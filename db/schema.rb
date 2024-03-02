@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_02_123128) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_02_123645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pet_profiles", force: :cascade do |t|
+    t.integer "age"
+    t.string "species"
+    t.string "gender"
+    t.text "description"
+    t.string "vaccinations"
+    t.boolean "neutered"
+    t.string "name"
+    t.string "breed"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_pet_profiles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,4 +49,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_02_123128) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pet_profiles", "users"
 end
