@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :pet_profiles
   has_many :appointments
+  has_many :posts
+  has_many :replies
 end
