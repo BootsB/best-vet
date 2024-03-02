@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_02_131134) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "weight"
-    t.string "microchip"
+    t.boolean "microchip", default: false
     t.index ["user_id"], name: "index_pet_profiles_on_user_id"
   end
 
@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_02_131134) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "vet"
+    t.boolean "vet", default: false
     t.string "first_name"
     t.string "last_name"
     t.string "address"

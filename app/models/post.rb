@@ -8,5 +8,4 @@ class Post < ApplicationRecord
   validates :user_id, presence: true
   validates :category, presence: true
   validates :subject, presence: true
-
 end
