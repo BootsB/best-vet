@@ -1,1 +1,24 @@
 // Specific CSS for your home-page
+.highlighted {
+  background-image: linear-gradient(to bottom, rgba(233, 253, 240, 1), rgba(233, 253, 240, 1));
+  font-weight: lighter;
+  font-size: 25px;
+  font-style: italic;
+}
+.round {
+  border-radius: 16px;
+}
+.btn-blocked {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.small {
+  font-size: smaller;
+}
+.sticky-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
