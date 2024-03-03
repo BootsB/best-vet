@@ -1,0 +1,47 @@
+<div class="bg-light">
+  <div class="container pt-3">
+    <div class="row">
+      <div class="text-center">
+        <h2 class="text-success"><strong>Best Vet Forum</strong></h2>
+        <h6 class="text-muted mb-3">Welcome to the Veterinary Forum</h6>
+        <%= simple_form_for :search, url: posts_path, method: :get do |f| %>
+          <div class="search-form-control form-group pb-3">
+            <input class="form-control string required" type="text" name="search[query]" id="search_query" placeholder="Search"/>
+            <button name="button" type="submit" class="btn btn-flat">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg-white pt-5">
+  <div class="container">
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-lg-3 col-sm-12 mb-4">
+          <a href="<%= post_path(post) %>" class="card-link">
+            <div class="card bg-white link-border">
+              <div class="card-body">
+                <i class="fa-solid fa-message text-success display-6 mb-2"></i>
+                <h4 class="text-success"><%= post.title %></h4>
+                <p><%= post.content %></p>
+              </div>
+              <div class="card-body d-flex justify-content-between">
+                <div>
+                  <i class="fa-solid fa-list text-muted"></i>
+                  <span><%= post.category %></span>
+                </div>
+                <div>
+                  <%= post.replies.size %>
+                  <i class="fa-solid fa-reply text-muted"></i>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
