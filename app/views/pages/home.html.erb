@@ -1,2 +1,85 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="bg-white">
+  <div class="container">
+    <div class="row pt-2 pb-2 border-bottom">
+      <div class="col-sm-12 ">
+        <div class="sticky-top sticky-bar">
+          <a href="<%= root_path %>">
+            <%= image_tag "best-vet-logo.png", alt: "Best Vet Logo", class: "mx-auto d-block", width: "200px" %>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-success p-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h1 class="text-white">Your Trusted Online Veterinary Clinic</h1>
+          <p class="text-white small mt-1">
+            Welcome to our Online Veterinary Clinic, where quality care meets convenience and speed.
+            Our dedicated team of experienced veterinarians is here to provide expert guidance and support for your beloved pets, all from the comfort of your own home.
+            Schedule a call now
+            </p>
+        </div>
+        <div class="p-3  col-sm-12 bg-white text-center col-md-6 round">
+          <h5><strong>Need assistance?</strong></h5>
+          <%= link_to "I need an emergency call", new_user_registration_path, class: 'btn btn-round btn-success btn-blocked mt-3' %>
+          <%= link_to "Schedule a call", new_user_registration_path, class: 'btn btn-outline-success btn-blocked mt-3' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="p-4 col-sm-12 col-lg-4">
+        <h2 class="display-5">
+          <i class="fa-solid fa-briefcase-medical text-success"></i>
+          <strong class="ms-2">Trusted vets</strong>
+        </h2>
+        <p class="text-muted small">
+          Our online clinic is home to a team of trusted veterinarians who are committed to delivering compassionate care for your beloved pets.
+          With years of experience and a deep understanding of animal health, our vets prioritize the well-being of your furry companions above all else.
+          Whether it's a routine check-up, preventive care, or urgent treatment, you can trust our dedicated team to provide the highest level of care and support for your pet's health journey.
+        </p>
+        <%= link_to "Get help", new_user_registration_path, class: 'text-success small text-decoration-none' %>
+      </div>
+
+      <div class="p-4 col-sm-12 col-lg-4">
+        <h2 class="display-5">
+          <i class="fa-solid fa-message text-success"></i>
+          <strong class="ms-2">Forum</strong>
+        </h2>
+        <p class="text-muted small">
+          Our veterinary forum is a community-driven platform where pet owners can seek expert advice and guidance from our team of experienced veterinarians.
+          If you have any questions about nutrition, behavior, or medical concerns, our vets are here to provide personalized answers tailored to your pet's specific needs.
+        </p>
+        <%= link_to "Ask a question", new_user_registration_path, class: 'text-success small text-decoration-none' %>
+      </div>
+
+      <div class="p-4 col-sm-12 col-lg-4">
+        <h2 class="display-5">
+          <i class="fa-solid fa-shield-dog text-success"></i>
+          <strong class="ms-2">Save records</strong>
+        </h2>
+        <p class="text-muted small">
+          Managing your pet's health records can be overwhelming, but our clinic offers a solution.
+          With our centralized pet health record system, you can conveniently store all of your pet's important medical information in one secure location.
+          From vaccination records to medication history and vet visit summaries, everything you need to keep your pet healthy is easily accessible whenever you need it.
+        </p>
+        <%= link_to "Start now", new_user_registration_path, class: 'text-success small text-decoration-none' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg-success">
+  <div class="container">
+    <footer class="py-3">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item "><a class="nav-link text-white" href="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/">FAQs</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/">About us</a></li>
+    </ul>
+    <p class="text-center text-white">© 2024 Best-vet</p>
+    </footer>
+  </div>
+</div>
