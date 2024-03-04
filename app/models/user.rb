@@ -12,15 +12,5 @@ class User < ApplicationRecord
   # Validations
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :phone_number, presence: true
-  validates :address, presence: true
-  validates :city, presence: true
-  validates :state, presence: true
-  validates :zip_code, presence: true
-  validates :vet, presence: true
-  validates :membership, presence: true
-  validates :description, presence: true
-  validates :location, presence: true
+
 end

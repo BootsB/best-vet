@@ -1,0 +1,22 @@
+.card-link {
+  text-decoration: none;
+  border-radius: 4px;
+  p {
+    color: gray
+  }
+}
+
+.card-link:hover {
+  text-decoration: none;
+
+}
+
+.link-border {
+  border: 1px solid #c5c5c5;
+  box-shadow: 0px 0px 8px #D2D5D9;
+  transition: all 0.5s ease;
+}
+
+.link-border:hover {
+  border: 1px solid $green;
+}
