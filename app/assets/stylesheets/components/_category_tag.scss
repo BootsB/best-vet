@@ -1,0 +1,17 @@
+.category-tag {
+  background-color: #e5edeb;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  border-radius: 30px;
+  font-size: 14px;
+  margin-right: 5px;
+  color: $green;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $green;
+    color: white;
+    }
+}
