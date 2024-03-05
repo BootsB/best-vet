@@ -1,0 +1,51 @@
+<div class="bg-light">
+  <div class="container pt-3">
+    <div class="row">
+      <div class="text-center">
+        <h2 class="text-success"><strong><%= @category.title %></strong></h2>
+        <h6 class="text-muted mb-3"><%= @category.description %></h6>
+        <%= simple_form_for :search, url: category_path(@category), method: :get do |f| %>
+          <div class="search-form-control form-group pb-3">
+            <input class="form-control string required" type="text" name="search[query]" id="search_query" placeholder="Search"/>
+            <button name="button" type="submit" class="btn btn-flat">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        <% end %>
+        <%= link_to "Ask a question", new_post_path, class: 'btn btn-round btn-success mt-2 mb-3' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg-white">
+  <div class="container pt-3">
+    <div class="row">
+     <h3 class="mb-1 pb-2 display-6"><i class="fa-regular fa-comments ms-2 "></i><span class="ps-3"><%= @category.title %></span></h3>
+      <ul class="d-inline-flex text-muted border-bottom pb-2">
+        <li class="list-group-item bg-white mx-2"><i class="fa-solid fa-house"></i></li>
+        <li class="list-group-item bg-white"><%= link_to "Forum", categories_path, class: "inline-list-item" %></strong></li>
+        <li class="list-group-item bg-white mx-2"> > </li>
+        <li class="list-group-item bg-white"><%= link_to "#{@category.title}", category_path(@category), class: "inline-list-item" %></li>
+      </ul>
+        <% @category.posts.each do |post| %>
+            <div class="post">
+              <a href="/">
+                <img src='https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' class="avatar-large" />
+              </a>
+              <a href="<%= post_path(post) %>" class="card-link">
+                <div class="post-content ">
+                  <p class="text-success"><%= post.title %></p>
+                  <p> <%= post.content %></p>
+                  <div class="d-flex justify-content-between mt-2">
+                    <div class="">
+                      <i class="fa-solid fa-reply text-muted"></i>
+                      <span class="text-muted"><%= post.replies.size %></span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+        <% end %>
+    </div>
+  </div>
+</div>
