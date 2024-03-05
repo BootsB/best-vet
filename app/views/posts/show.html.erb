@@ -1,0 +1,87 @@
+<div class="bg-light" >
+  <div class="container pt-3">
+    <div class="row">
+      <div class="text-center">
+        <h2 class="text-success"><strong><%= @post.category.title %></strong></h2>
+        <h6 class="text-muted mb-3"><%= @post.category.description %></h6>
+        <%= simple_form_for :search, url: category_path(@post.category), method: :get do |f| %>
+          <div class="search-form-control form-group pb-3">
+            <input class="form-control string required" type="text" name="search[query]" id="search_query" placeholder="Search"/>
+            <button name="button" type="submit" class="btn btn-flat">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        <% end %>
+        <%= link_to "Ask a question", new_post_path, class: 'btn btn-round btn-success mt-2 mb-3' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg-white">
+  <div class="container pt-3">
+    <div class="row" data-controller="reply-form">
+
+      <h3 class="mb-1 mt-4 pb-2 display-6"><i class="fa-regular fa-comments ms-2 "></i><span class="ps-3"><%= @post.category.title %></span></h3>
+      <ul class="d-inline-flex text-muted border-bottom pb-2 mb-5">
+        <li class="list-group-item bg-white mx-2"><i class="fa-solid fa-house"></i></li>
+        <li class="list-group-item bg-white"><%= link_to "Forum", categories_path, class: "inline-list-item" %></strong></li>
+        <li class="list-group-item bg-white mx-2"> > </li>
+        <li class="list-group-item bg-white"><%= link_to "#{@post.category.title}", category_path(@post.category), class: "inline-list-item" %></li>
+        <li class="list-group-item bg-white mx-2"> > </li>
+        <li class="list-group-item bg-white"><%= @post.title %></li>
+      </ul>
+
+      <h3 class=" display-5"> <%= @post.title %></h3>
+
+      <div class="d-flex mt-2 mb-1">
+        <div class="pb-5">
+          <a href="/" >
+            <img src='https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+             class="avatar-larger" />
+          </a>
+        </div>
+        <div class="mx-3 ">
+          <h6 class="text-success mb-0"><%= @post.user.email %></h6>
+          <p class="text-muted mb-0"><small><%= time_ago_in_words(@post.created_at) %> ago</small></p>
+          <i class="fa-solid fa-reply text-success"></i>
+          <span class="text-muted"><%= @post.replies.size %></span>
+        </div>
+      </div>
+
+      <div class="mb-2 pb-4 border-bottom">
+        <p><%= @post.content %></p>
+      </div>
+
+      <div class="d-flex mt-2 border-bottom mb-3 align-items-center">
+        <h5 class="flex-fill mx-2"><strong>Category: </strong>
+        <a href="<%= category_path(@post.category) %>" class="text-decoration-none">
+          <span class="category-tag "><%= @post.category.title %></span></h5>
+        </a>
+
+        <%= link_to "Reply", "#", class: 'btn btn-success mt-2 mb-3', data: { action: 'click->reply-form#toggleForm' } %>
+
+      </div>
+        <div data-reply-form-target="form" class="d-none pb-4 mb-3 border-bottom">
+          <%= simple_form_for [@post, @reply], html: {  } do |form| %>
+            <%= form.input :content, label: "Replying to #{@post.title}" %>
+            <%= form.hidden_field :post_id, value: @post.id %>
+            <%= form.button :submit, class: 'btn btn-success' %>
+          <% end %>
+        </div>
+
+        <div class="pb-5">
+          <% @post.replies.each do |reply| %>
+            <div class="post">
+              <a href="/">
+                <img src='https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' class="avatar" />
+              </a>
+                <div class="post-content">
+                  <p> <%= reply.content %></p>
+                  <p class="text-muted mb-0"><small><%= time_ago_in_words(@post.created_at) %> ago</small></p>
+                </div>
+            </div>
+        <% end %>
+        </div>
+    </div>
+  </div>
+</div>
