@@ -1,0 +1,25 @@
+.post {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 8px 16px;
+  border-bottom: 1px solid rgb(235,235,235);
+
+  hover: {
+    border-bottom: $green;
+  }
+}
+
+.post .post-content {
+  flex-grow: 1;
+  padding: 0 24px;
+}
+
+.post p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.post small {
+  color: $green;
+}
