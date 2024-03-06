@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show]
+  before_action :set_post, only: %i[show destroy]
 
   def index
     @posts = Post.all
@@ -23,6 +23,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post.destroy
+    redirect_to category_url(@post.category), notice: "Successfully destroyed."
+  end
 
   private
 

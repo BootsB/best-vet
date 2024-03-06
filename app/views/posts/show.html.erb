@@ -17,11 +17,12 @@
     </div>
   </div>
 </div>
-<div class="bg-white">
+<div class="bg-white pb-5">
   <div class="container pt-3">
     <div class="row" data-controller="reply-form">
 
       <h3 class="mb-1 mt-4 pb-2 display-6"><i class="fa-regular fa-comments ms-2 "></i><span class="ps-3"><%= @post.category.title %></span></h3>
+
       <ul class="d-inline-flex text-muted border-bottom pb-2 mb-5">
         <li class="list-group-item bg-white mx-2"><i class="fa-solid fa-house"></i></li>
         <li class="list-group-item bg-white"><%= link_to "Forum", categories_path, class: "inline-list-item" %></strong></li>
@@ -31,7 +32,8 @@
         <li class="list-group-item bg-white"><%= @post.title %></li>
       </ul>
 
-      <h3 class=" display-5"> <%= @post.title %></h3>
+      <h3 class=" display-5"> <%= @post.title  %></h3>
+
 
       <div class="d-flex mt-2 mb-1">
         <div class="pb-5">
@@ -43,9 +45,14 @@
         <div class="mx-3 ">
           <h6 class="text-success mb-0"><%= @post.user.email %></h6>
           <p class="text-muted mb-0"><small><%= time_ago_in_words(@post.created_at) %> ago</small></p>
-          <i class="fa-solid fa-reply text-success"></i>
+          <i class="fa-solid fa-reply text-success "></i>
           <span class="text-muted"><%= @post.replies.size %></span>
+
+          <% if  current_user == @post.user%>
+          <%= link_to raw("<small><i class='fa-solid fa-trash-can text-success mx-2'></i></small>"), post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          <% end %>
         </div>
+
       </div>
 
       <div class="mb-2 pb-4 border-bottom">
@@ -83,5 +90,6 @@
         <% end %>
         </div>
     </div>
+
   </div>
 </div>
