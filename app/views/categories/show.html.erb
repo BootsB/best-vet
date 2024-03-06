@@ -37,7 +37,7 @@
               <a href="<%= post_path(post) %>" class="card-link">
                 <div class="post-content ">
                   <p class="text-success"><%= post.title %></p>
-                  <p> <%= post.content %></p>
+                  <p> <%= truncate(post.content, length: 150, separator: ' ', omission: '...') %></p>
                   <div class="d-flex justify-content-between mt-2">
                     <div class="">
                       <i class="fa-solid fa-reply text-muted"></i>
