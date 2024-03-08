@@ -1,0 +1,39 @@
+<div class="bg-white">
+  <div class="container">
+    <div class="row justify-content-center pt-3">
+      <div class="col-12 col-lg-8 text-center">
+        <h2> <strong> Welcome back, Michaela </strong></h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-6">
+        <div class="inline-button mt-3" id="join-call">
+          <i class="fa-solid fa-phone icon-button"></i>
+          <p> Join call </p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="inline-button mt-3">
+          <i class="fa-solid fa-calendar-check icon-button"></i>
+          <p> Appointments </p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-between pt-3">
+      <div class="col-10 col-lg-7 text-left mt-3">
+        <h4> Trending topics <%= link_to categories_path do %>
+            <%= content_tag(:i, '', class: 'fa-solid fa-chevron-right') %>
+          <% end %>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-8 text-left mt-3">
+        <div class="inline-card">
+          <%= image_tag "cute-cat.png",{ alt:"Picture that describes discussion theme", class:"image-card"} %>
+          <p><%= truncate("This is a really long text that needs to be truncated because if not it will not fit into the dashboard.", length: 70) %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= Category.last %>
+</div>

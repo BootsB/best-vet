@@ -21,11 +21,11 @@
   <div class="container pt-3">
     <div class="row">
 
-     <h3 class=" mt-4 mb-1 pb-2 display-6"><i class="fa-regular fa-comments ms-2 "></i><span class="ps-3"><%= @category.title %></span></h3>
+    <h3 class=" mt-4 mb-1 pb-2 display-6"><i class="fa-regular fa-comments ms-2 "></i><span class="ps-3"><%= @category.title %></span></h3>
       <ul class="d-inline-flex text-muted border-bottom pb-2">
         <li class="list-group-item bg-white mx-2"><i class="fa-solid fa-house"></i></li>
         <li class="list-group-item bg-white"><%= link_to "Forum", categories_path, class: "inline-list-item" %></strong></li>
-        <li class="list-group-item bg-white mx-2"> > </li>
+        <li class="list-group-item bg-white mx-2"> </li>
         <li class="list-group-item bg-white"><%= link_to "#{@category.title}", category_path(@category), class: "inline-list-item" %></li>
       </ul>
 
