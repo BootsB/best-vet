@@ -1,0 +1,35 @@
+.inline-button {
+  height: 60px;
+  margin: 0 auto;
+  background-color: $blue;
+  display: flex;
+  align-items: center;
+  color: $light-gray;
+  border-radius: 10px;
+  border: 1px solid #c5c5c5;
+  box-shadow: 0px 0px 8px #D2D5D9;
+  p {
+    font-size: 18px;
+    margin: auto;
+  }
+  .icon-button {
+    font-size: 15px;
+    margin-left: 20px;
+  }
+}
+
+.inline-button:hover {
+  background-color: $light-gray;
+  color: $blue;
+  border: 1px solid $blue;
+}
+
+#join-call{
+  background-color: $green;
+}
+
+#join-call:hover{
+  background-color: $light-gray;
+  color: $green;
+  border: 1px solid $green;
+}
