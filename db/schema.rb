@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_04_173939) do
     t.boolean "neutered"
     t.string "name"
     t.string "breed"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "weight"
@@ -90,14 +90,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_04_173939) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "vet"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.string "location"
-    t.string "city"
-    t.text "description"
-    t.integer "membership"
     t.string "phone_number"
     t.string "state"
     t.string "zip_code"
