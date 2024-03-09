@@ -1,12 +1,12 @@
 <div class="container signupformcontainer">
   <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
+    <div class="col-md-8 col-lg-12">
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= f.error_notification %>
 
         <div class="card shadow-sm">
           <div class="card-body">
-            <h2 class="card-title text-center mb-4">Sign Up</h2>
+            <h2 class="card-title text-center mb-4">Registration</h2>
 
             <div class="form-group">
               <%= f.input :email, required: true, autofocus: true, input_html: { autocomplete: "email", class: "form-control" }, label_html: { class: 'mb-1' } %>
@@ -22,6 +22,7 @@
 
             <div class="form-group mb-4">
               <%= f.label :vet, "Sign-up as Professional Vet?", class: 'form-check-label mb-2' %>
+              <br>
               <div class="form-check form-check-inline">
                 <%= f.radio_button :vet, true, id: "vet-yes", class: 'form-check-input' %>
                 <%= f.label :vet_yes, "Yes", class: 'form-check-label mr-3' %>
@@ -32,8 +33,8 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <%= f.button :submit, "Sign up", class: "btn btn-primary btn-block" %>
+            <div class="form-group text-center">
+              <%= f.button :submit, "Submit", class: "btn btn-primary btn-block submitfbtn" %>
             </div>
           </div>
         </div>

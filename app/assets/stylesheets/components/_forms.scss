@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+}
+
+.signupformcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100%;
+  background-color: #f5f5f5;
+
+  .shadow-sm {
+    border-radius: 25px;
+  }
+
+  .card-body {
+    padding: 25px;
+    width: 350px;
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+
+      label {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      input {
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #c5c5c5;
+      }
+    }
+
+    .submitfbtn {
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      background-color: $green;
+      border: 1px solid $light-gray;
+      color: white;
+      width: 100%;
+    }
+
+  }
+}
