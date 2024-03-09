@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_09_163549) do
     t.boolean "neutered"
     t.string "name"
     t.string "breed"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "weight"
