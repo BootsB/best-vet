@@ -1,6 +1,12 @@
 <footer class="footer">
   <ul class="footer-nav">
-    <li><%= link_to root_path do %><i class="fa fa-home"></i> <% end %></li>
+    <li>
+      <% if user_signed_in? %>
+        <%= link_to dashboard_path(current_user)  do %><i class="fa fa-home"></i> <% end %>
+      <% else %>
+        <%= link_to root_path do %><i class="fa fa-home"></i> <% end %>
+      <% end %>
+    </li>
     <li><%= link_to "/forum" do %><i class="fa fa-solid fa-message"></i> <% end %></li>
     <li><%= link_to "#" do %><i class="fa fa-calendar"></i><% end %></li>
     <li><%= link_to "#" do %><i class="fa fa-light fa-shield-dog"></i> <% end %></li>

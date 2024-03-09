@@ -9,7 +9,7 @@ class PetProfile < ApplicationRecord
   validates :age, presence: true
   validates :weight, presence: true
   validates :user_id, presence: true
-  validates :vaccination, presence: true
+  validates :vaccinations, presence: true
   validates :neutered, presence: true
   validates :microchip, presence: true
   validates :description, presence: true

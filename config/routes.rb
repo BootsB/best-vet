@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
+  resources :pet_profiles
   resources :categories, only: [:show, :index], path: 'forum'
   resources :posts, only: [:show, :new, :create, :destroy] do
     resources :replies, only: [:create, :destroy]
