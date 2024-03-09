@@ -30,6 +30,7 @@
       label {
         font-size: 14px;
         font-weight: 600;
+        margin-left: 5px;
       }
 
       input {
@@ -37,6 +38,7 @@
         padding: 10px;
         font-size: 14px;
         border: 1px solid #c5c5c5;
+        border-left: none;
       }
     }
 
@@ -62,4 +64,22 @@
       width: 100%;
     }
   }
+
+  .linklogin {
+    margin-top: 40px;
+
+    a {
+      text-decoration: none;
+      margin-top: 40px;
+    }
+
+  }
+}
+
+.input-group-text {
+  border: 1px solid #c5c5c5;
+  font-size: 20px;
+  height: 45px;
+  background-color: $green;
+  color: white;
 }
