@@ -70,7 +70,7 @@
       </div>
         <div data-reply-form-target="form" class="d-none pb-4 mb-3 border-bottom">
           <%= simple_form_for [@post, @reply], html: {  } do |form| %>
-            <%= form.input :content, label: "Replying to <span class='text-success'><strong>#{@post.title}</strong></span>".html_safe %>
+            <%= form.input :content, label: "Replying to <span class='text-success'><strong>#{@post.title}</strong></span>".html_safe, input_html: { class: 'form-control bg-white' } %>
             <%= form.hidden_field :post_id, value: @post.id %>
             <%= form.button :submit, class: 'btn btn-success' %>
           <% end %>
