@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :replies
   has_many :reviews, through: :appointments
 
+  has_one :user_profile
   # Validations
   validates :email, presence: true, uniqueness: true
   validates :password, presence: true
