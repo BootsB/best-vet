@@ -3,9 +3,11 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all
+    @categories = policy_scope(Category)
   end
 
   def show
+    authorize @category
   end
 
   private
