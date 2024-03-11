@@ -13,4 +13,5 @@ class PetProfile < ApplicationRecord
   validates :neutered, presence: true
   validates :microchip, presence: true
   validates :description, presence: true
+  validates :gender, presence: true
 end

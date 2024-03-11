@@ -37,7 +37,7 @@
     <div class="filtered-information-card" data-pet-information-filter-target="information" data-pet-information-filter-info-value="about">
       <p><i class="fa-solid fa-address-card"></i> : <%= @pet.description.capitalize %></p>
       <p><i class="fa-solid fa-venus-mars"></i> : <%= @pet.gender.capitalize %></p>
-      <p><i class="fa-solid fa-weight-scale"></i> : <%= @pet.weight %> kg.</p>
+      <p><i class="fa-solid fa-weight-scale"></i> : <%= @pet.weight %> kg</p>
       <p><i class="fa-solid fa-signs-post"></i>: <% if @pet.neutered? %>
         <%="Is neutered"%>
       <% else %>

@@ -10,6 +10,7 @@
           <div class="form-inputs">
             <%= form.input :name, input_html: { class: 'form-control bg-white' } %>
             <%= form.input :species, input_html: { class: 'form-control bg-white' } %>
+            <%= form.input :gender, collection: ['Male', 'Female'], prompt: 'Select Gender', input_html: { class: 'form-control bg-white' } %>
             <%= form.input :breed, input_html: { class: 'form-control bg-white' } %>
             <%= form.input :age, input_html: { class: 'form-control bg-white' } %>
             <%= form.input :weight, input_html: { class: 'form-control bg-white' }, label: "Weight (kg)" %>
