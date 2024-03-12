@@ -23,8 +23,8 @@
         </div>
         <div class="p-3  col-sm-12 bg-white text-center col-md-6 round">
           <h5><strong>Need assistance?</strong></h5>
-          <%= link_to "I need an emergency call", new_user_registration_path, class: 'btn btn-round btn-success btn-blocked mt-3' %>
-          <%= link_to "Schedule a call", new_user_registration_path, class: 'btn btn-outline-success btn-blocked mt-3' %>
+          <%= link_to "I need an emergency call", dashboard_path(current_user), class: 'btn btn-round btn-success btn-blocked mt-3' %>
+          <%= link_to "Schedule a call", dashboard_path(current_user), class: 'btn btn-outline-success btn-blocked mt-3' %>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
           With years of experience and a deep understanding of animal health, our vets prioritize the well-being of your furry companions above all else.
           Whether it's a routine check-up, preventive care, or urgent treatment, you can trust our dedicated team to provide the highest level of care and support for your pet's health journey.
         </p>
-        <%= link_to "Get help", new_user_registration_path, class: 'text-success small text-decoration-none' %>
+        <%= link_to "Get help", dashboard_path(current_user), class: 'text-success small text-decoration-none' %>
       </div>
 
       <div class="p-4 col-sm-12 col-lg-4">
@@ -66,7 +66,7 @@
           With our centralized pet health record system, you can conveniently store all of your pet's important medical information in one secure location.
           From vaccination records to medication history and vet visit summaries, everything you need to keep your pet healthy is easily accessible whenever you need it.
         </p>
-        <%= link_to "Start now", new_user_registration_path, class: 'text-success small text-decoration-none' %>
+        <%= link_to "Start now", pet_profiles_path, class: 'text-success small text-decoration-none' %>
       </div>
     </div>
   </div>
