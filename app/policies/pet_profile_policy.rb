@@ -14,6 +14,14 @@ class PetProfilePolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    update?
+  end
+
+  def update?
+    record.user == user
+  end
+
   def new?
     create?
   end
