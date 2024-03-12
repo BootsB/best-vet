@@ -1,0 +1,20 @@
+<%= simple_form_for pet do |form| %>
+  <%= form.error_notification %>
+
+  <div class="form-inputs">
+    <%= form.input :name, input_html: { class: 'form-control bg-white' } %>
+    <%= form.input :species, input_html: { class: 'form-control bg-white' } %>
+    <%= form.input :gender, collection: ['Male', 'Female'], prompt: 'Select Gender', input_html: { class: 'form-control bg-white' } %>
+    <%= form.input :breed, input_html: { class: 'form-control bg-white' } %>
+    <%= form.input :age, input_html: { class: 'form-control bg-white' } %>
+    <%= form.input :weight, input_html: { class: 'form-control bg-white' }, label: "Weight (kg)" %>
+    <%= form.input :vaccinations, input_html: { class: 'form-control bg-white' } %>
+    <%= form.input :neutered, input_html: { class: 'form-control bg-white toggle' } %>
+    <%= form.input :microchip, input_html: { class: 'form-control bg-white toggle' } %>
+    <%= form.input :description, input_html: { class: 'form-control bg-white' } %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.button :submit, class: "btn btn-success" %>
+  </div>
+<% end %>

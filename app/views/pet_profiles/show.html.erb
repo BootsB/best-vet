@@ -1,7 +1,7 @@
 <div class="bg-white pb-5">
   <div class="container pt-3 pe-5 ps-5" data-controller="pet-information-filter" >
     <div class="pet-profile-card">
-      <%= image_tag "emilia.png",{ alt:"Picture that describes discussion theme", class:"image-card"} %>
+      <%= image_tag "https://source.unsplash.com/random/?dog",{ alt:"Picture that describes discussion theme", class:"image-card"} %>
       <div class="pet-profile-card-information">
           <h4><%= @pet.name.capitalize %></h4>
           <p><%= @pet.species.capitalize %> - <%= @pet.breed.capitalize %></p>
@@ -9,8 +9,12 @@
       </div>
       <% if current_user == @pet.user %>
         <div class="d-flex edit-delete">
-          <i class="fa-solid fa-trash me-2"></i>
-          <i class="fa-solid fa-pen-to-square"></i>
+          <%= link_to pet_profile_path(@pet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            <i class="fa-solid fa-trash me-2"></i>
+          <% end %>
+          <%= link_to(edit_pet_profile_path(@pet)) do %>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
         </div>
       <% end %>
     </div>
