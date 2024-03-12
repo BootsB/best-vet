@@ -1,6 +1,6 @@
 .card-link {
   text-decoration: none;
-  border-radius: 4px;
+
   p {
     color: gray
   }
@@ -15,6 +15,7 @@
   border: 1px solid #c5c5c5;
   box-shadow: 0px 0px 8px #D2D5D9;
   transition: all 0.4s ease;
+  border-radius: 24px;
 }
 
 .link-border:hover {
