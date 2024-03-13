@@ -10,6 +10,7 @@ class AppointmentsController < ApplicationController
     else
       @appointments = current_user.pet_profiles.map(&:appointments).flatten
     end
+    raise
   end
 
 
