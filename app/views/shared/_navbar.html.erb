@@ -1,13 +1,13 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-  <% if user_signed_in? %>
-        <%= link_to dashboard_path(current_user),  class: "navbar-brand" do %>
-          <%= image_tag "best-vet-logo.png", alt: "BestVet logo", class: "logo-img" %>
-        <% end %>
-      <% else %>
-        <%= link_to "/", class: "navbar-brand" do %>
-          <%= image_tag "best-vet-logo.png", alt: "BestVet logo", class: "logo-img" %>
-        <% end %>
+    <% if user_signed_in? %>
+      <%= link_to dashboard_path(current_user), class: "navbar-brand" do %>
+        <%= image_tag "best-vet-logo.png", alt: "BestVet logo", class: "logo-img" %>
+      <% end %>
+    <% else %>
+      <%= link_to "/", class: "navbar-brand" do %>
+        <%= image_tag "best-vet-logo.png", alt: "BestVet logo", class: "logo-img" %>
+      <% end %>
     <% end %>
 
     <% if user_signed_in? %>
@@ -15,7 +15,11 @@
         <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
       </a>
       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <%= link_to "Profile", "#", class: "dropdown-item" %>
+        <% if current_user.user_profile.present? && current_user.user_profile.id.present? %>
+          <%= link_to "My Profile", user_profile_path(current_user.user_profile), class: "dropdown-item" %>
+        <% else %>
+          <%= link_to "Create Profile", new_user_profile_path, class: "dropdown-item" %>
+        <% end %>
         <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
       </div>
     <% else %>
