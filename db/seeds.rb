@@ -13,6 +13,9 @@ categories = Category.create([
   { title: "Community", description: "Stay connected with our pet-loving community and get involved in events promoting pet welfare." }
 ])
 
+# Create a single user
+user = User.create(email: "example@example.com", password: "password")
+
 categories.each do |category|
   3.times do |i|
     post = Post.create!(
@@ -25,9 +28,6 @@ categories.each do |category|
   end
 end
 
-# Create a single user
-user = User.create(email: "example@example.com", password: "password")
-
 # Output the ID of the created user
 puts "Created user ID: #{user.id}"
 
@@ -36,7 +36,7 @@ puts "Number of existing user profiles: #{UserProfile.count}"
 
 # Create users
 5.times do
-  password = Faker::Internet.password
+  password = "123456"
 
   user = User.create(
     email: Faker::Internet.email,
