@@ -3,12 +3,12 @@
     <div class="row">
       <h2 class="text-success text-center pb-4"><strong> Your pets </strong></h2>
       <% @pets.each do |pet| %>
-       <div class="col-lg-3 col-sm-12 mb-4">
+        <div class="col-lg-3 col-sm-12 mb-4">
           <a href="<%= pet_profile_path(pet) %>" class="card-link">
             <div class="card bg-white link-border">
               <div class="d-flex px-3 pt-3">
                 <div>
-                  <%= image_tag "emilia.png",{ alt:"Picture that describes discussion theme", class:"avatar-large"} %>
+                  <%= image_tag "https://source.unsplash.com/random/?dog",{ alt:"Picture that describes discussion theme", class:"avatar-large"} %>
                 </div>
                 <div class="">
                   <h4 class="text-success mx-3"><%= pet.name %></h4>
