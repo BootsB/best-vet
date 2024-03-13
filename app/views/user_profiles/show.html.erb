@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 class="text-center mt-5 mb-4">User Profile</h1>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>First Name:</strong> <%= @user_profile.first_name %>
+        </li>
+        <li class="list-group-item">
+          <strong>Last Name:</strong> <%= @user_profile.last_name %>
+        </li>
+        <li class="list-group-item">
+          <strong>Address:</strong> <%= @user_profile.address %>
+        </li>
+        <li class="list-group-item">
+          <strong>Description:</strong> <%= @user_profile.description %>
+        </li>
+        <li class="list-group-item">
+          <strong>Membership:</strong> <%= @user_profile.membership %>
+        </li>
+        <li class="list-group-item">
+          <strong>Location:</strong> <%= @user_profile.location %>
+        </li>
+        <li class="list-group-item">
+          <strong>City:</strong> <%= @user_profile.city %>
+        </li>
+        <li class="list-group-item">
+          <strong>Phone Number:</strong> <%= @user_profile.phone_number %>
+        </li>
+        <li class="list-group-item">
+          <strong>State:</strong> <%= @user_profile.state %>
+        </li>
+        <li class="list-group-item">
+          <strong>Zip Code:</strong> <%= @user_profile.zip_code %>
+        </li>
+        <% if current_user.vet? %>
+          <li class="list-group-item">
+            <strong>License Number:</strong> <%= @user_profile.licence_number %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <%= link_to "Edit Profile", edit_user_profile_path(current_user.user_profile), class: "btn btn-primary btn-lg btn-block mt-3" %>
+</div>
