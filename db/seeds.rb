@@ -56,7 +56,7 @@ puts "Number of existing user profiles: #{UserProfile.count}"
   user_profile.save!
 
   2.times do
-    pet_profile = user.pet_profiles.build(
+    pet_profile = PetProfile.new(
       name: Faker::Creature::Dog.name,
       species: 'Dog', # You can customize this for your needs
       breed: Faker::Creature::Dog.breed,
@@ -69,21 +69,22 @@ puts "Number of existing user profiles: #{UserProfile.count}"
       neutered: [true, false].sample # Randomly assign neutered status
       # Add any other attributes you have for the PetProfile model
     )
-
+    pet_profile.user = user
     pet_profile.save!
   end
 
 
   # Create appointments for each user
   3.times do
-    appointment = user.appointments.build(
+    appointment = Appointment.new(
       appointment_date: Faker::Date.forward(days: 30), # Random date within the next 30 days
       status: ['Pending', 'Confirmed', 'Cancelled'].sample, # Randomly assign status
       appointment_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + 1, format: :default), # Random time within the next day
       description_of_problem: Faker::Lorem.paragraph
       # Add any other attributes you have for the Appointment model
     )
-
+    appointment.user = user
+    appointment.pet_profile = PetProfile.all.sample
     appointment.save!
   end
 end

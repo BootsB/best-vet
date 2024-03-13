@@ -8,6 +8,5 @@ class Appointment < ApplicationRecord
   validates :appointment_time, presence: true
   validates :status, presence: true
   validates :description_of_problem, presence: true
-  validates :user_id, presence: true
-  validates :pet_profile_id, presence: true
+
 end
