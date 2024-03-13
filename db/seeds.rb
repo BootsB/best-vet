@@ -13,6 +13,18 @@ categories = Category.create([
   { title: "Community", description: "Stay connected with our pet-loving community and get involved in events promoting pet welfare." }
 ])
 
+categories.each do |category|
+  3.times do |i|
+    post = Post.create!(
+      title: "Post #{i + 1} in #{category.title}",
+      content: "This is post #{i + 1} in the #{category.title} category. Sample text",
+      category: category,
+      user_id: 1
+    )
+    post.replies.create(content: "This is a reply to post #{i + 1} in the #{category.title} category.", user: user)
+  end
+end
+
 # Create a single user
 user = User.create(email: "example@example.com", password: "password")
 
