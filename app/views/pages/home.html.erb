@@ -3,7 +3,12 @@
     <div class="row pt-2 pb-2 border-bottom">
       <div class="col-sm-12 ">
         <div class="sticky-top sticky-bar">
-          <a href="<%= root_path %>">
+        <% if user_signed_in? %>
+        <% path = dashboard_path(current_user) %>
+          <% else %>
+        <% path = root_path %>
+        <% end %>
+          <a href="<%= path %>">
             <%= image_tag "best-vet-logo.png", alt: "Best Vet Logo", class: "mx-auto d-block", width: "200px" %>
           </a>
         </div>

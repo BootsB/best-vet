@@ -4,6 +4,14 @@ Rails.application.routes.draw do
 
   resources :pet_profiles
   resources :user_profiles, except: [:destroy]
+
+  resources :appointments do
+    member do
+      put :accept
+      put :reject
+    end
+  end
+
   resources :categories, only: [:show, :index], path: 'forum'
   resources :posts, only: [:show, :new, :create, :destroy] do
     resources :replies, only: [:create, :destroy]
