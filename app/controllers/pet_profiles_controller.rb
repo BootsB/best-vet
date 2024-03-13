@@ -24,6 +24,29 @@ class PetProfilesController < ApplicationController
     end
   end
 
+  def edit
+    @pet = PetProfile.find(params[:id])
+    authorize @pet
+  end
+
+  def update
+    @pet = PetProfile.find(params[:id])
+    @pet.update(pet_params)
+    authorize @pet
+    if @pet.save
+      redirect_to pet_profile_path(@pet)
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @pet = PetProfile.find(params[:id])
+    authorize @pet
+    @pet.destroy
+    redirect_to dashboard_path, notice: "Successfully deleted."
+  end
+
   private
 
   def pet_params
