@@ -20,6 +20,11 @@
         <% else %>
           <%= link_to "Create Profile", new_user_profile_path, class: "dropdown-item" %>
         <% end %>
+        <% if current_user.pet_profiles.any? %>
+          <%= link_to "Pets", pet_profiles_path, class: "dropdown-item" %>
+        <% else %>
+          <%= link_to "Add a Pet", new_pet_profile_path, class: "dropdown-item" %>
+        <% end %>
         <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
       </div>
     <% else %>

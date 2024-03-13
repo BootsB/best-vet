@@ -1,0 +1,36 @@
+<div class="bg-white pb-5">
+  <div class="container pt-3 ">
+    <div class="row">
+      <h2 class="text-success text-center pb-4"><strong> Your pets </strong></h2>
+      <% @pets.each do |pet| %>
+       <div class="col-lg-3 col-sm-12 mb-4">
+          <a href="<%= pet_profile_path(pet) %>" class="card-link">
+            <div class="card bg-white link-border">
+              <div class="d-flex px-3 pt-3">
+                <div>
+                  <%= image_tag "emilia.png",{ alt:"Picture that describes discussion theme", class:"avatar-large"} %>
+                </div>
+                <div class="">
+                  <h4 class="text-success mx-3"><%= pet.name %></h4>
+                  <p class="mt-1 mx-3"><%= pet.age %> <%= pet.age > 1 ? "years old" : "year old" %></p>
+                </div>
+              </div>
+              <div class="card-body d-flex justify-content-between pt-1">
+                <div>
+                  <p class="text-muted">
+                    <strong>Next scheduled call:</strong>
+                    <br>
+                    insert bookings logic when done
+                  </p>
+
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+
+      <%= link_to "Add pet", new_pet_profile_path, class: "btn btn-success col-11 mx-3" %>
+    </div>
+  </div>
+</div>

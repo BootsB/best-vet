@@ -3,19 +3,22 @@ class UserProfilesController < ApplicationController
   before_action :set_user_profile, only: [:show, :edit, :update]
 
   def show
-    @user_profile = current_user.user_profile
+    authorize @user_profile
   end
 
   def new
     @user_profile = current_user.build_user_profile
+    authorize @user_profile
   end
 
   def edit
     # No need to find by :id, because it's the current user's profile
+    authorize @user_profile
   end
 
   def create
     @user_profile = current_user.build_user_profile(user_profile_params)
+    authorize @user_profile
     if @user_profile.save
       redirect_to @user_profile, notice: 'User profile was successfully created.'
     else
@@ -24,6 +27,7 @@ class UserProfilesController < ApplicationController
   end
 
   def update
+    authorize @user_profile
     if @user_profile.update(user_profile_params)
       redirect_to @user_profile, notice: 'User profile was successfully updated.'
     else

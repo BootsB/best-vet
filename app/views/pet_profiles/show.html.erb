@@ -1,1 +1,63 @@
-<%= @pet.name %>
+<div class="bg-white pb-5">
+  <div class="container pt-3 pe-5 ps-5" data-controller="pet-information-filter" >
+    <div class="pet-profile-card">
+      <%= image_tag "https://source.unsplash.com/random/?dog",{ alt:"Picture that describes discussion theme", class:"image-card"} %>
+      <div class="pet-profile-card-information">
+          <h4><%= @pet.name.capitalize %></h4>
+          <p><%= @pet.species.capitalize %> - <%= @pet.breed.capitalize %></p>
+          <p><%= @pet.age %> years old </p>
+      </div>
+      <% if current_user == @pet.user %>
+        <div class="d-flex edit-delete">
+          <%= link_to pet_profile_path(@pet), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            <i class="fa-solid fa-trash me-2"></i>
+          <% end %>
+          <%= link_to(edit_pet_profile_path(@pet)) do %>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="filter-card">
+      <div class="filter-button">
+        <div class="circle-item pressed" data-pet-information-filter-target="button" data-action="click->pet-information-filter#select" data-pet-information-filter-info-value="about">
+          <i class="fa-solid fa-paw"></i>
+        </div>
+        <p> About </p>
+      </div>
+      <div class="filter-button">
+        <div class="circle-item" data-pet-information-filter-target="button" data-action="click->pet-information-filter#select" data-pet-information-filter-info-value="appointments">
+          <i class="fa-solid fa-calendar-days"></i>
+        </div>
+        <p> Appointments </p>
+      </div>
+      <div class="filter-button">
+        <div class="circle-item" data-pet-information-filter-target="button" data-action="click->pet-information-filter#select" data-pet-information-filter-info-value="records">
+          <i class="fa-solid fa-folder-open"></i>
+        </div>
+        <p> Records </p>
+      </div>
+    </div>
+    <div class="filtered-information-card" data-pet-information-filter-target="information" data-pet-information-filter-info-value="about">
+      <p><i class="fa-solid fa-address-card"></i> : <%= @pet.description.capitalize %></p>
+      <p><i class="fa-solid fa-venus-mars"></i> : <%= @pet.gender.capitalize %></p>
+      <p><i class="fa-solid fa-weight-scale"></i> : <%= @pet.weight %> kg</p>
+      <p><i class="fa-solid fa-signs-post"></i>: <% if @pet.neutered? %>
+        <%="Is neutered"%>
+      <% else %>
+        <%= "Is not neutered" %>
+      <% end %></p>
+      <p><i class="fa-solid fa-ticket"></i>:  <% if @pet.microchip? %>
+        <%="Is microchiped"%>
+      <% else %>
+        <%= "Is not microchiped" %>
+      <% end %></p>
+    </div>
+    <div class="filtered-information-card d-none" data-pet-information-filter-target="information" data-pet-information-filter-info-value="appointments">
+      <p>No scheduled appointments</p>
+    </div>
+    <div class="filtered-information-card d-none" data-pet-information-filter-target="information" data-pet-information-filter-info-value="records">
+      <p>No records yet</p>
+    </div>
+  </div>
+</div>
