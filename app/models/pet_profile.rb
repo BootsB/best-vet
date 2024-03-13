@@ -10,8 +10,8 @@ class PetProfile < ApplicationRecord
   validates :weight, presence: true
   validates :user_id, presence: true
   validates :vaccinations, presence: true
-  validates :neutered, presence: true
-  validates :microchip, presence: true
+  validates :neutered, inclusion: [true, false]
+  validates :microchip, inclusion: [true, false]
   validates :description, presence: true
   validates :gender, presence: true
 end
