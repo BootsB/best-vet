@@ -1,7 +1,7 @@
 <div class="bg-white pb-5">
   <div class="container pt-3 pe-3 ps-3" data-controller="pet-information-filter" >
     <div class="pet-profile-card">
-      <%= image_tag "emilia.png",{ alt:"Picture that describes discussion theme", class:"image-card"} %>
+      <%= image_tag "https://source.unsplash.com/random/?dog",{ alt:"Picture that describes discussion theme", class:"image-card"} %>
       <div class="pet-profile-card-information">
           <h4><%= @pet.name.capitalize %></h4>
           <p><%= @pet.species.capitalize %> - <%= @pet.breed.capitalize %></p>
@@ -54,14 +54,7 @@
       <% end %></p>
     </div>
     <div class="filtered-information-card d-none" data-pet-information-filter-target="information" data-pet-information-filter-info-value="appointments">
-      <p>You don't have any appointments scheduled.</p>
-      <br>
-      <p><strong> Book an appointment:</strong> </p>
-      <form action="/pet_profiles" method="post" data-pet-information-filter-target="appointment" data-action="submit->pet-information-filter#message">
-        <input  class="form-control form-control-sm mt-1" id="date" name="date" type="text" placeholder="Choose a session" data-pet-information-filter-target="chosen">
-        <input class="btn btn-success btn-sm  mt-2" type="submit">
-      </form>
-      <p data-pet-information-filter-target="reply"></p>
+      <p>No scheduled appointments</p>
     </div>
     <div class="filtered-information-card d-none" data-pet-information-filter-target="information" data-pet-information-filter-info-value="records">
       <p>No records yet</p>
