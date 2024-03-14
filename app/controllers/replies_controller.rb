@@ -4,6 +4,7 @@ class RepliesController < ApplicationController
     @reply = Reply.new(reply_params)
     @reply.user = current_user
     @reply.post = @post
+    authorize @post
     if @reply.save
       redirect_to @post, notice: "Reply sent"
     else
