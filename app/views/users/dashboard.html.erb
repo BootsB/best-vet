@@ -26,7 +26,7 @@
           <% end %>
       </div>
     </div>
-    <% Category.all.sample(4).each do |category| %>
+    <% Category.all.each do |category| %>
       <% @post = category.posts.all.sample %>
       <div class="row justify-content-center">
         <div class="col-12 col-lg-8 text-left mt-3">
