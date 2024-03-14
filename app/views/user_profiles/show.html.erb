@@ -1,8 +1,27 @@
-<div class="container">
-  <h1 class="text-center mt-5 mb-4">User Profile</h1>
-
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
+<div class="bg-white pb-5">
+  <div class="container pt-3 pe-3 ps-3">
+    <div class="user-profile-card">
+      <%= image_tag "https://source.unsplash.com/random/?user",{ alt:"Picture that describes user", class:"image-card"} %>
+      <div class="user-profile-card-information">
+          <h4>User Profile</h4>
+      </div>
+      <% if current_user == @user_profile.user %>
+        <div class="d-flex edit-delete">
+          <%= link_to edit_user_profile_path(@user_profile), class: "btn btn-primary" do %>
+            Edit Profile
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="filter-card">
+      <div class="filter-button">
+        <div class="circle-item pressed">
+          <i class="fa-solid fa-address-card"></i>
+        </div>
+        <p> Information </p>
+      </div>
+    </div>
+    <div class="filtered-information-card">
       <ul class="list-group">
         <li class="list-group-item">
           <strong>First Name:</strong> <%= @user_profile.first_name %>
@@ -42,6 +61,4 @@
       </ul>
     </div>
   </div>
-
-  <%= link_to "Edit Profile", edit_user_profile_path(current_user.user_profile), class: "btn btn-primary btn-lg btn-block mt-3" %>
 </div>
