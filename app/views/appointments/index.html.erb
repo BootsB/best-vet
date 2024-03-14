@@ -9,7 +9,6 @@
             <p class="card-text"><strong>Time:</strong> <%= appointment.appointment_time.strftime("%I:%M %p") %></p>
             <p class="card-text"><strong>Status:</strong> <%= appointment.status %></p>
 
-
             <% if current_user.vet? %>
               <p class="card-text"><strong>Pet Owner:</strong> <%= appointment.pet_owner.email %></p>
             <% else %>
@@ -37,3 +36,19 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    flatpickr(".datepicker", {
+      dateFormat: "Y-m-d",
+      enableTime: false
+    });
+
+    flatpickr(".timepicker", {
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i",
+      time_24hr: true
+    });
+  });
+</script>
