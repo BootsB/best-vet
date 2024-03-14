@@ -2,29 +2,34 @@
   <h1 class="text-center">Appointments</h1>
   <div class="row">
     <% @appointments.each do |appointment| %>
-      <div class="col-md-4">
-        <div class="card mb-3">
+      <div class="col-md-4 mb-4">
+        <div class="card">
           <div class="card-body">
-            <h5 class="card-title"><%= appointment.appointment_date %></h5>
-            <p class="card-text"><strong>Time:</strong> <%= appointment.appointment_time %></p>
+            <h5 class="card-title"><%= appointment.appointment_date.strftime("%B %d, %Y") %></h5>
+            <p class="card-text"><strong>Time:</strong> <%= appointment.appointment_time.strftime("%I:%M %p") %></p>
             <p class="card-text"><strong>Status:</strong> <%= appointment.status %></p>
+
+
             <% if current_user.vet? %>
-              <p class="card-text"><strong>Patient:</strong> <%= appointment.pet_profile.pet.name %></p>
-              <p class="card-text"><strong>Owner:</strong> <%= appointment.pet_profile.user.email %></p>
-              <p class="card-text"><strong>Description:</strong> <%= appointment.description_of_problem %></p>
-              <% if appointment.pending? %>
-                <div class="text-center">
-                  <%= link_to accept_appointment_path(appointment), method: :put, class: "btn btn-success btn-sm mr-2", title: "Accept" do %>
-                    <i class="fas fa-check"></i> Accept
-                  <% end %>
-                  <%= link_to reject_appointment_path(appointment), method: :put, class: "btn btn-danger btn-sm", title: "Reject" do %>
-                    <i class="fas fa-times"></i> Reject
-                  <% end %>
-                </div>
-              <% end %>
+              <p class="card-text"><strong>Pet Owner:</strong> <%= appointment.pet_owner.email %></p>
             <% else %>
               <p class="card-text"><strong>Vet:</strong> <%= appointment.vet.email %></p>
-              <p class="card-text"><strong>Description:</strong> <%= appointment.description_of_problem %></p>
+            <% end %>
+            <p class="card-text"><strong>Description:</strong> <%= appointment.description_of_problem %></p>
+            <% if current_user.vet? && appointment.pending? %>
+              <div class="text-center">
+                <%= link_to accept_appointment_path(appointment), method: :put, class: "btn btn-success mr-2", title: "Accept" do %>
+                  <i class="fas fa-check"></i> Accept
+                <% end %>
+                <%= link_to reject_appointment_path(appointment), method: :put, class: "btn btn-danger", title: "Reject" do %>
+                  <i class="fas fa-times"></i> Reject
+                <% end %>
+              </div>
+            <% end %>
+            <% if current_user == appointment.pet_owner || current_user == appointment.vet %>
+              <div class="text-center mt-3">
+                <%= link_to "Edit", edit_appointment_path(appointment), class: "btn btn-primary" %>
+              </div>
             <% end %>
           </div>
         </div>

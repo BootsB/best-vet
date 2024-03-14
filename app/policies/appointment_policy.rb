@@ -15,20 +15,20 @@ class AppointmentPolicy < ApplicationPolicy
     true
   end
 
-  def dashboard?
+  def show?
+    user.present? # All users can view appointments
+  end
+
+  def new?
     true
   end
 
-  def show?
-    user.vet? && record.vet_id == user.id # Vets can only view their own appointments
-  end
-
   def create?
-    user.vet? # Only vets can create appointments
+    user.vet? || user.non_vet? # Vets can create appointments, non-vets can request appointments
   end
 
   def update?
-    user.vet? && record.vet_id == user.id # Vets can only update their own appointments
+    true
   end
 
   def destroy?
@@ -44,6 +44,6 @@ class AppointmentPolicy < ApplicationPolicy
   end
 
   def create_for_user?
-    user.id == record.user_id # Users can only create appointments for themselves
+    user.vet? # Only vets can create appointments for users
   end
 end

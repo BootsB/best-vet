@@ -1,0 +1,24 @@
+<h1>Edit Appointment</h1>
+
+<%= simple_form_for @appointment, html: { class: "form" } do |f| %>
+  <div class="form-group">
+    <%= f.input :appointment_date, as: :string, input_html: { class: "form-control", data: { date_picker: true } } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :appointment_time, as: :time, input_html: { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description_of_problem %>
+    <%= f.text_area :description_of_problem, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :status %>
+    <%= f.select :status, Appointment.statuses.keys.map(&:to_sym), {}, { class: "form-control" } %>
+
+  </div>
+
+  <%= f.button :submit, "Save Changes", class: "btn btn-primary" %>
+<% end %>

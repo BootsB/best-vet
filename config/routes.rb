@@ -6,10 +6,8 @@ Rails.application.routes.draw do
   resources :user_profiles, except: [:destroy]
 
   resources :appointments do
-    member do
-      put :accept
-      put :reject
-    end
+    put :accept, on: :member
+    put :reject, on: :member
   end
 
   resources :categories, only: [:show, :index], path: 'forum'
