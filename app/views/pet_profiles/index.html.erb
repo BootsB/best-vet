@@ -1,6 +1,6 @@
 <div class="bg-white pb-5">
   <div class="container pt-3 ">
-    <div class="row">
+    <div class="row px-1">
       <h2 class="text-success text-center pb-4"><strong> Your pets </strong></h2>
       <% @pets.each do |pet| %>
         <div class="col-lg-3 col-sm-12 mb-4">
@@ -20,7 +20,8 @@
                   <p class="text-muted">
                     <strong>Next scheduled call:</strong>
                     <br>
-                    insert bookings logic when done
+                    <%# insert booking logic below when done %>
+                    <%= ["15th", "19th", "27th", "22nd"].sample %> March 2024
                   </p>
 
                 </div>
