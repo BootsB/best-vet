@@ -84,7 +84,7 @@
               </a>
                 <div class="post-content">
                   <p> <%= reply.content %></p>
-                  <p class="text-muted mb-0"><small><%= time_ago_in_words(@post.created_at) %> ago</small></p>
+                  <p class="text-muted mb-0"><small><%= time_ago_in_words(reply.created_at) %> ago</small></p>
                 </div>
             </div>
         <% end %>

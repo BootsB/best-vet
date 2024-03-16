@@ -2,13 +2,15 @@
   <ul class="footer-nav">
     <li>
       <% if user_signed_in? %>
-        <%= link_to dashboard_path(current_user)  do %><i class="fa fa-home"></i> <% end %>
+        <%= link_to dashboard_path(current_user)  do %><i class="fa fa-home <% if params[:controller] == 'users' || params[:controller] == 'user_profiles' %>text-primary<% end %>"></i> <% end %>
       <% else %>
         <%= link_to root_path do %><i class="fa fa-home"></i> <% end %>
       <% end %>
     </li>
-    <li><%= link_to "/forum" do %><i class="fa fa-solid fa-message"></i> <% end %></li>
-    <li><%= link_to "#" do %><i class="fa fa-calendar"></i><% end %></li>
-    <li><%= link_to "/pet_profiles" do %><i class="fa fa-light fa-shield-dog"></i> <% end %></li>
+    <li><%= link_to "/forum" do %><i class="fa fa-solid fa-message <% if params[:controller] == 'categories' || params[:controller] == 'posts' %>text-primary<% end %>"></i> <% end %></li>
+    <li><%= link_to "#" do %><i class="fa fa-calendar <% if params[:controller] == 'appointments' %>text-primary<% end %>"></i><% end %></li>
+    <li>
+  <%= link_to "/pet_profiles" do %><i class="fa fa-light fa-shield-dog <% if params[:controller] == 'pet_profiles' %>text-primary<% end %>"> </i><% end %>
+</li>
   </ul>
 </footer>
