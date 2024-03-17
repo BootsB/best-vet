@@ -16,9 +16,9 @@
         <div class="col-md-6">
           <h1 class="text-white">Your Trusted Online Veterinary Clinic</h1>
           <p class="text-white small mt-1">
-            Welcome to our Online Veterinary Clinic!
-            Our experienced veterinarians offer quality care and support for your pets from your home.
-            Schedule a call today.
+            Welcome to our Online Veterinary Clinic, where quality care meets convenience and speed.
+            Our dedicated team of experienced veterinarians is here to provide expert guidance and support for your beloved pets, all from the comfort of your own home.
+            Schedule a call now
             </p>
         </div>
         <div class="p-3  col-sm-12 bg-white text-center col-md-6 round">
@@ -30,8 +30,61 @@
     </div>
   </div>
   <div class="container">
-    <div class="row">
-      <div class="p-4 col-sm-12 col-lg-4">
+    <div data-controller="toggle-card" class="row px-2" >
+
+      <%= link_to "#", class: "text-decoration-none mt-4 mb-4", data: { action: "click->toggle-card#toggleVets" } do %>
+        <div class="text-center link-border p-4" data-toggle-card-target="vets">
+          <i class="fa-solid fa-briefcase-medical text-success display-1 mt-2 mb-2"></i>
+          <h2 class="text-black">Trusted vets</h2>
+        </div>
+
+        <div class="text-center link-border p-4 d-none" data-toggle-card-target="textVets">
+          <p class="text-muted">At our online clinic, your pets receive compassionate care from seasoned veterinarians who prioritize their well-being.</p>
+
+        </div>
+      <% end %>
+
+      <%= link_to "#", class: "text-decoration-none mb-4", data: { action: "click->toggle-card#toggleForum" } do %>
+        <div class="text-center link-border p-4" data-toggle-card-target="forum" >
+          <i class="fa-solid fa-message text-success display-1 mt-2 mb-2"></i>
+          <h2 class="text-black">Forum</h2>
+        </div>
+
+        <div class="text-center link-border p-4 d-none" data-toggle-card-target="textForum">
+          <p class="text-muted">Our veterinary forum connects pet owners with experienced vets for expert advice on any medical concerns.</p>
+        </div>
+      <% end %>
+
+      <%= link_to "#", class: "text-decoration-none mb-4", data: { action: "click->toggle-card#toggleRecords"} do %>
+        <div class="text-center link-border p-4" data-toggle-card-target="records">
+          <i class="fa-solid fa-shield-dog text-success display-1 mt-2 mb-2"></i>
+          <h2 class="text-black">Save records</h2>
+        </div>
+
+        <div class="text-center link-border p-4 d-none" data-toggle-card-target="textRecords">
+          <p class="text-muted">Our centralized system securely stores all important medical information for easy access whenever you need it.</p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+<div class="bg-success">
+  <div class="container">
+    <footer class="py-3">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item "><a class="nav-link text-white" href="/">Home</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/">FAQs</a></li>
+      <li class="nav-item"><a class="nav-link text-white" href="/">About us</a></li>
+    </ul>
+    <p class="text-center text-white">© 2024 Best-vet</p>
+    </footer>
+  </div>
+</div>
+
+
+<div class="d-none">
+  <div class="p-4 col-sm-12 col-lg-4">
         <h2 class="display-5">
           <i class="fa-solid fa-briefcase-medical text-success"></i>
           <strong class="ms-2">Trusted vets</strong>
@@ -68,18 +121,4 @@
         </p>
         <%= link_to "Start now", pet_profiles_path, class: 'btn btn-success btn-blocked' %>
       </div>
-    </div>
-  </div>
-</div>
-<div class="bg-success">
-  <div class="container">
-    <footer class="py-3">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item "><a class="nav-link text-white" href="/">Home</a></li>
-      <li class="nav-item"><a class="nav-link text-white" href="/">FAQs</a></li>
-      <li class="nav-item"><a class="nav-link text-white" href="/">About us</a></li>
-    </ul>
-    <p class="text-center text-white">© 2024 Best-vet</p>
-    </footer>
-  </div>
 </div>
