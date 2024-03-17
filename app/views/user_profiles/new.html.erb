@@ -1,65 +1,62 @@
 <div class="container">
-  <h1 class="text-center mt-5 mb-4">Create User Profile</h1>
+  <h1 class="text-center mt-5 mb-4">Create Profile</h1>
 
   <%= form_with(model: @user_profile, url: user_profiles_path, method: :post, html: { class: "mb-5", autocomplete: "on" }) do |form| %>
     <div class="mb-3">
-      <%= form.label :first_name, class: "form-label" %>
-      <%= form.text_field :first_name, class: "form-control", autocomplete: "given-name" %>
+      <%= form.label :first_name, "First Name *", class: "form-label" %>
+      <%= form.text_field :first_name, class: "form-control bg-white", autocomplete: "given-name", required: true %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :last_name, class: "form-label" %>
-      <%= form.text_field :last_name, class: "form-control", autocomplete: "family-name" %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :address, class: "form-label" %>
-      <%= form.text_field :address, class: "form-control", autocomplete: "street-address" %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :description, class: "form-label" %>
-      <%= form.text_field :description, class: "form-control", autocomplete: "off" %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :membership, class: "form-label" %>
-      <%= form.number_field :membership, class: "form-control", autocomplete: "off" %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :location, class: "form-label" %>
-      <%= form.text_field :location, class: "form-control", autocomplete: "off" %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :city, class: "form-label" %>
-      <%= form.text_field :city, class: "form-control", autocomplete: "address-level2" %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :phone_number, class: "form-label" %>
-      <%= form.text_field :phone_number, class: "form-control", autocomplete: "tel" %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :state, class: "form-label" %>
-      <%= form.text_field :state, class: "form-control", autocomplete: "address-level1" %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :zip_code, class: "form-label" %>
-      <%= form.text_field :zip_code, class: "form-control", autocomplete: "postal-code" %>
+      <%= form.label :last_name, "Last Name *", class: "form-label" %>
+      <%= form.text_field :last_name, class: "form-control bg-white", autocomplete: "family-name", required: true %>
     </div>
 
     <% if current_user.vet? %>
       <div class="mb-3">
-        <%= form.label :licence_number, class: "form-label" %>
-        <%= form.text_field :licence_number, class: "form-control", autocomplete: "off" %>
+        <i class="fa-solid fa-user-doctor"></i> <strong>Professional Information:</strong>
+      </div>
+      <div class="mb-3">
+        <%= form.label :licence_number, "License Number *", class: "form-label" %>
+        <%= form.text_field :licence_number, class: "form-control bg-white", required: true %>
       </div>
     <% end %>
 
-    <%= form.submit "Create Profile", class: "btn btn-primary btn-lg btn-block" %>
-  <% end %>
+    <div class="mb-3">
+      <%= form.label :phone_number, "Phone Number *", class: "form-label" %>
+      <%= form.text_field :phone_number, class: "form-control bg-white", autocomplete: "tel", required: true %>
+    </div>
 
+    <div class="mb-3">
+      <%= form.label :address, "Address *", class: "form-label" %>
+      <%= form.text_field :address, class: "form-control bg-white", autocomplete: "street-address", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :location, "Location *", class: "form-label" %>
+      <%= form.text_field :location, class: "form-control bg-white", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :city, "City *", class: "form-label" %>
+      <%= form.text_field :city, class: "form-control bg-white", autocomplete: "address-level2", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :state, "State *", class: "form-label" %>
+      <%= form.text_field :state, class: "form-control bg-white", autocomplete: "address-level1", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :zip_code, "Zip Code *", class: "form-label" %>
+      <%= form.text_field :zip_code, class: "form-control bg-white", autocomplete: "postal-code", required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :description, "Description *", class: "form-label" %>
+      <%= form.text_area :description, class: "form-control bg-white", rows: 3, required: true %>
+    </div>
+
+    <%= form.submit "Create Profile", class: "btn btn-success submitfbtn", style: "margin-bottom: 30px;" %>
+  <% end %>
 </div>
