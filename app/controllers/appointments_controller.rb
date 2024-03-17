@@ -38,6 +38,7 @@ class AppointmentsController < ApplicationController
   end
 
   def update
+    authorize @appointment
     if @appointment.update(appointment_params)
       redirect_to @appointment, notice: 'Appointment was successfully updated.'
     else
@@ -67,9 +68,13 @@ class AppointmentsController < ApplicationController
 
   def destroy
     authorize @appointment
-    @appointment.destroy!
-    redirect_to appointments_url, notice: 'Appointment was successfully deleted.'
+    if @appointment.destroy
+      redirect_to appointments_path, notice: 'Appointment was successfully deleted.'
+    else
+      redirect_to appointments_path, alert: 'Failed to delete appointment.'
+    end
   end
+
 
   private
 
@@ -78,6 +83,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:appointment_date, :appointment_time, :description_of_problem, :pet_profile_id, :user_id)
+    params.require(:appointment).permit(:appointment_date, :appointment_time, :description_of_problem, :pet_profile_id, :user_id, :zoom_link)
   end
 end

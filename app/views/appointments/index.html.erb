@@ -23,7 +23,6 @@
                     <div class="card-body">
                       <h5 class="card-title text-center"><i class="fas fa-paw"></i> Consultation for <%= appointment.pet_profile.name %></h5>
                       <br>
-                      <p><i class="fas fa-hashtag"></i> Reference ID: <%= appointment.id %></p>
                       <p><%= content_tag :i, "", class: "fa-solid fa-calendar" %> <%= appointment.appointment_date.strftime("%B %d, %Y") %></p>
                       <p><strong><%= content_tag :i, "", class: "fa-solid fa-clock" %> </strong> <%= appointment.appointment_time.strftime("%I:%M %p") %></p>
                       <% icon_class = case appointment.status.to_sym

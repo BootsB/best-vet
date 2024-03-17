@@ -36,7 +36,8 @@ class AppointmentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
+    # Only vet can destroy appointments
+    user.vet
   end
 
   def accept?

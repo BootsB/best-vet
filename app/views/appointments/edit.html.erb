@@ -14,6 +14,14 @@
       <%= f.text_area :description_of_problem, class: "form-control" %>
     </div>
 
+    <% if current_user.vet? %>
+      <div class="form-group">
+        <div class="col-md-9">
+          <%= f.input :zoom_link, as: :string, input_html: { class: "form-control" }, label: "Zoom Link" %>
+        </div>
+      </div>
+    <% end %>
+
     <%= f.button :submit, "Save Changes", class: "btn btn-primary" %>
   <% end %>
 </div>
