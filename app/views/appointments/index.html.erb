@@ -1,38 +1,62 @@
 <div class="container">
-  <h1 class="text-center">Appointments</h1>
-  <div class="row">
-    <% @appointments.each do |appointment| %>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><%= appointment.appointment_date.strftime("%B %d, %Y") %></h5>
-            <p class="card-text"><strong>Time:</strong> <%= appointment.appointment_time.strftime("%I:%M %p") %></p>
-            <p class="card-text"><strong>Status:</strong> <%= appointment.status %></p>
-
-            <% if current_user.vet? %>
-              <p class="card-text"><strong>Pet Owner:</strong> <%= appointment.pet_owner.email %></p>
-            <% else %>
-              <p class="card-text"><strong>Vet:</strong> <%= appointment.vet.email %></p>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <% unless current_user.vet? %>
+            <%= link_to new_appointment_path, class: "btn btn-success" do %>
+              <i class="fas fa-plus"></i> New Appointment
             <% end %>
-            <p class="card-text"><strong>Description:</strong> <%= appointment.description_of_problem %></p>
-            <% if current_user.vet? && appointment.pending? %>
-              <div class="text-center">
-                <%= link_to accept_appointment_path(appointment), method: :put, class: "btn btn-success mr-2", title: "Accept" do %>
-                  <i class="fas fa-check"></i> Accept
-                <% end %>
-                <%= link_to reject_appointment_path(appointment), method: :put, class: "btn btn-danger", title: "Reject" do %>
-                  <i class="fas fa-times"></i> Reject
-                <% end %>
-              </div>
-            <% end %>
-            <% if current_user == appointment.pet_owner || current_user == appointment.vet %>
-              <div class="text-center mt-3">
-                <%= link_to "Edit", edit_appointment_path(appointment), class: "btn btn-primary" %>
-              </div>
-            <% end %>
-          </div>
+          <% end %>
         </div>
-      </div>
-    <% end %>
-  </div>
-</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <h1 class="text-center">Appointments</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 mb-4" style="overflow-y: auto; max-height: 500px;">
+              <% @appointments.each do |appointment| %>
+                <%= link_to appointment_path(appointment), class: "text-decoration-none" do %>
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title text-center"><i class="fas fa-paw"></i> Consultation for <%= appointment.pet_profile.name %></h5>
+                      <br>
+                      <p><i class="fas fa-hashtag"></i> Reference ID: <%= appointment.id %></p>
+                      <p><%= content_tag :i, "", class: "fa-solid fa-calendar" %> <%= appointment.appointment_date.strftime("%B %d, %Y") %></p>
+                      <p><strong><%= content_tag :i, "", class: "fa-solid fa-clock" %> </strong> <%= appointment.appointment_time.strftime("%I:%M %p") %></p>
+                      <% icon_class = case appointment.status.to_sym
+                        when :pending
+                          "fa-solid fa-clock" # Default black
+                        when :accepted
+                          "fa-solid fa-check-circle text-success" # Green
+                        when :declined
+                          "fa-solid fa-times-circle text-danger" # Red
+                        when :confirmed
+                          "fa-solid fa-check-double" # Confirmed icon
+                        else
+                          "fa-solid fa-question-circle" # Default if status is not recognized
+                      end %>
+                      <p><strong><%= content_tag :i, "", class: icon_class %></strong> <%= appointment.status.capitalize %></p>
+                    </div>
+                    <% if current_user.vet? && appointment.pending? %>
+                      <div class="card-footer">
+                        <%= link_to accept_appointment_path(appointment), method: :get, class: "btn btn-success mr-2", title: "Accept" do %>
+                          <i class="fas fa-check"></i> Accept
+                        <% end %>
+                        <%= link_to reject_appointment_path(appointment), method: :get, class: "btn btn-danger", title: "Reject" do %>
+                          <i class="fas fa-times"></i> Reject
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div> <!-- Closing card-body -->
+      </div> <!-- Closing card -->
+    </div> <!-- Closing col-md-8 -->
+  </div> <!-- Closing row justify-content-center -->
+</div> <!-- Closing container -->

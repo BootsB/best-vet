@@ -1,8 +1,0 @@
-<%= simple_form_for(@appointment) do |f| %>
-  <%= f.input :appointment_date %>
-  <%= f.input :appointment_time %>
-  <%= f.input :description_of_problem %>
-  <%= f.collection_select :pet_profile_id, current_user.pet_profiles, :id, :name, { prompt: "Select your pet" } %>
-  <%= f.collection_select :vet_id, User.where(vet: true), :id, :email, { prompt: "Select a Vet" } %>
-  <%= f.button :submit, "Request Appointment" %>
-<% end %>

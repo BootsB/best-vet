@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_14_145921) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_16_202923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,13 +18,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_14_145921) do
     t.bigint "user_id", null: false
     t.bigint "pet_profile_id", null: false
     t.date "appointment_date"
-    t.string "status"
     t.time "appointment_time"
     t.text "description_of_problem"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "vet_id"
-    t.integer "pet_owner_id"
+    t.integer "status", default: 0
+    t.string "zoom_link"
     t.index ["pet_profile_id"], name: "index_appointments_on_pet_profile_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end

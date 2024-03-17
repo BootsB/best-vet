@@ -1,5 +1,12 @@
 require "faker"
 
+Appointment.destroy_all
+PetProfile.destroy_all
+Post.destroy_all
+Category.destroy_all
+UserProfile.destroy_all
+User.destroy_all
+
 # Output the number of existing users before creating new ones
 puts "Number of existing users: #{User.count}"
 
@@ -14,25 +21,25 @@ categories = Category.create([
 ])
 
 # Create a single user
-user = User.create(email: "example@example.com", password: "password")
+user = User.create!(email: "example@example.com", password: "password")
 
 # General Category
 Post.create!(
   title: "Question about grooming",
   content: "I have a long-haired cat and I'm struggling with grooming. Any tips on how to make the process easier?",
-  category_id: 1,
+  category: Category.all[0],
   user: user
 )
 Post.create!(
   title: "Pet socialization",
   content: "My new puppy seems to be having trouble socializing with other dogs. What are some ways I can help him overcome this?",
-  category_id: 1,
+  category: Category.all[0],
   user: user
 )
 Post.create!(
   title: "Traveling with pets",
   content: "I'm planning a road trip with my cat. Any advice on making the journey comfortable and stress-free for her?",
-  category_id: 1,
+  category: Category.all[0],
   user: user
 )
 
@@ -40,19 +47,19 @@ Post.create!(
 Post.create!(
   title: "Concerned about my dog's weight",
   content: "My dog seems to be gaining weight rapidly despite no changes in diet or exercise. Should I be worried? What could be causing this?",
-  category_id: 2,
+  category: Category.all[1],
   user: user
 )
 Post.create!(
   title: "Hair loss in cats",
   content: "My cat has been shedding a lot more than usual and I've noticed some bald patches. What could be causing this and how can I help?",
-  category_id: 2,
+  category: Category.all[1],
   user: user
 )
 Post.create!(
   title: "Chronic ear infections",
   content: "My dog keeps getting ear infections despite regular cleaning. What can I do to prevent them?",
-  category_id: 2,
+  category: Category.all[1],
   user: user
 )
 
@@ -60,19 +67,19 @@ Post.create!(
 Post.create!(
   title: "Puppy biting problem",
   content: "My puppy keeps biting everything, including me. How can I train him to stop this behavior?",
-  category_id: 3,
+  category: Category.all[2],
   user: user
 )
 Post.create!(
   title: "Fear of thunderstorms",
   content: "My dog gets extremely anxious during thunderstorms. Any tips on how to help him feel calmer?",
-  category_id: 3,
+  category: Category.all[2],
   user: user
 )
 Post.create!(
   title: "Teaching my cat tricks",
   content: "I want to teach my cat some tricks. Where should I start?",
-  category_id: 3,
+  category: Category.all[2],
   user: user
 )
 
@@ -80,19 +87,19 @@ Post.create!(
 Post.create!(
   title: "Transitioning to a new diet",
   content: "I want to switch my cat's food to a healthier option. How can I transition her to the new diet without upsetting her stomach?",
-  category_id: 4,
+  category: Category.all[3],
   user: user
 )
 Post.create!(
   title: "Homemade dog treats",
   content: "I'd like to start making homemade treats for my dog. Any easy recipes to get started?",
-  category_id: 4,
+  category: Category.all[3],
   user: user
 )
 Post.create!(
   title: "Food allergies in pets",
   content: "My cat seems to have developed an allergy to her food. How can I identify the allergen and find a suitable alternative?",
-  category_id: 4,
+  category: Category.all[3],
   user: user
 )
 
@@ -100,19 +107,19 @@ Post.create!(
 Post.create!(
   title: "First aid for a cut paw",
   content: "My dog cut her paw while playing outside. What should I do to treat the wound before taking her to the vet?",
-  category_id: 5,
+  category: Category.all[4],
   user: user
 )
 Post.create!(
   title: "Choking hazard",
   content: "My cat swallowed a small object and is coughing. What should I do?",
-  category_id: 5,
+  category: Category.all[4],
   user: user
 )
 Post.create!(
   title: "Heatstroke prevention",
   content: "With summer approaching, I'm concerned about my dog overheating. What are some signs of heatstroke and how can I prevent it?",
-  category_id: 5,
+  category: Category.all[4],
   user: user
 )
 
@@ -120,19 +127,19 @@ Post.create!(
 Post.create!(
   title: "Managing arthritis in older cats",
   content: "My senior cat has been showing signs of arthritis lately. Are there any home remedies or supplements I can give her to ease her discomfort?",
-  category_id: 6,
+  category: Category.all[5],
   user: user
 )
 Post.create!(
   title: "Senior dog's declining appetite",
   content: "My elderly dog has been eating less lately. Should I be concerned?",
-  category_id: 6,
+  category: Category.all[5],
   user: user
 )
 Post.create!(
   title: "Dental care for senior pets",
   content: "How can I maintain good dental health for my senior dog?",
-  category_id: 6,
+  category: Category.all[5],
   user: user
 )
 
@@ -140,19 +147,19 @@ Post.create!(
 Post.create!(
   title: "Pet adoption event",
   content: "Our local shelter is hosting a pet adoption event next weekend. What can I do to help promote it and encourage people to adopt?",
-  category_id: 7,
+  category: Category.all[6],
   user: user
 )
 Post.create!(
   title: "Fundraising for animal rescue",
   content: "I'm interested in organizing a fundraiser for our local animal rescue organization. Any suggestions on how to get started?",
-  category_id: 7,
+  category: Category.all[6],
   user: user
 )
 Post.create!(
   title: "Lost pet alert",
   content: "My neighbor's cat has gone missing. How can we spread the word and increase the chances of finding her?",
-  category_id: 7,
+  category: Category.all[6],
   user: user
 )
 
@@ -218,7 +225,7 @@ puts "Number of existing user profiles: #{UserProfile.count}"
   3.times do
     appointment = Appointment.new(
       appointment_date: Faker::Date.forward(days: 30), # Random date within the next 30 days
-      status: ['Pending', 'Confirmed', 'Cancelled'].sample, # Randomly assign status
+      status: [0, 1, 2, 3].sample, # Randomly assign status
       appointment_time: Faker::Time.between(from: DateTime.now, to: DateTime.now + 1, format: :default), # Random time within the next day
       description_of_problem: Faker::Lorem.paragraph
       # Add any other attributes you have for the Appointment model

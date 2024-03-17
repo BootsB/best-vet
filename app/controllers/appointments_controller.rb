@@ -1,26 +1,19 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy, :accept, :reject] # Include additional actions as needed
-  before_action :authorize_appointment, only: [:accept, :reject]
+  before_action :set_appointment, only: [:show, :edit, :update, :destroy, :accept, :reject]
 
   def index
     @appointments = policy_scope(Appointment)
 
-    if current_user.vet?
-      @vet_appointments = Appointment.where(vet_id: current_user.id)
-      @pet_owner_appointments = Appointment.joins(:pet_profile).where("pet_profiles.user_id = ? AND appointments.status = ?", current_user.id, "requested")
+    if current_user.vet
+      @appointments = @appointments.where(user_id: current_user.id)
     else
-      @pet_owner_appointments = current_user.appointments
-      @vet_appointments = Appointment.joins(:pet_profile).where("pet_profiles.user_id = ?", current_user.id)
+      @appointments = @appointments.where(pet_profile_id: current_user.pet_profiles.ids)
     end
-
-    @appointments = (@vet_appointments + @pet_owner_appointments).uniq.sort_by(&:created_at).reverse
   end
 
-
   def show
-    @appointment = Appointment.find(params[:id])
-    authorize @appointment # Authorize the specific appointment
+    authorize @appointment
   end
 
   def new
@@ -29,50 +22,22 @@ class AppointmentsController < ApplicationController
   end
 
   def create
-    if current_user.vet?
-      @appointment = current_user.vet_appointments.build(appointment_params)
-    else
-      @appointment = current_user.appointments.build(appointment_params)
-      @appointment.pet_owner_id = current_user.id # Assign the pet_owner_id based on the current user
-      @appointment.status = "requested" # Set status to "requested" for non-vet users
-    end
-
+    @appointment = Appointment.new(appointment_params)
     authorize @appointment
 
-    if @appointment.save
-      redirect_to @appointment, notice: 'Appointment was successfully created.'
+    if @appointment.save!
+      redirect_to @appointment, notice: 'Appointment request sent successfully.'
     else
-      puts @appointment.errors.full_messages # Output the full error messages to the console
-      render :new, alert: 'Failed to create the appointment. Please try again later.'
+      render :new, alert: 'Failed to send appointment request. Please try again later.'
     end
   end
-
 
 
   def edit
-    @appointment = Appointment.find(params[:id])
-    if current_user.vet? && @appointment.vet_id == current_user.id
-      authorize @appointment
-    elsif !current_user.vet? && @appointment.pet_owner_id == current_user.id
-      authorize @appointment
-    else
-      flash[:alert] = "You are not authorized to edit this appointment."
-      redirect_to appointments_path
-    end
+    authorize @appointment
   end
 
   def update
-    @appointment = Appointment.find(params[:id])
-    if current_user.vet? && @appointment.vet_id == current_user.id
-      authorize @appointment
-    elsif !current_user.vet? && @appointment.pet_owner_id == current_user.id
-      authorize @appointment
-    else
-      flash[:alert] = "You are not authorized to update this appointment."
-      redirect_to appointments_path
-      return
-    end
-
     if @appointment.update(appointment_params)
       redirect_to @appointment, notice: 'Appointment was successfully updated.'
     else
@@ -81,30 +46,30 @@ class AppointmentsController < ApplicationController
   end
 
   def accept
-    @appointment = Appointment.find(params[:id])
     authorize @appointment
-
-    if current_user.vet? && @appointment.status == "requested"
-      @appointment.update(status: "accepted")
-      render json: { message: 'Appointment accepted successfully.' }
+    if @appointment.pending?
+      @appointment.accepted!
+      redirect_to appointments_path, notice: 'Appointment accepted successfully.'
     else
-      render json: { error: 'You are not authorized to accept this appointment.' }, status: :unprocessable_entity
+      redirect_to appointments_path, status: :unprocessable_entity, alert: 'You cannot accept this appointment or it has already been accepted.'
     end
   end
 
   def reject
-    @appointment = Appointment.find(params[:id])
     authorize @appointment
-
-    if current_user.vet? && @appointment.status == "requested"
-      @appointment.update(status: "declined")
-      render json: { message: 'Appointment rejected successfully.' }
+    if @appointment.pending?
+      @appointment.declined!
+      redirect_to appointments_path, notice: 'Appointment rejected successfully.'
     else
-      render json: { error: 'You are not authorized to reject this appointment.' }, status: :unprocessable_entity
+      redirect_to appointments_path, status: :unprocessable_entity, alert: 'You cannot reject this appointment or it has already been rejected/accepted.'
     end
   end
 
-  # Other actions...
+  def destroy
+    authorize @appointment
+    @appointment.destroy!
+    redirect_to appointments_url, notice: 'Appointment was successfully deleted.'
+  end
 
   private
 
@@ -113,7 +78,6 @@ class AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:appointment_date, :appointment_time, :status, :description_of_problem, :pet_profile_id, :vet_id)
+    params.require(:appointment).permit(:appointment_date, :appointment_time, :description_of_problem, :pet_profile_id, :user_id)
   end
-
 end

@@ -1,8 +1,4 @@
 <div class="container">
   <h1 class="text-center"><%= current_user.vet? ? "New Appointment" : "Request Appointment" %></h1>
-  <% if current_user.vet? %>
-    <%= render "vet_form" %>
-  <% else %>
-    <%= render "non_vet_form" %>
-  <% end %>
+    <%= render "form" %>
 </div>
