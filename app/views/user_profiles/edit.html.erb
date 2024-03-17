@@ -1,62 +1,69 @@
-<h1>Edit User Profile</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1 class="mb-4">Edit Profile</h1>
 
-<%= form_with(model: @user_profile, url: user_profile_path(@user_profile), method: :patch) do |form| %>
-  <div>
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
+      <%= form_with(model: @user_profile, url: user_profile_path(@user_profile), method: :patch, class: "edit-profile-form") do |form| %>
+        <div class="mb-3">
+          <%= form.label :first_name, "First Name *", class: "form-label" %>
+          <%= form.text_field :first_name, class: "form-control bg-white", required: true %>
+        </div>
 
-  <div>
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :last_name, "Last Name *", class: "form-label" %>
+          <%= form.text_field :last_name, class: "form-control bg-white", required: true %>
+        </div>
 
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
+        <% if current_user.vet? %>
+          <div class="mb-3">
+            <i class="fa-solid fa-user-doctor"></i> <strong>Professional Information:</strong>
+            </label>
+          </div>
+          <div class="mb-3">
+            <%= form.label :licence_number, "License Number *", class: "form-label" %>
+            <%= form.text_field :licence_number, class: "form-control bg-white", required: true %>
+          </div>
+        <% end %>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :phone_number, "Phone Number *", class: "form-label" %>
+          <%= form.text_field :phone_number, class: "form-control bg-white", required: true %>
+        </div>
 
-  <div>
-    <%= form.label :membership %>
-    <%= form.number_field :membership %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :address, "Address *", class: "form-label" %>
+          <%= form.text_field :address, class: "form-control bg-white", required: true %>
+        </div>
 
-  <div>
-    <%= form.label :location %>
-    <%= form.text_field :location %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :location, "Location *", class: "form-label" %>
+          <%= form.text_field :location, class: "form-control bg-white", required: true %>
+        </div>
 
-  <div>
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :city, "City *", class: "form-label" %>
+          <%= form.text_field :city, class: "form-control bg-white", required: true %>
+        </div>
 
-  <div>
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :state, "State *", class: "form-label" %>
+          <%= form.text_field :state, class: "form-control bg-white", required: true %>
+        </div>
 
-  <div>
-    <%= form.label :state %>
-    <%= form.text_field :state %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :zip_code, "Zip Code ", class: "form-label" %>
+          <%= form.text_field :zip_code, class: "form-control bg-white", required: true %>
+        </div>
 
-  <div>
-    <%= form.label :zip_code %>
-    <%= form.text_field :zip_code %>
-  </div>
+        <div class="mb-3">
+          <%= form.label :description, "Description *", class: "form-label" %>
+          <%= form.text_area :description, class: "form-control bg-white", rows: 3, required: true %>
+        </div>
 
-  <div>
-    <%= form.label :licence_number %>
-    <%= form.text_field :licence_number %>
+        <div class="mb-3">
+          <%= form.submit "Update Profile", class: "btn btn-success .submitfbtn " %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div>
-    <%= form.submit "Update Profile" %>
-  </div>
-<% end %>
+</div>
