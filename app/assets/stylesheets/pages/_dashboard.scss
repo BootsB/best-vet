@@ -6,3 +6,16 @@
   color: $orange;
   font-size: 15px;
 }
+
+.nudge-profile{
+  color:rgb(158, 157, 157);
+  font-size: 12px;
+  margin-bottom: 0px;
+  background-color:$light-gray;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 10px;
+  border:0.5px solid rgb(201, 198, 198);
+  border-radius: 10px;
+}
