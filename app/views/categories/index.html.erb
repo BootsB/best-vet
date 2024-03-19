@@ -25,8 +25,27 @@
           <a href="<%= category_path(category) %>" class="card-link">
             <div class="card bg-white link-border">
               <div class="card-body">
-                <i class="fa-solid fa-message text-success display-6 mb-2"></i>
-                <h4 class="text-success header4"><%= category.title %></h4>
+                <div class="card-title">
+                  <% if category.title == "General"%>
+                    <% image = "GENERAL.png" %>
+                  <% elsif category.title == "Health Concerns" %>
+                    <% image = "HEALTH CONCERNS.png" %>
+                  <% elsif category.title == "Behavior and Training" %>
+                    <% image = "BEHAVIOURS & TRAINING.png" %>
+                  <% elsif category.title == "Nutrition and Diet"%>
+                    <% image = "NUTRITION AND DIET.png" %>
+                  <% elsif category.title == "Emergency Care" %>
+                    <% image = "EMERGENCY CARE.png" %>
+                  <% elsif category.title == "Senior Pet Care" %>
+                    <% image = "SENIOR PET CARE.png" %>
+                  <% elsif category.title == "Community" %>
+                    <% image = "COMMUNITY.png" %>
+                  <% else %>
+                    <% image = "cute-cat.png" %>
+                  <% end %>
+                  <%= image_tag image,{ alt:"Picture that describes discussion theme", class:"image-forum"} %>
+                  <h4 class="text-success header4"><%= category.title %></h4>
+                </div>
                 <p><%= category.description %></p>
               </div>
               <div class="card-body d-flex justify-content-between">

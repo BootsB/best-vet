@@ -2,7 +2,12 @@
   <div class="container">
     <div class="row justify-content-center pt-3">
       <div class="col-12 col-lg-8 text-center">
-        <h2> <strong> Welcome back, Michaela </strong></h2>
+        <h2> <strong> Welcome back<%= @current_user.user_profile ? ", #{@current_user.user_profile.first_name}" : " " %> </strong></h2>
+        <% if @current_user.user_profile == nil %>
+          <div class="nudge-profile">
+            <p>Optimize your experience, <%= link_to("create a profile", new_user_profile_path) %></p>
+          </div>
+        <% end %>
       </div>
     </div>
     <div class="row justify-content-center">
