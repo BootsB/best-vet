@@ -6,6 +6,12 @@ export default class extends Controller {
   connect() {
     console.log("Hello, Stimulus!", this.element);
 
-    flatpickr(this.element)
-  }
+    flatpickr(this.element, {
+    altInput: true,
+    altFormat: "F j, Y",
+    dateFormat: "Y-m-d",
+    minDate: "today",
+    defaultDate: "today",
+    });
+  };
 }

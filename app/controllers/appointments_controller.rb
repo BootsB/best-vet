@@ -69,7 +69,7 @@ class AppointmentsController < ApplicationController
   def destroy
     authorize @appointment
     if @appointment.destroy
-      redirect_to appointments_path, notice: 'Appointment was successfully deleted.'
+      redirect_to appointments_path, status: :see_other ,notice:  'Appointment was successfully deleted.'
     else
       redirect_to appointments_path, alert: 'Failed to delete appointment.'
     end

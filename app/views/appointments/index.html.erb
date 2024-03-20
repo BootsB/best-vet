@@ -1,33 +1,51 @@
-<div class="container">
+<div class="container custom-appointments">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between">
+          <%= link_to root_path, class: "btn btn-primary" do %>
+            <i class="fas fa-arrow-left"></i>
+          <% end %>
           <% unless current_user.vet? %>
             <%= link_to new_appointment_path, class: "btn btn-success" do %>
-              <i class="fas fa-plus"></i> New Appointment
+              <i class="fas fa-plus"></i> Book an Appointment
             <% end %>
           <% end %>
         </div>
+
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-              <h1 class="text-center">Appointments</h1>
+              <% if current_user.vet? %>
+                <% if @appointments.present? %>
+                  <h1 class="text-center">Scheduled Appointments</h1>
+                <% else %>
+                  <h1 class="text-center">No Appointments</h1>
+                <% end %>
+              <% else %>
+                <% if @appointments.present? %>
+                  <h1 class="text-center">Your Appointments</h1>
+                <% else %>
+                  <h1 class="text-center">No Appointments? Let's Schedule One!</h1>
+                <% end %>
+              <% end %>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-12 mb-4" style="overflow-y: auto; max-height: 500px;">
               <% @appointments.each do |appointment| %>
                 <%= link_to appointment_path(appointment), class: "text-decoration-none" do %>
                   <div class="card mb-3">
                     <div class="card-body">
-                      <h5 class="card-title text-center"><i class="fas fa-paw"></i> Consultation for <%= appointment.pet_profile.name %></h5>
+                      <h5 class="card-title justify-content-center"></i> Consultation for <%= appointment.pet_profile.name %></h5>
                       <br>
-                      <p><%= content_tag :i, "", class: "fa-solid fa-calendar" %> <%= appointment.appointment_date.strftime("%B %d, %Y") %></p>
+                      <p><i class="fas fa-file-medical medicalicon fa-beat" style="--fa-animation-duration: 3s;"></i> Reference Number: <%= appointment.id %></p>
+                      <p><%= content_tag :i, "", class: "fa-regular fa-calendar" %> <%= appointment.appointment_date.strftime("%B %d, %Y") %></p>
                       <p><strong><%= content_tag :i, "", class: "fa-solid fa-clock" %> </strong> <%= appointment.appointment_time.strftime("%I:%M %p") %></p>
                       <% icon_class = case appointment.status.to_sym
                         when :pending
-                          "fa-solid fa-clock" # Default black
+                          ["fa-solid fa-cog fa-spin", "animation-duration: 15s;"] # Default black
                         when :accepted
                           "fa-solid fa-check-circle text-success" # Green
                         when :declined
@@ -39,13 +57,14 @@
                       end %>
                       <p><strong><%= content_tag :i, "", class: icon_class %></strong> <%= appointment.status.capitalize %></p>
                     </div>
+
                     <% if current_user.vet? && appointment.pending? %>
-                      <div class="card-footer">
-                        <%= link_to accept_appointment_path(appointment), method: :get, class: "btn btn-success mr-2", title: "Accept" do %>
+                      <div class="card-footer d-flex justify-content-center">
+                        <%= link_to accept_appointment_path(appointment), method: :get, class: "btn btn-success font-weight-bold", title: "Accept" do %>
                           <i class="fas fa-check"></i> Accept
                         <% end %>
-                        <%= link_to reject_appointment_path(appointment), method: :get, class: "btn btn-danger", title: "Reject" do %>
-                          <i class="fas fa-times"></i> Reject
+                        <%= link_to reject_appointment_path(appointment), method: :get, class: "btn btn-danger text-white font-weight-bold", title: "Decline" do %>
+                          <i class="fas fa-times"></i> Decline
                         <% end %>
                       </div>
                     <% end %>

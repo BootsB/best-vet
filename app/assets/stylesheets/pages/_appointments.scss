@@ -1,0 +1,91 @@
+.custom-appointments {
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 40px;
+
+  h1 {
+      text-align: center;
+      margin-bottom: 20px;
+  }
+
+  //* LABELS ON FORMS ARE HIDDEN IN THE NEW.HTML.ERB*//
+  label.form-label.string.required,
+  label.form-label.text.required {
+      display: none !important;
+  }
+
+
+  //* FORMS *//
+  .form-group {
+      margin-bottom: 20px;
+
+      label {
+          font-weight: bold;
+      }
+
+      input,
+      select,
+      textarea {
+          width: 100%;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+      }
+
+      select {
+          width: 100%;
+          padding: 10px;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+
+          option {
+              width: 50px;
+              padding: 5px; // Adjust padding for options
+              font-size: px; // Set font size for options
+          }
+      }
+
+      textarea {
+          height: 100px; // Set the height of textarea
+          resize: vertical; // Allow vertical resizing
+      }
+  }
+
+  //* BUTTONS *//
+  .card-footer {
+    .btn-success,
+    .btn-danger {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+  }
+
+  .medicalicon {
+    font-size: 20px;
+    color: #ff1e00;
+  }
+  .btndelete {
+    font-weight: bold;
+  }
+}
+
+// LABELS //
+.editform label.form-label.string.required {
+  display: none;
+}
+
+.editform label.form-label.text.required {
+  display: none;
+}
+// LICENCE NUMBER VET
+[data-toggleappointments-target="toggleableText"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px; /* Add padding to the span */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  background-color: #007bff; /* Set background color */
+  color: #fff; /* Set text color to white */
+  cursor: pointer; /* Add cursor pointer */
+  margin-top: 10px; /* Add margin to the top */
+}

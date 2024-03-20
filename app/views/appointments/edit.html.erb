@@ -1,23 +1,28 @@
 <div class="container">
-  <h1 class="text-center">Edit Appointment</h1>
-  <%= simple_form_for @appointment, html: { class: "form" } do |f| %>
-    <div class="form-group">
-      <%= f.input :appointment_date, as: :string, input_html: { class: "form-control", data: { date_picker: true } } %>
+  <h1 class="text-center">Update Consultation</h1>
+  <%= simple_form_for(@appointment, html: { class: "form-horizontal" }) do |f| %>
+  <div class="form-group editform">
+    <div class="col-sm-12">
+      <%= f.input :appointment_date, as: :string, input_html: { data: { controller: "datepicker" }, class: "form-control", label: ""} %>
     </div>
+  </div>
 
-    <div class="form-group">
-      <%= f.input :appointment_time, as: :time, input_html: { class: "form-control" } %>
+  <div class="form-group editform">
+    <div class="col-sm-12">
+      <%= f.input :appointment_time, as: :string, input_html: { data: { controller: "timepicker" }, class: "form-control" } %>
     </div>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :description_of_problem %>
-      <%= f.text_area :description_of_problem, class: "form-control" %>
+  <div class="form-group editform">
+    <div class="col-sm-12">
+      <%= f.input :description_of_problem, class: "form-control", placeholder: "Tell us about your problem...." %>
     </div>
+  </div>
 
     <% if current_user.vet? %>
       <div class="form-group">
         <div class="col-md-9">
-          <%= f.input :zoom_link, as: :string, input_html: { class: "form-control" }, label: "Zoom Link" %>
+          <%= f.input :zoom_link, as: :string, input_html: { class: "form-control" }, label: "Zoom Link", placeholder: "Type your Zoom link here...."%>
         </div>
       </div>
     <% end %>
