@@ -5,6 +5,11 @@
 
       <%= form_with(model: @user_profile, url: user_profile_path(@user_profile), method: :patch, class: "edit-profile-form") do |form| %>
         <div class="mb-3">
+          <%= form.label :photo %>
+          <%= form.file_field :photo, class: "form-control bg-white", accept: "image/*" %>
+        </div>
+
+        <div class="mb-3">
           <%= form.label :first_name, "First Name *", class: "form-label" %>
           <%= form.text_field :first_name, class: "form-control bg-white", required: true %>
         </div>

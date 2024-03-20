@@ -1,7 +1,7 @@
 <div class="bg-white pb-5">
   <div class="container pt-3 pe-3 ps-3">
     <div class="user-profile-card">
-      <%= image_tag "https://source.unsplash.com/random/?user",{ alt:"Picture that describes user", class:"image-card"} %>
+      <%= cl_image_tag @user_profile.photo.key, { alt:"Picture that describes user", class:"image-card"} %>
       <div class="user-profile-card-information">
           <h4><%= @user_profile.first_name %> <%= @user_profile.last_name %></h4>
       </div>
@@ -27,9 +27,6 @@
       </p>
       <p>
         <strong>Membership:</strong> <%= @user_profile.membership %>
-      </p>
-      <p>
-        <strong>Location:</strong> <%= @user_profile.location %>
       </p>
        <% if current_user.vet? %>
         <p>

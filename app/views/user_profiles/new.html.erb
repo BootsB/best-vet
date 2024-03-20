@@ -3,6 +3,11 @@
 
   <%= form_with(model: @user_profile, url: user_profiles_path, method: :post, html: { class: "mb-5", autocomplete: "on" }) do |form| %>
     <div class="mb-3">
+      <%= form.label :photo %>
+      <%= form.file_field :photo, class: "form-control bg-white", accept: "image/*" %>
+    </div>
+
+    <div class="mb-3">
       <%= form.label :first_name, "First Name *", class: "form-label" %>
       <%= form.text_field :first_name, class: "form-control bg-white", autocomplete: "given-name", required: true %>
     </div>
@@ -30,11 +35,6 @@
     <div class="mb-3">
       <%= form.label :address, "Address *", class: "form-label" %>
       <%= form.text_field :address, class: "form-control bg-white", autocomplete: "street-address", required: true %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :location, "Location *", class: "form-label" %>
-      <%= form.text_field :location, class: "form-control bg-white", required: true %>
     </div>
 
     <div class="mb-3">
