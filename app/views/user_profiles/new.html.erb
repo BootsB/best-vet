@@ -53,6 +53,11 @@
     </div>
 
     <div class="mb-3">
+      <%= form.label :location, "Country *", class: "form-label" %>
+      <%= form.text_field :location, class: "form-control bg-white", required: true %>
+    </div>
+
+    <div class="mb-3">
       <%= form.label :description, "Description *", class: "form-label" %>
       <%= form.text_area :description, class: "form-control bg-white", rows: 3, required: true %>
     </div>

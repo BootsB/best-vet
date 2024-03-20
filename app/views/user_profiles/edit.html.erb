@@ -41,11 +41,6 @@
         </div>
 
         <div class="mb-3">
-          <%= form.label :location, "Location *", class: "form-label" %>
-          <%= form.text_field :location, class: "form-control bg-white", required: true %>
-        </div>
-
-        <div class="mb-3">
           <%= form.label :city, "City *", class: "form-label" %>
           <%= form.text_field :city, class: "form-control bg-white", required: true %>
         </div>
@@ -58,6 +53,11 @@
         <div class="mb-3">
           <%= form.label :zip_code, "Zip Code ", class: "form-label" %>
           <%= form.text_field :zip_code, class: "form-control bg-white", required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :location, "Country *", class: "form-label" %>
+          <%= form.text_field :location, class: "form-control bg-white", required: true %>
         </div>
 
         <div class="mb-3">

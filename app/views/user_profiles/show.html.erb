@@ -28,26 +28,33 @@
       <p>
         <strong>Membership:</strong> <%= @user_profile.membership %>
       </p>
-       <% if current_user.vet? %>
+
+      <% if current_user.vet? %>
+        <p>
+          <strong>License Number:</strong> <%= @user_profile.licence_number %>
+        </p>
         <p>
           <strong>Address:</strong> <%= @user_profile.address %>
         </p>
+
+        <p>
+          <strong>Phone Number:</strong> <%= @user_profile.phone_number %>
+        </p>
       <% end %>
+
       <p>
         <strong>City:</strong> <%= @user_profile.city %>
-      </p>
-      <p>
-        <strong>Phone Number:</strong> <%= @user_profile.phone_number %>
       </p>
       <p>
         <strong>State:</strong> <%= @user_profile.state %>
       </p>
       <p>
-        <strong>Zip Code:</strong> <%= @user_profile.zip_code %>
+        <strong>Country:</strong> <%= @user_profile.location %>
       </p>
+
       <% if current_user.vet? %>
         <p>
-          <strong>License Number:</strong> <%= @user_profile.licence_number %>
+          <strong>Zip Code:</strong> <%= @user_profile.zip_code %>
         </p>
       <% end %>
     </div>
