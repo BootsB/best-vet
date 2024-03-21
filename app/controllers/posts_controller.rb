@@ -2,12 +2,13 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show destroy]
 
   def index
-  
+
   end
 
   def show
     authorize @post
     @reply = Reply.new
+    @user_profile = @post.user.user_profile
   end
 
   def new
