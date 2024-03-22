@@ -16,4 +16,16 @@ class Appointment < ApplicationRecord
 
   enum status: { pending: 0, accepted: 1, declined: 2, confirmed: 3 }
 
+
+  def self.available_vets(date, time)
+    vet_user = User.where(vet: true)
+
+    available_vets = vet_user.select do |vet|
+      vet.available_at?(date, time)
+    end
+
+    available_vets
+  end
+
+
 end

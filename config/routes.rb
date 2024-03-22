@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :pet_profiles
   resources :user_profiles, except: [:destroy]
 
+  get '/appointments/available_vets', to: 'appointments#available_vets'
   resources :appointments do
     get :accept, on: :member
     get :reject, on: :member

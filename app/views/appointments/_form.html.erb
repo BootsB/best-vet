@@ -1,37 +1,40 @@
-<%= simple_form_for(@appointment, html: { class: "form-horizontal" }) do |f| %>
-  <div class="form-group">
-    <div class="col-sm-12">
-      <%= f.input :appointment_date, as: :string, input_html: { data: { controller: "datepicker" }, class: "form-control", label: ""} %>
+<div data-controller="available-vets">
+  <%= simple_form_for(@appointment, data: { available_vets_target: "form", action: "submit->available-vets#send" }, html: { class: "form-horizontal", id: "appointment-form" }) do |f| %>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :appointment_date, as: :string, input_html: { data: { controller: "datepicker", 'available-vets-target': "date", action: "change->available-vets#update" }, class: "form-control" } %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-12">
-      <%= f.input :appointment_time, as: :string, input_html: { data: { controller: "timepicker" }, class: "form-control" } %>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :appointment_time, as: :string, input_html: { data: { controller: "timepicker", 'available-vets-target': "time", action: "change->available-vets#update" }, class: "form-control" } %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-12">
-      <%= f.input :description_of_problem, class: "form-control", placeholder: "Tell us about your problem...." %>
+    <div class="form-group" data-available-vets-target="items">
+      <div class="col-sm-12">
+        <%= f.hidden_field :user_id, id: "selected-vet-id" %> <!-- Hidden input field for the selected vet ID -->
+        <div id="vet-list"></div> <!-- Container for vet divs -->
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-12">
-      <%= f.collection_select :pet_profile_id, current_user.pet_profiles, :id, :name, { prompt: "Select your pet" }, { class: "form-control" } %>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.input :description_of_problem, class: "form-control", placeholder: "Tell us about your problem...." %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-12">
-      <%= f.collection_select :user_id, User.where(vet: true), :id, :id, { prompt: "Select a Vet" }, { class: "form-control" } %>
+    <div class="form-group">
+      <div class="col-sm-12">
+        <%= f.collection_select :pet_profile_id, current_user.pet_profiles, :id, :name, { prompt: "Select your pet" }, { class: "form-control" } %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-0 col-sm-12">
-      <%= f.button :submit, "Request Appointment", class: "btn btn-success btn-block" %>
+    <div class="form-group">
+      <div class="col-sm-offset-0 col-sm-12">
+        <%= f.button :submit, "Request Appointment", class: "btn btn-success btn-block" %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

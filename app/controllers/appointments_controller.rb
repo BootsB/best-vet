@@ -1,6 +1,7 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy, :accept, :reject]
+  before_action :set_vet_users, only: [:new, :create]
 
   def index
     @appointments = policy_scope(Appointment)
@@ -25,10 +26,15 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     authorize @appointment
 
-    if @appointment.save!
+    if Appointment.exists?(user_id: @appointment.user_id, appointment_date: @appointment.appointment_date, appointment_time: @appointment.appointment_time)
+      redirect_to new_appointment_path, alert: 'The selected vet already has an appointment at the specified time.'
+      return
+    end
+
+    if @appointment.save
       redirect_to @appointment, notice: 'Appointment request sent successfully.'
     else
-      render :new, alert: 'Failed to send appointment request. Please try again later.'
+      render :new, flash: { alert: 'Failed to send appointment request. Please try again later.' }
     end
   end
 
@@ -75,11 +81,33 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  def available_vets
+    authorize Appointment
+    date = params[:date]
+    time = params[:time]
+    @available_vets = Appointment.available_vets(date, time).map do |vet|
+      {
+        id: vet.id,
+        email: vet.email
+      }
+    end
+
+    render json: { vets: @available_vets }
+  end
+
+
+
+
+
 
   private
 
   def set_appointment
     @appointment = Appointment.find(params[:id])
+  end
+
+  def set_vet_users
+    @vet_users = User.where(vet: true)
   end
 
   def appointment_params

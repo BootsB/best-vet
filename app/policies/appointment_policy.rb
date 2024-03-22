@@ -48,4 +48,8 @@ class AppointmentPolicy < ApplicationPolicy
     user.vet
   end
 
+  def available_vets?
+    true
+  end
+
 end
