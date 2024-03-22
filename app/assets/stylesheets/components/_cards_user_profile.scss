@@ -1,7 +1,6 @@
 .inline-card {
   height: 60px;
   margin: 0 auto;
-  background-color: $light-gray;
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -65,9 +64,6 @@
   .filter-button {
     text-align: center;
     margin-top: 10px;
-  }
-  p {
-    font-size: 12px;
   }
   .circle-item {
     background-color: $light-gray;

@@ -4,10 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["vets", "records", "forum", "textForum", "textVets", "textRecords"];
 
-  connect() {
-    console.log("hello")
-  }
-
   toggleVets(event) {
     event.preventDefault();
     this.textVetsTarget.classList.toggle('d-none');

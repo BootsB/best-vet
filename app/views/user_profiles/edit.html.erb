@@ -1,74 +1,81 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <h1 class="mb-4">Edit Profile</h1>
-
-      <%= form_with(model: @user_profile, url: user_profile_path(@user_profile), method: :patch, class: "edit-profile-form") do |form| %>
-        <div class="mb-3">
-          <%= form.label :photo %>
-          <%= form.file_field :photo, class: "form-control bg-white", accept: "image/*" %>
+<div class="row bg-white pb-5">
+  <div class="col-lg-6 col-md-8  m-auto">
+    <div class="p-3">
+      <div class="mt-3 pet-form">
+        <div class="d-flex justify-content-center mt-3">
+          <%= image_tag "USER FORM.png",{ alt:"Dog and cat icon", class:"image-card"} %>
         </div>
-
+        <h2 class="mt-3 text-center text-success"><strong>Edit your profile:</strong></h2>
+        <br>
         <div class="mb-3">
-          <%= form.label :first_name, "First Name *", class: "form-label" %>
-          <%= form.text_field :first_name, class: "form-control bg-white", required: true %>
-        </div>
+          <%= form_with(model: @user_profile, url: user_profile_path(@user_profile), method: :patch, class: "edit-profile-form") do |form| %>
+            <div class="mb-3">
+              <%= form.label :photo %>
+              <%= form.file_field :photo, class: "form-control bg-white", accept: "image/*" %>
+            </div>
 
-        <div class="mb-3">
-          <%= form.label :last_name, "Last Name *", class: "form-label" %>
-          <%= form.text_field :last_name, class: "form-control bg-white", required: true %>
-        </div>
+            <div class="mb-3">
+              <%= form.label :first_name, "First Name *", class: "form-label" %>
+              <%= form.text_field :first_name, class: "form-control bg-white", required: true %>
+            </div>
 
-        <% if current_user.vet? %>
-          <div class="mb-3">
-            <i class="fa-solid fa-user-doctor"></i> <strong>Professional Information:</strong>
-            </label>
-          </div>
-          <div class="mb-3">
-            <%= form.label :licence_number, "License Number *", class: "form-label" %>
-            <%= form.text_field :licence_number, class: "form-control bg-white", required: true %>
-          </div>
-        <% end %>
+            <div class="mb-3">
+              <%= form.label :last_name, "Last Name *", class: "form-label" %>
+              <%= form.text_field :last_name, class: "form-control bg-white", required: true %>
+            </div>
 
-        <div class="mb-3">
-          <%= form.label :phone_number, "Phone Number *", class: "form-label" %>
-          <%= form.text_field :phone_number, class: "form-control bg-white", required: true %>
-        </div>
+            <% if current_user.vet? %>
+              <div class="mb-3">
+                <i class="fa-solid fa-user-doctor"></i> <strong>Professional Information:</strong>
+                </label>
+              </div>
+              <div class="mb-3">
+                <%= form.label :licence_number, "License Number *", class: "form-label" %>
+                <%= form.text_field :licence_number, class: "form-control bg-white", required: true %>
+              </div>
+            <% end %>
 
-        <div class="mb-3">
-          <%= form.label :address, "Address *", class: "form-label" %>
-          <%= form.text_field :address, class: "form-control bg-white", required: true %>
-        </div>
+            <div class="mb-3">
+              <%= form.label :phone_number, "Phone Number *", class: "form-label" %>
+              <%= form.text_field :phone_number, class: "form-control bg-white", required: true %>
+            </div>
 
-        <div class="mb-3">
-          <%= form.label :city, "City *", class: "form-label" %>
-          <%= form.text_field :city, class: "form-control bg-white", required: true %>
-        </div>
+            <div class="mb-3">
+              <%= form.label :address, "Address *", class: "form-label" %>
+              <%= form.text_field :address, class: "form-control bg-white", required: true %>
+            </div>
 
-        <div class="mb-3">
-          <%= form.label :state, "State *", class: "form-label" %>
-          <%= form.text_field :state, class: "form-control bg-white", required: true %>
-        </div>
+            <div class="mb-3">
+              <%= form.label :city, "City *", class: "form-label" %>
+              <%= form.text_field :city, class: "form-control bg-white", required: true %>
+            </div>
 
-        <div class="mb-3">
-          <%= form.label :zip_code, "Zip Code ", class: "form-label" %>
-          <%= form.text_field :zip_code, class: "form-control bg-white", required: true %>
-        </div>
+            <div class="mb-3">
+              <%= form.label :state, "State *", class: "form-label" %>
+              <%= form.text_field :state, class: "form-control bg-white", required: true %>
+            </div>
 
-        <div class="mb-3">
-          <%= form.label :location, "Country *", class: "form-label" %>
-          <%= form.text_field :location, class: "form-control bg-white", required: true %>
-        </div>
+            <div class="mb-3">
+              <%= form.label :zip_code, "Zip Code ", class: "form-label" %>
+              <%= form.text_field :zip_code, class: "form-control bg-white", required: true %>
+            </div>
 
-        <div class="mb-3">
-          <%= form.label :description, "Description *", class: "form-label" %>
-          <%= form.text_area :description, class: "form-control bg-white", rows: 3, required: true %>
-        </div>
+            <div class="mb-3">
+              <%= form.label :location, "Country *", class: "form-label" %>
+              <%= form.text_field :location, class: "form-control bg-white", required: true %>
+            </div>
 
-        <div class="mb-3">
-          <%= form.submit "Update Profile", class: "btn btn-success .submitfbtn " %>
+            <div class="mb-3">
+              <%= form.label :description, "Description *", class: "form-label" %>
+              <%= form.text_area :description, class: "form-control bg-white", rows: 3, required: true %>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+              <%= form.submit "Update Profile", class: "btn btn-success .submitfbtn button" %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
