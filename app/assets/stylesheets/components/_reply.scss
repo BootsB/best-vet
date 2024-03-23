@@ -9,8 +9,10 @@
       position: relative;
 
       .vet-icon {
-        margin-left: 5px; // Adjust this value as needed for spacing between the icon and the text
+        margin-left: 5px;
         float: right;
+        color: $blue !important;
+
       }
     }
   }
