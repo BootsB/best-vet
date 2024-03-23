@@ -23,7 +23,7 @@
         <% elsif @next_appointment %>
           <div class="inline-button btn-outline mt-3" id="join-call">
             <i class="fa-solid fa-phone icon-button"></i>
-            <p> Next call at <%= @next_appointment.appointment_time.strftime("%-l%P") %></p>
+            <p> Next call at <%= @next_appointment.appointment_time.strftime("%-1I:%M%p") %></p>
           </div>
         <% else %>
           <div class="inline-button btn-outline mt-3" id="join-call">
