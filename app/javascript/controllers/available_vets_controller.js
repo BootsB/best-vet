@@ -38,8 +38,11 @@ export default class extends Controller {
         const vetDiv = document.createElement('div');
         vetDiv.textContent = `HELLO ${vet.email}`;
         // Append default profile image
-        vetDiv.innerHTML += `<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR2v8jGQFEHwDE0bEIm2Sofs-0n5RUWyiNtY_JQw46IozVB-YPU" alt="Default Image">`;
-        vetDiv.dataset.vet = vet.id; // Add a data attribute for identification
+        console.log(vet.profile_picture);
+        vetDiv.innerHTML += `<img src="${vet.profile_picture.key }" alt="Profile picture" style="width: 100px; height: 100px; border-radius: 50%;">`;
+        vetDiv.dataset.vet = vet.id;
+        vetDiv.setAttribute("data-action", "click->available-vets#selectVet")
+        // Add a data attribute for identification
         vetList.appendChild(vetDiv);
       });
     })
@@ -49,6 +52,8 @@ export default class extends Controller {
   }
 
   selectVet(event) {
+    event.stopPropagation();
+    console.log(event.currentTarget)
     const selectedVetIdInput = document.querySelector('#selected-vet-id');
     const vetDiv = event.target.closest('div[data-vet]');
     if (vetDiv) {

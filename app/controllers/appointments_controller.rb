@@ -88,7 +88,8 @@ class AppointmentsController < ApplicationController
     @available_vets = Appointment.available_vets(date, time).map do |vet|
       {
         id: vet.id,
-        email: vet.email
+        email: vet.email,
+        profile_picture: vet.user_profile.photo.key
       }
     end
 
