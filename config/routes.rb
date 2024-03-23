@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :appointments do
     get :accept, on: :member
     get :reject, on: :member
+    get :videocall, on: :member
   end
 
   resources :categories, only: [:show, :index], path: 'forum'
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
-  get '/videocall', to: 'pages#videocall', as: 'videocall'
+
   # Defines the root path route ("/")
   # root "articles#index"
 end
