@@ -49,7 +49,13 @@
           <% end %>
         </div>
         <div class="mx-3 ">
-          <h6 class="text-success mb-0"><%= @post.user.email %></h6>
+           <h6 class="text-success mb-0">
+             <% if @post.user.user_profile.present? && @post.user.user_profile.first_name.present? %>
+               <%= @post.user.user_profile.first_name %>
+             <% else %>
+               <%= @post.user.email %>
+             <% end %>
+            </h6>
           <p class="text-muted mb-0"><small><%= time_ago_in_words(@post.created_at) %> ago</small></p>
           <i class="fa-solid fa-reply text-success "></i>
           <span class="text-muted"><%= @post.replies.size %></span>
