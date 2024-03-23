@@ -35,17 +35,41 @@ export default class extends Controller {
       vetList.innerHTML = '';
 
       vets.forEach(vet => {
-        const vetDiv = document.createElement('div');
-        vetDiv.textContent = `HELLO ${vet.email}`;
-        // Append default profile image
-        console.log(vet.profile_picture);
-        vetDiv.innerHTML += `<img src="${vet.profile_picture.key }" alt="Profile picture" style="width: 100px; height: 100px; border-radius: 50%;">`;
-        vetDiv.dataset.vet = vet.id;
-        vetDiv.setAttribute("data-action", "click->available-vets#selectVet")
-        // Add a data attribute for identification
-        vetList.appendChild(vetDiv);
+        // Create card element
+      const cardDiv = document.createElement('div');
+      cardDiv.classList.add('card', 'col-sm-12');
+
+      // Create card body
+      const cardBodyDiv = document.createElement('div');
+      cardBodyDiv.classList.add('card-body');
+
+      // Vet name
+      const vetName = document.createElement('h5');
+      vetName.classList.add('card-title', 'text-center');
+      vetName.textContent = `Dr. ${vet.full_name}`;
+
+      // Vet image
+      const vetImage = document.createElement('img');
+      vetImage.src = vet.profile_picture;
+      vetImage.alt = 'Profile Picture';
+      vetImage.classList.add('card-img-top', 'img-thumbnail', 'rounded-circle', 'col-sm-12', 'imgvetapp');
+
+      // Append elements to card body
+      cardBodyDiv.appendChild(vetName);
+      cardBodyDiv.appendChild(vetImage);
+
+      // Append card body to card
+      cardDiv.appendChild(cardBodyDiv);
+
+      // Set data attribute for identification
+      cardDiv.dataset.vet = vet.id;
+      cardDiv.setAttribute('data-action', 'click->available-vets#selectVet');
+
+      // Append card to vet list
+      vetList.appendChild(cardDiv);
       });
     })
+
     .catch(error => {
       console.error('Error fetching available vets:', error);
     });

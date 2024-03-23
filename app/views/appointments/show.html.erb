@@ -38,13 +38,12 @@
 
             <div class="col-md-12">
               <% full_name = full_name(@appointment) %>
-              <% if current_user.vet? && @appointment.accepted? || @appointment.pending? %>
-                <p><strong>Pet Owner:</strong> <%= full_name %></p>
+              <% if current_user.vet? && (@appointment.pending? || @appointment.accepted?) %>
+                <p><%= content_tag :i, "", class: "fas fa-user" %> <%= full_name %></p>
                 <p><%= content_tag :i, "", class: "fa-solid fa-dog" %> <%= @appointment.pet_profile.name %></p>
               <% else %>
                 <p><%= content_tag :i, "", class: "fa-solid fa-dog" %> <%= @appointment.pet_profile.name %></p>
                 <p><%= content_tag :i, "", class: "fa-solid fa-user-doctor" %> <%= full_name %></p>
-
                 <div data-controller="toggleappointments" data-licence-number="<%= @appointment.licence_number %>">
                   <%= link_to "", data: { action: "click->toggleappointments#fire" }, class: "license-toggle", title: "Click to see licence", style: "text-decoration: none;" do %>
                     <i class="fas fa-eye"></i> See Vet Licence Number

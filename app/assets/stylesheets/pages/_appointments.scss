@@ -89,3 +89,18 @@
   cursor: pointer; /* Add cursor pointer */
   margin-top: 10px; /* Add margin to the top */
 }
+
+
+// APPOINTMENT NEW FORM //
+#vet-list {
+  h5 {
+    margin-top: 10px;
+    justify-content: center;
+  }
+}
+.imgvetapp {
+  width: 110px;
+  height: 110px;
+  display: block;
+  object-fit: cover;
+}

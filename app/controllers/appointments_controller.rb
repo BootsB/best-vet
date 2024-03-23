@@ -2,6 +2,7 @@ class AppointmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_appointment, only: [:show, :edit, :update, :destroy, :accept, :reject]
   before_action :set_vet_users, only: [:new, :create]
+  include CloudinaryHelper
 
   def index
     @appointments = policy_scope(Appointment)
@@ -89,7 +90,8 @@ class AppointmentsController < ApplicationController
       {
         id: vet.id,
         email: vet.email,
-        profile_picture: vet.user_profile.photo.key
+        profile_picture: cl_image_path(vet.user_profile.photo.key),
+        full_name: vet.user_profile.first_name + ' ' + vet.user_profile.last_name,
       }
     end
 
