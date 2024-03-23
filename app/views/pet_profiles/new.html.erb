@@ -1,10 +1,15 @@
 <div class="row bg-white pb-5">
-  <div class=" col-lg-6 col-md-8  m-auto ">
-    <div class=" p-3">
-      <div class="mt-3 ">
-        <h2 class="text-center">Add your pet:</h2>
+  <div class="col-lg-6 col-md-8  m-auto">
+    <div class="p-3">
+      <div class="mt-3 pet-form">
+        <div class="d-flex justify-content-center mt-3">
+          <%= image_tag "PET FORM.png",{ alt:"Dog and cat icon", class:"image-card"} %>
+        </div>
+        <h2 class="mt-3 text-center text-success"><strong>Add your pet:</strong></h2>
         <br>
-        <%= render partial: "form", locals: { pet: @pet } %>
+        <div class="mb-3">
+          <%= render partial: "form", locals: { pet: @pet } %>
+        </div>
       </div>
     </div>
   </div>

@@ -1,9 +1,13 @@
 <div class="bg-white pb-5">
   <div class="container pt-3 pe-3 ps-3" data-controller="pet-information-filter" >
     <div class="pet-profile-card">
-      <%= image_tag "https://source.unsplash.com/random/?dog",{ alt:"Picture that describes discussion theme", class:"image-card"} %>
+      <% if @pet.photo.attached? %>
+        <%= cl_image_tag @pet.photo.key,{ alt:"Pet Profile Picture", class:"image-card"} %>
+      <% else %>
+        <%= image_tag "PET PROFILE.png",{ alt:"Pet Avatar Picture", class:"image-card"} %>
+      <% end %>
       <div class="pet-profile-card-information">
-          <h4><%= @pet.name.capitalize %></h4>
+          <h4 class="text-success"><strong><%= @pet.name.capitalize %></strong></h4>
           <p><%= @pet.species.capitalize %> - <%= @pet.breed.capitalize %></p>
           <p><%= @pet.age %> years old </p>
       </div>
@@ -23,19 +27,19 @@
         <div class="circle-item pressed" data-pet-information-filter-target="button" data-action="click->pet-information-filter#select" data-pet-information-filter-info-value="about">
           <i class="fa-solid fa-paw"></i>
         </div>
-        <p> About </p>
+        <p class="information-type"> About </p>
       </div>
       <div class="filter-button">
         <div class="circle-item" data-pet-information-filter-target="button" data-action="click->pet-information-filter#select" data-pet-information-filter-info-value="appointments">
           <i class="fa-solid fa-calendar-days"></i>
         </div>
-        <p> Appointments </p>
+        <p class="information-type"> Appointments </p>
       </div>
       <div class="filter-button">
         <div class="circle-item" data-pet-information-filter-target="button" data-action="click->pet-information-filter#select" data-pet-information-filter-info-value="records">
           <i class="fa-solid fa-folder-open"></i>
         </div>
-        <p> Records </p>
+        <p class="information-type"> Records </p>
       </div>
     </div>
     <div class="filtered-information-card" data-pet-information-filter-target="information" data-pet-information-filter-info-value="about">
