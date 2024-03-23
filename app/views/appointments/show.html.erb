@@ -1,0 +1,75 @@
+<div class="container-fluid custom-appointments">
+  <div class="row justify-content-center align-items-center h-100">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <%= link_to appointments_path, class: "btn btn-primary" do %>
+            <i class="fas fa-arrow-left"></i>
+          <% end %>
+          <% if current_user.vet? %>
+            <%= link_to edit_appointment_path(@appointment), class: "btn btn-secondary", title: "Edit Appointment" do %>
+              <i class="fas fa-edit"></i> Edit Consultation
+            <% end %>
+          <% end %>
+        </div>
+        <div class="card-body" style="overflow-y: auto; max-height: 500px;">
+          <div class="row">
+            <div class="col-md-12">
+              <h1 class="text-center"><i class="fas fa-paw"></i> Consultation for <%= @appointment.pet_profile.name %></h1>
+              <br>
+              <p><i class="fas fa-file-medical medicalicon fa-beat" style="--fa-animation-duration: 3s;"></i> Reference Number: <%= @appointment.id %></p>
+              <p><%= content_tag :i, "", class: "fa-regular fa-calendar" %> <%= @appointment.appointment_date.strftime("%B %d, %Y") %></p>
+              <p><strong><%= content_tag :i, "", class: "fa-solid fa-clock" %> </strong> <%= @appointment.appointment_time.strftime("%I:%M %p") %></p>
+              <% icon_class = case @appointment.status.to_sym
+                when :pending
+                  ["fa-solid fa-cog fa-spin", "animation-duration: 15s;"] # Default black
+                when :accepted
+                  "fa-solid fa-check-circle text-success" # Green
+                when :declined
+                  "fa-solid fa-times-circle text-danger" # Red
+                when :confirmed
+                  "fa-solid fa-check-double" # Confirmed icon
+                else
+                  "fa-solid fa-question-circle" # Default if status is not recognized
+              end %>
+
+              <p><strong><%= content_tag :i, "", class: icon_class %></strong> <%= @appointment.status.capitalize %></p>
+            </div>
+
+            <div class="col-md-12">
+              <% full_name = full_name(@appointment) %>
+              <% if current_user.vet? && @appointment.accepted? || @appointment.pending? %>
+                <p><strong>Pet Owner:</strong> <%= full_name %></p>
+                <p><%= content_tag :i, "", class: "fa-solid fa-dog" %> <%= @appointment.pet_profile.name %></p>
+              <% else %>
+                <p><%= content_tag :i, "", class: "fa-solid fa-dog" %> <%= @appointment.pet_profile.name %></p>
+                <p><%= content_tag :i, "", class: "fa-solid fa-user-doctor" %> <%= full_name %></p>
+
+                <div data-controller="toggleappointments" data-licence-number="<%= @appointment.licence_number %>">
+                  <%= link_to "", data: { action: "click->toggleappointments#fire" }, class: "license-toggle", title: "Click to see licence", style: "text-decoration: none;" do %>
+                    <i class="fas fa-eye"></i> See Vet Licence Number
+                  <% end %>
+                  <div data-toggleappointments-target="toggleableElement" class="d-none">
+                    <p><span data-toggleappointments-target="toggleableText" class=""></span></p>
+                  </div>
+                </div>
+              <% end %> <!-- Closing if statement -->
+              <p><strong>What happened to the Pet?</strong></p>
+              <p><%= @appointment.description_of_problem %></p>
+
+              <% if @appointment.zoom_link.present? %>
+                <%= link_to @appointment.zoom_link, class: "btn btn-success btn-blocked mt-3" do %>
+                  <i class="fas fa-phone-alt"></i> Join Call
+                <% end %>
+              <% end %>
+
+              <% if current_user.vet? %>
+                  <%= link_to "DELETE APPOINTMENT", appointment_path(@appointment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-blocked mt-3 text-white btndelete" %>
+              <% end %>
+            </div> <!-- Closing col-md-12 -->
+          </div> <!-- Closing row -->
+        </div> <!-- Closing card-body -->
+      </div> <!-- Closing card -->
+    </div> <!-- Closing col-md-8 -->
+  </div> <!-- Closing row justify-content-center -->
+</div> <!-- Closing container -->

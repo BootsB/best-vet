@@ -5,11 +5,10 @@ Rails.application.routes.draw do
   resources :pet_profiles
   resources :user_profiles, except: [:destroy]
 
+  get '/appointments/available_vets', to: 'appointments#available_vets'
   resources :appointments do
-    member do
-      put :accept
-      put :reject
-    end
+    get :accept, on: :member
+    get :reject, on: :member
   end
 
   resources :categories, only: [:show, :index], path: 'forum'

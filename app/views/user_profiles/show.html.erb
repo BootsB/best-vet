@@ -1,7 +1,7 @@
 <div class="bg-white pb-5">
   <div class="container pt-3 pe-3 ps-3">
     <div class="user-profile-card">
-      <%= image_tag "https://source.unsplash.com/random/?user",{ alt:"Picture that describes user", class:"image-card"} %>
+      <%= cl_image_tag @user_profile.photo.key, { alt:"Picture that describes user", class:"image-card"} %>
       <div class="user-profile-card-information">
           <h4><%= @user_profile.first_name %> <%= @user_profile.last_name %></h4>
       </div>
@@ -18,7 +18,7 @@
         <div class="circle-item pressed">
           <i class="fa-solid fa-address-card"></i>
         </div>
-        <p> Information </p>
+        <p class="information-type"> Information </p>
       </div>
     </div>
     <div class="filtered-information-card">
@@ -28,29 +28,33 @@
       <p>
         <strong>Membership:</strong> <%= @user_profile.membership %>
       </p>
-      <p>
-        <strong>Location:</strong> <%= @user_profile.location %>
-      </p>
-       <% if current_user.vet? %>
+
+      <% if current_user.vet? %>
+        <p>
+          <strong>License Number:</strong> <%= @user_profile.licence_number %>
+        </p>
         <p>
           <strong>Address:</strong> <%= @user_profile.address %>
         </p>
+
+        <p>
+          <strong>Phone Number:</strong> <%= @user_profile.phone_number %>
+        </p>
       <% end %>
+
       <p>
         <strong>City:</strong> <%= @user_profile.city %>
-      </p>
-      <p>
-        <strong>Phone Number:</strong> <%= @user_profile.phone_number %>
       </p>
       <p>
         <strong>State:</strong> <%= @user_profile.state %>
       </p>
       <p>
-        <strong>Zip Code:</strong> <%= @user_profile.zip_code %>
+        <strong>Country:</strong> <%= @user_profile.location %>
       </p>
+
       <% if current_user.vet? %>
         <p>
-          <strong>License Number:</strong> <%= @user_profile.licence_number %>
+          <strong>Zip Code:</strong> <%= @user_profile.zip_code %>
         </p>
       <% end %>
     </div>

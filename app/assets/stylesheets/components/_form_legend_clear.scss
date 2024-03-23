@@ -12,3 +12,29 @@ legend ~ div.form-check:first-of-type {
 .edit-profile-form {
   margin-bottom: 80px; /* Adjust the margin-bottom to accommodate the height of your navbar in user profile (edit) */
 }
+
+.pet-form{
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 0.5px solid #c5c5c5;
+  box-shadow: 0px 0px 3px #D2D5D9;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 35px;
+  padding-right: 35px;
+  word-wrap: break-word;
+  p{
+    margin: auto;
+    font-size: 14px;
+  }
+  .button{
+    border-radius: 10px;
+    padding: 8px 8px 8px 8px;
+  }
+    .image-card {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}

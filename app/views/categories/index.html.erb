@@ -26,24 +26,7 @@
             <div class="card bg-white link-border">
               <div class="card-body">
                 <div class="card-title">
-                  <% if category.title == "General"%>
-                    <% image = "GENERAL.png" %>
-                  <% elsif category.title == "Health Concerns" %>
-                    <% image = "HEALTH CONCERNS.png" %>
-                  <% elsif category.title == "Behavior and Training" %>
-                    <% image = "BEHAVIOURS & TRAINING.png" %>
-                  <% elsif category.title == "Nutrition and Diet"%>
-                    <% image = "NUTRITION AND DIET.png" %>
-                  <% elsif category.title == "Emergency Care" %>
-                    <% image = "EMERGENCY CARE.png" %>
-                  <% elsif category.title == "Senior Pet Care" %>
-                    <% image = "SENIOR PET CARE.png" %>
-                  <% elsif category.title == "Community" %>
-                    <% image = "COMMUNITY.png" %>
-                  <% else %>
-                    <% image = "cute-cat.png" %>
-                  <% end %>
-                  <%= image_tag image,{ alt:"Picture that describes discussion theme", class:"image-forum"} %>
+                  <%= cl_image_tag category.photo.key,{ alt:"Picture that describes discussion theme", class:"image-forum"} %>
                   <h4 class="text-success header4"><%= category.title %></h4>
                 </div>
                 <p><%= category.description %></p>
