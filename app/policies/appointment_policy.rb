@@ -2,7 +2,11 @@ class AppointmentPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       # By default, allow all users to view all appointments.
-      scope.where(user: user)
+      if user.vet?
+        scope.where(user: user)
+      else
+        scope.all
+      end
     end
   end
 
@@ -15,35 +19,37 @@ class AppointmentPolicy < ApplicationPolicy
     true
   end
 
-  def dashboard?
-    true
+  def show?
+    user.present? # All users can view appointments
   end
 
-  def show?
-    user.vet? && record.vet_id == user.id # Vets can only view their own appointments
+  def new?
+    create?
   end
 
   def create?
-    user.vet? # Only vets can create appointments
+    user.vet == false # Only pet owners can create appointments
   end
 
   def update?
-    user.vet? && record.vet_id == user.id # Vets can only update their own appointments
+    true
   end
 
   def destroy?
-    user.vet? && record.vet_id == user.id # Vets can only destroy their own appointments
+    # Only vet can destroy appointments
+    user.vet
   end
 
   def accept?
-    user.vet? && record.vet_id == user.id && record.pending? # Vets can only accept pending appointments
+    user.vet
   end
 
   def reject?
-    user.vet? && record.vet_id == user.id && record.pending? # Vets can only reject pending appointments
+    user.vet
   end
 
-  def create_for_user?
-    user.id == record.user_id # Users can only create appointments for themselves
+  def available_vets?
+    true
   end
+
 end
