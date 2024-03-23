@@ -46,11 +46,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_162232) do
     t.bigint "user_id", null: false
     t.bigint "pet_profile_id", null: false
     t.date "appointment_date"
-    t.string "status"
     t.time "appointment_time"
     t.text "description_of_problem"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
+    t.string "zoom_link"
     t.index ["pet_profile_id"], name: "index_appointments_on_pet_profile_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end

@@ -8,7 +8,7 @@
       <% end %>
     </li>
     <li><%= link_to "/forum" do %><i class="fa fa-solid fa-message <% if params[:controller] == 'categories' || params[:controller] == 'posts' %>text-primary<% end %>"></i> <% end %></li>
-    <li><%= link_to "#" do %><i class="fa fa-calendar <% if params[:controller] == 'appointments' %>text-primary<% end %>"></i><% end %></li>
+    <li><%= link_to "/appointments" do %><i class="fa fa-calendar <% if params[:controller] == 'appointments' %>text-primary<% end %>"></i><% end %></li>
     <li>
   <%= link_to "/pet_profiles" do %><i class="fa fa-light fa-shield-dog <% if params[:controller] == 'pet_profiles' %>text-primary<% end %>"> </i><% end %>
 </li>
