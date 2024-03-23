@@ -97,19 +97,19 @@
         <div class="pb-5">
           <% @post.replies.each do |reply| %>
             <div class="post">
-              <% if @user_profile.present? %>
-                <%= link_to user_profile_path(@user_profile.id) do %>
-                  <%= cl_image_tag @user_profile.photo.key, { alt: "Picture that describes user", class: "avatar" } %>
+              <% if reply.user.user_profile.present? %>
+                <%= link_to user_profile_path(reply.user.user_profile.id) do %>
+                  <%= cl_image_tag reply.user.user_profile.photo.key, { alt: "Picture that describes user", class: "avatar" } %>
                 <% end %>
               <% else %>
                 <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", class: "avatar" %>
-             <% end %>
-                <div class="post-content">
-                  <p> <%= reply.content %></p>
-                  <p class="text-muted mb-0"><small><%= time_ago_in_words(reply.created_at) %> ago</small></p>
-                </div>
+              <% end %>
+              <div class="post-content">
+                <p><%= reply.content %></p>
+                <p class="text-muted mb-0"><small><%= time_ago_in_words(reply.created_at) %> ago</small></p>
+              </div>
             </div>
-        <% end %>
+          <% end %>
         </div>
     </div>
 
