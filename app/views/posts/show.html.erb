@@ -44,6 +44,8 @@
             <%= link_to user_profile_path(@user_profile.id) do %>
               <%= cl_image_tag @user_profile.photo.key, { alt: "Picture that describes user", class: "avatar" } %>
             <% end %>
+          <% else %>
+                <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", class: "avatar" %>
           <% end %>
         </div>
         <div class="mx-3 ">
@@ -86,6 +88,7 @@
                 <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", class: "avatar" %>
               <% end %>
               <div class="post-content">
+                <h6 class="text-success mb-0"><%= reply.user.user_profile.first_name %></h6>
                 <p><%= reply.content %></p>
                 <p class="text-muted mb-0"><small><%= time_ago_in_words(reply.created_at) %> ago</small></p>
               </div>
