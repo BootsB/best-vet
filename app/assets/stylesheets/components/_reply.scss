@@ -1,0 +1,17 @@
+.post {
+  display: flex;
+  align-items: center;
+
+  .post-content {
+    flex-grow: 1;
+
+    h6 {
+      position: relative;
+
+      .vet-icon {
+        margin-left: 5px; // Adjust this value as needed for spacing between the icon and the text
+        float: right;
+      }
+    }
+  }
+}

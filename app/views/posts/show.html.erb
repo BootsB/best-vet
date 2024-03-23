@@ -41,7 +41,7 @@
       <div class="d-flex mt-2 mb-1">
         <div class="pb-5">
           <% if @user_profile.present? %>
-            <%= link_to user_profile_path(@user_profile.id) do %>
+            <%= link_to user_profile_path(@post.user.user_profile.id) do %>
               <%= cl_image_tag @user_profile.photo.key, { alt: "Picture that describes user", class: "avatar" } %>
             <% end %>
           <% else %>
@@ -83,25 +83,31 @@
         <% end %>
       </div>
 
-        <div class="pb-5">
-          <% @post.replies.each do |reply| %>
-            <div class="post">
-              <% if reply.user.user_profile.present? %>
-                <%= link_to user_profile_path(reply.user.user_profile.id) do %>
-                  <%= cl_image_tag reply.user.user_profile.photo.key, { alt: "Picture that describes user", class: "avatar" } %>
-                <% end %>
-              <% else %>
-                <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", class: "avatar" %>
+      <div class="pb-5">
+        <% @post.replies.each do |reply| %>
+          <div class="post">
+            <% if reply.user.user_profile.present? %>
+              <%= link_to user_profile_path(reply.user.user_profile.id) do %>
+                <%= cl_image_tag reply.user.user_profile.photo.key, { alt: "Picture that describes user", class: "avatar" } %>
               <% end %>
-              <div class="post-content">
-                <h6 class="text-success mb-0"><%= reply.user.user_profile.first_name %></h6>
-                <p><%= reply.content %></p>
-                <p class="text-muted mb-0"><small><%= time_ago_in_words(reply.created_at) %> ago</small></p>
-              </div>
+            <% else %>
+              <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", class: "avatar" %>
+            <% end %>
+            <div class="post-content">
+              <h6 class="text-success mb-0">
+                <% if reply.user.vet? %>
+                  <i class="fas fa-user-md text-info vet-icon"></i>
+                  <span>Dr. <%= reply.user.user_profile.first_name %> <%= reply.user.user_profile.last_name %></span>
+                <% else %>
+                  <%= reply.user.user_profile.first_name %>
+                <% end %>
+              </h6>
+              <p><%= reply.content %></p>
+              <p class="text-muted mb-0"><small><%= time_ago_in_words(reply.created_at) %> ago</small></p>
             </div>
-          <% end %>
-        </div>
-    </div>
+          </div>
+        <% end %>
+      </div>
 
   </div>
 </div>
