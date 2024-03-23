@@ -8,10 +8,14 @@
             <div class="card bg-white link-border">
               <div class="d-flex px-3 pt-3">
                 <div>
-                  <%= image_tag "https://source.unsplash.com/random/?dog",{ alt:"Picture that describes discussion theme", class:"avatar-large"} %>
+                  <% if pet.photo.attached? %>
+                    <%= cl_image_tag pet.photo.key,{ alt:"Pet Profile Picture", class:"avatar-large"} %>
+                  <% else %>
+                    <%= image_tag "PET PROFILE.png",{ alt:"Pet Avatar Picture", class:"avatar-large"} %>
+                  <% end %>
                 </div>
                 <div class="">
-                  <h4 class="text-success mx-3"><%= pet.name %></h4>
+                  <h4 class="text-success mx-3"><strong><%= pet.name %></strong></h4>
                   <p class="mt-1 mx-3"><%= pet.age %> <%= pet.age > 1 ? "years old" : "year old" %></p>
                 </div>
               </div>

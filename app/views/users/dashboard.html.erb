@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-center pt-3">
       <div class="col-12 col-lg-8 text-center">
-        <h2> <strong> Welcome back<%= @current_user.user_profile ? ", #{@current_user.user_profile.first_name}" : " " %> </strong></h2>
+        <h2 class="text-success"> <strong> Welcome back<%= @current_user.user_profile ? ", #{@current_user.user_profile.first_name}" : " " %> </strong></h2>
         <% if @current_user.user_profile == nil %>
           <div class="nudge-profile">
             <p>Optimize your experience, <%= link_to("create a profile", new_user_profile_path) %></p>
@@ -35,25 +35,8 @@
       <% @post = category.posts.all.sample %>
       <div class="row justify-content-center">
         <div class="col-12 col-lg-8 text-left mt-3">
-            <% if @post.category.title == "General"%>
-              <% image = "GENERAL.png" %>
-            <% elsif @post.category.title == "Health Concerns" %>
-              <% image = "HEALTH CONCERNS.png" %>
-            <% elsif @post.category.title == "Behavior and Training" %>
-              <% image = "BEHAVIOURS & TRAINING.png" %>
-            <% elsif @post.category.title == "Nutrition and Diet"%>
-              <% image = "NUTRITION AND DIET.png" %>
-            <% elsif @post.category.title == "Emergency Care" %>
-              <% image = "EMERGENCY CARE.png" %>
-            <% elsif @post.category.title == "Senior Pet Care" %>
-              <% image = "SENIOR PET CARE.png" %>
-            <% elsif @post.category.title == "Community" %>
-              <% image = "COMMUNITY.png" %>
-            <% else %>
-              <% image = "cute-cat.png" %>
-            <% end %>
             <a href="<%= post_path(@post) %>" class="text-decoration-none inline-card">
-              <%= image_tag image,{ alt:"Picture that describes discussion theme", class:"image-card"} %>
+              <%= cl_image_tag @post.category.photo.key,{ alt:"Picture that describes discussion theme", class:"image-card"} %>
               <p class="text-black"><%= truncate("#{@post.content}", length: 70) %></p>
             </a>
         </div>
