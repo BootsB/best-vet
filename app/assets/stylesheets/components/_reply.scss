@@ -1,0 +1,19 @@
+.post {
+  display: flex;
+  align-items: center;
+
+  .post-content {
+    flex-grow: 1;
+
+    h6 {
+      position: relative;
+
+      .vet-icon {
+        margin-left: 5px;
+        float: right;
+        color: $blue !important;
+
+      }
+    }
+  }
+}

@@ -32,9 +32,13 @@
       </ul>
         <% @posts.each do |post| %>
             <div class="post">
-              <a href="/">
-                <img src='https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' class="avatar-large" />
-              </a>
+              <% if post.user.user_profile.present? %>
+                <%= link_to user_profile_path(post.user.user_profile.id) do %>
+                  <%= cl_image_tag post.user.user_profile.photo.key, { alt: "Picture that describes user", class: "avatar-large" } %>
+                <% end %>
+              <% else %>
+                <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", class: "avatar-large" %>
+              <% end %>
               <a href="<%= post_path(post) %>" class="card-link">
                 <div class="post-content ">
                   <p class="text-success"><%= post.title %></p>

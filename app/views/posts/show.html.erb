@@ -40,23 +40,32 @@
 
       <div class="d-flex mt-2 mb-1">
         <div class="pb-5">
-          <a href="/" >
-            <img src='https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-              class="avatar-larger" />
-          </a>
+          <% if @user_profile.present? %>
+            <%= link_to user_profile_path(@post.user.user_profile.id) do %>
+              <%= cl_image_tag @user_profile.photo.key, { alt: "Picture that describes user", class: "avatar" } %>
+            <% end %>
+          <% else %>
+                <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", class: "avatar" %>
+          <% end %>
         </div>
         <div class="mx-3 ">
-          <h6 class="text-success mb-0"><%= @post.user.email %></h6>
+           <h6 class="text-success mb-0">
+             <% if @post.user.user_profile.present? && @post.user.user_profile.first_name.present? %>
+               <%= @post.user.user_profile.first_name %>
+             <% else %>
+               <%= @post.user.email %>
+             <% end %>
+            </h6>
           <p class="text-muted mb-0"><small><%= time_ago_in_words(@post.created_at) %> ago</small></p>
           <i class="fa-solid fa-reply text-success "></i>
           <span class="text-muted"><%= @post.replies.size %></span>
 
-          <% if  current_user == @post.user%>
-          <%= link_to raw("<small><i class='fa-solid fa-trash-can text-success mx-2'></i></small>"), post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+          <% if current_user == @post.user %>
+            <%= link_to raw("<small><i class='fa-solid fa-trash-can text-success mx-2'></i></small>"), post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
           <% end %>
         </div>
-
       </div>
+
 
       <div class="mb-2 pb-4 border-bottom">
         <p><%= @post.content %></p>
@@ -74,20 +83,31 @@
         <% end %>
       </div>
 
-        <div class="pb-5">
-          <% @post.replies.each do |reply| %>
-            <div class="post">
-              <a href="/">
-                <img src='https://images.unsplash.com/photo-1640951613773-54706e06851d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' class="avatar" />
-              </a>
-                <div class="post-content">
-                  <p> <%= reply.content %></p>
-                  <p class="text-muted mb-0"><small><%= time_ago_in_words(reply.created_at) %> ago</small></p>
-                </div>
+      <div class="pb-5">
+        <% @post.replies.each do |reply| %>
+          <div class="post">
+            <% if reply.user.user_profile.present? %>
+              <%= link_to user_profile_path(reply.user.user_profile.id) do %>
+                <%= cl_image_tag reply.user.user_profile.photo.key, { alt: "Picture that describes user", class: "avatar" } %>
+              <% end %>
+            <% else %>
+              <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", class: "avatar" %>
+            <% end %>
+            <div class="post-content">
+              <h6 class="text-success mb-0">
+                <% if reply.user.vet? %>
+                  <i class="fas fa-user-md text-info vet-icon"></i>
+                  <span>Dr. <%= reply.user.user_profile.first_name %> <%= reply.user.user_profile.last_name %></span>
+                <% else %>
+                  <%= reply.user.user_profile.first_name %>
+                <% end %>
+              </h6>
+              <p><%= reply.content %></p>
+              <p class="text-muted mb-0"><small><%= time_ago_in_words(reply.created_at) %> ago</small></p>
             </div>
+          </div>
         <% end %>
-        </div>
-    </div>
+      </div>
 
   </div>
 </div>
