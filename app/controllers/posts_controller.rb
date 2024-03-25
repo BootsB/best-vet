@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show destroy]
+  require 'net/http'
+  require 'json'
 
   def index
-  
+
   end
 
   def show
