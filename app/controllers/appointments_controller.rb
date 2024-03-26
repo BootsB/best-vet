@@ -19,6 +19,7 @@ class AppointmentsController < ApplicationController
 
   def show
     authorize @appointment
+    @reviews = @appointment.reviews
   end
 
   def new
