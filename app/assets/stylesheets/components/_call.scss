@@ -1,0 +1,18 @@
+.iframe-container {
+  overflow: hidden;
+  position: relative;
+  height: 600px;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: -32px;
+  width: auto;
+  height: 600px;
+  border: none;
+}
+
+.call-bg {
+  background-color: rgb(0, 102, 84);
+  height: 1100px;
+}

@@ -1,8 +1,12 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy, :accept, :reject]
+  before_action :set_appointment, only: [:show, :edit, :update, :destroy, :accept, :reject, :videocall]
   before_action :set_vet_users, only: [:new, :create]
   include CloudinaryHelper
+
+  def videocall
+    authorize @appointment
+  end
 
   def index
     @appointments = policy_scope(Appointment)
@@ -33,6 +37,25 @@ class AppointmentsController < ApplicationController
     end
 
     if @appointment.save
+      api_key = ENV['WHEREBY_API_KEY']
+      data = {
+        endDate: "2099-02-18T14:23:00.000Z",
+        fields: ["hostRoomUrl"]
+      }
+
+      uri = URI.parse("https://api.whereby.dev/v1/meetings")
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request["Authorization"] = "Bearer #{api_key}"
+      request["Content-Type"] = "application/json"
+      request.body = data.to_json
+
+      response = http.request(request)
+      @appointment.zoom_link = JSON.parse(response.body)["roomUrl"]
+      @appointment.save
+
       redirect_to @appointment, notice: 'Appointment request sent successfully.'
     else
       render :new, flash: { alert: 'Failed to send appointment request. Please try again later.' }

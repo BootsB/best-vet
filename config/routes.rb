@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :appointments do
     get :accept, on: :member
     get :reject, on: :member
+    get :videocall, on: :member
   end
 
   resources :categories, only: [:show, :index], path: 'forum'

@@ -28,7 +28,7 @@ class AppointmentPolicy < ApplicationPolicy
   end
 
   def create?
-    user.vet == false # Only pet owners can create appointments
+    !user.vet # Only pet owners can create appointments
   end
 
   def update?
@@ -50,6 +50,10 @@ class AppointmentPolicy < ApplicationPolicy
 
   def available_vets?
     true
+  end
+
+  def videocall?
+    user.present? && ( user == @appointment.user || user == @appointment.vet )
   end
 
 end

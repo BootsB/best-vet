@@ -7,7 +7,7 @@ class UserProfilePolicy < ApplicationPolicy
   end
 
   def show?
-    record.user == user
+    true
   end
 
   def edit?

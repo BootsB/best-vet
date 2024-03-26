@@ -1,4 +1,12 @@
 require "faker"
+require "open-uri"
+
+Appointment.destroy_all
+PetProfile.destroy_all
+Post.destroy_all
+Category.destroy_all
+UserProfile.destroy_all
+User.destroy_all
 
 Appointment.destroy_all
 PetProfile.destroy_all
@@ -10,15 +18,72 @@ User.destroy_all
 # Output the number of existing users before creating new ones
 puts "Number of existing users: #{User.count}"
 
-categories = Category.create([
-  { title: "General", description: "Explore general pet care topics including tips, advice, and best practices for keeping your furry friend happy and healthy." },
-  { title: "Health Concerns", description: "Discover common health issues, symptoms, treatments, and preventive care for pets to ensure their well-being." },
-  { title: "Behavior and Training", description: "Learn effective training techniques and positive reinforcement methods for managing pet behavior." },
-  { title: "Nutrition and Diet", description: "Get insights and advice for pet nutrition and feeding guidelines for a balanced diet and optimal health." },
-  { title: "Emergency Care", description: "Be prepared for pet emergencies with information on recognizing signs of distress and administering first aid." },
-  { title: "Senior Pet Care", description: "Discover tips for providing the best care to senior pets and managing age-related health issues." },
-  { title: "Community", description: "Stay connected with our pet-loving community and get involved in events promoting pet welfare." }
-])
+file1 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711130227/GENERAL_eqrhxe.png")
+file2 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711130227/HEALTH_CONCERNS_r6y5mc.png")
+file3 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711130228/BEHAVIOURS_TRAINING_yb179z.png")
+file4 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711130228/NUTRITION_AND_DIET_dabtja.png")
+file5 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711130229/EMERGENCY_CARE_dz1vqx.png")
+file6 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711130230/SENIOR_PET_CARE_xx8ri8.png")
+file7 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711130230/COMMUNITY_nxgnrv.png")
+
+general = Category.new(
+  title: "General",
+  description: "Explore general pet care topics including tips, advice, and best practices for keeping your furry friend happy and healthy."
+)
+general.photo.attach(io: file1, filename: "general.png", content_type: "image/png")
+general.save!
+
+health_concerns = Category.new(
+  title: "Health Concerns",
+  description: "Discover common health issues, symptoms, treatments, and preventive care for pets to ensure their well-being."
+)
+health_concerns.photo.attach(io: file2, filename: "health-concerns.png", content_type: "image/png")
+health_concerns.save!
+
+behavior_and_training = Category.new(
+  title: "Behaviour and Training",
+  description: "Learn effective training techniques and positive reinforcement methods for managing pet behavior."
+)
+behavior_and_training.photo.attach(io: file3, filename: "behavior-training.png", content_type: "image/png")
+behavior_and_training.save!
+
+nutrition_and_diet = Category.new(
+  title: "Nutrition and Diet",
+  description: "Get insights and advice for pet nutrition and feeding guidelines for a balanced diet and optimal health."
+)
+nutrition_and_diet.photo.attach(io: file4, filename: "nutrition-diet.png", content_type: "image/png")
+nutrition_and_diet.save!
+
+emergency_care = Category.new(
+  title: "Emergency Care",
+  description: "Be prepared for pet emergencies with information on recognizing signs of distress and administering first aid."
+)
+emergency_care.photo.attach(io: file5, filename: "emergency-care.png", content_type: "image/png")
+emergency_care.save!
+
+senior_pet_care = Category.new(
+  title: "Senior Pet Care",
+  description: "Discover tips for providing the best care to senior pets and managing age-related health issues."
+)
+senior_pet_care.photo.attach(io: file6, filename: "senior_pet_care.png", content_type: "image/png")
+senior_pet_care.save!
+
+community = Category.new(
+  title: "Community",
+  description: "Stay connected with our pet-loving community and get involved in events promoting pet welfare."
+)
+community.photo.attach(io: file7, filename: "community.png", content_type: "image/png")
+community.save!
+
+# categories = Category.create([
+#   { title: "General", description: "Explore general pet care topics including tips, advice, and best practices for keeping your furry friend happy and healthy." },
+#   { title: "Health Concerns", description: "Discover common health issues, symptoms, treatments, and preventive care for pets to ensure their well-being." },
+#   { title: "Behavior and Training", description: "Learn effective training techniques and positive reinforcement methods for managing pet behavior." },
+#   { title: "Nutrition and Diet", description: "Get insights and advice for pet nutrition and feeding guidelines for a balanced diet and optimal health." },
+#   { title: "Emergency Care", description: "Be prepared for pet emergencies with information on recognizing signs of distress and administering first aid." },
+#   { title: "Senior Pet Care", description: "Discover tips for providing the best care to senior pets and managing age-related health issues." },
+#   { title: "Community", description: "Stay connected with our pet-loving community and get involved in events promoting pet welfare." }
+# ])
 
 # Create a single user
 user = User.create!(email: "example@example.com", password: "password")
