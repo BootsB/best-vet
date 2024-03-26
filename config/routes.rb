@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
+  get "/memberships", to: "pages#memberships", as: "memberships"
+  get "/subscribe", to: "memberships#subscribe", as: "subscribe"
 
   # Defines the root path route ("/")
   # root "articles#index"

@@ -1,0 +1,26 @@
+<div class="bg-white pb-5">
+  <div class="container pt-3 ">
+    <div class="headings mb-4">
+      <h4 class="text-success text-start"><strong> Affordable plans for any situation </strong></h4>
+      <h6 class="text-success text-start">Choose a Premium Plan and get unlimited access to certified vets.</h6>
+    </div>
+    <div class="row px-1">
+      <% @memberships.each do | membership | %>
+        <div class="col-sm-12 mb-4">
+          <%= link_to subscribe_path(membership_id: membership.id) , class: "membership-card-link" do %>
+            <div class="membership-card">
+              <div class="membership-card-header">
+                <%= cl_image_tag membership.photo.key, height: 80, width: 80%>
+                <div class="membership-information">
+                  <p><strong><%= membership.name %></strong></p>
+                  <p><strong>£ <%= membership.price %> / month</strong></p>
+                </div>
+              </div>
+              <p class="membership-description"><%= membership.description %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
