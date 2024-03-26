@@ -18,9 +18,9 @@
             <div class="col-md-12">
               <% if current_user.vet? %>
                 <% if @appointments.present? %>
-                  <h1 class="text-center">Scheduled Appointments</h1>
+                  <h1 class="text-center">Your Appointments</h1>
                 <% else %>
-                  <h1 class="text-center">No Appointments</h1>
+                  <h1 class="text-center">No Appointments Today</h1>
                 <% end %>
               <% else %>
                 <% if @appointments.present? %>
@@ -36,7 +36,7 @@
             <div class="col-md-12 mb-4" style="overflow-y: auto; max-height: 500px;">
               <% @appointments.each do |appointment| %>
                 <%= link_to appointment_path(appointment), class: "text-decoration-none" do %>
-                  <div class="card mb-3">
+                  <div class="card mb-3 rounded">
                     <div class="card-body">
                       <h5 class="card-title justify-content-center"></i> Consultation for <%= appointment.pet_profile.name %></h5>
                       <br>

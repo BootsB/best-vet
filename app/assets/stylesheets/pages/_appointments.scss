@@ -84,8 +84,9 @@
   align-items: center;
   padding: 6px 12px; /* Add padding to the span */
   border-radius: 10px; /* Add border radius for rounded corners */
-  background-color: #007bff; /* Set background color */
+  background-color: #2E4493; /* Set background color */
   color: #fff; /* Set text color to white */
+  font-weight: bold; /* Bold text */
   cursor: pointer; /* Add cursor pointer */
   margin-top: 10px; /* Add margin to the top */
 }
@@ -103,4 +104,67 @@
   height: 110px;
   display: block;
   object-fit: cover;
+}
+.selected {
+  border: 1px solid black; /* Add border */
+  position: relative; /* Ensure the icon is positioned relative to the vet div */
+}
+
+.selected::before {
+  content: "fa-angellist"; /* Add your icon content here */
+  font-family: 'Font Awesome'; /* Assuming you're using Font Awesome */
+  position: absolute; /* Position the icon absolutely */
+  top: -10px; /* Adjust vertical position as needed */
+  right: -10px; /* Adjust horizontal position as needed */
+  color: green; /* Choose your icon color */
+  font-size: 20px; /* Adjust the icon size */
+  background-color: white; /* Optional: Add background color behind the icon */
+  padding: 5px; /* Optional: Add padding around the icon */
+  border-radius: 50%; /* Optional: Make the icon circular */
+}
+
+
+
+// APPOINTMENT SHOW PAGE //
+
+.owner-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 25px;
+}
+.owner-about {
+  margin-left: 20px;
+}
+
+.vet-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 25px;
+}
+.vet-about {
+  margin-left: 20px;
+}
+
+.problem-pet {
+  padding: 20px;
+  border-radius: 25px;
+}
+
+
+// Buttons & Icons
+.box-shadow {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2)
+}
+.pawappointment {
+  background-color: #2E6E62;
+  border-radius: 50%;
+  color: #F4F4F4;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto;
+  padding: 4px;
 }

@@ -77,13 +77,24 @@ export default class extends Controller {
 
   selectVet(event) {
     event.stopPropagation();
-    console.log(event.currentTarget)
     const selectedVetIdInput = document.querySelector('#selected-vet-id');
     const vetDiv = event.target.closest('div[data-vet]');
+    const allVetDivs = this.itemsTarget.querySelectorAll('div[data-vet]');
+
     if (vetDiv) {
+      // Remove selected class from all vet divs
+      allVetDivs.forEach(div => {
+        div.classList.remove('selected');
+      });
+
+      // Add selected class to the clicked vet div
+      vetDiv.classList.add('selected');
+
+      // Set selected vet ID
       selectedVetIdInput.value = vetDiv.dataset.vet; // Use dataset to retrieve vet ID
     }
   }
+
 
   send(event) {
     event.preventDefault();
