@@ -1,0 +1,73 @@
+.membership-card{
+  border-radius: 10px;
+  border: 0.5px solid #c5c5c5;
+  box-shadow: 0px 0px 3px #D2D5D9;
+  margin-bottom: 15px;
+
+  .membership-card-header{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+  .membership-information{
+    margin-left: 10px;
+  }
+  .membership-description{
+    margin: 10px 10px 10px 10px;
+    font-size: 12px;
+  }
+
+  .image-card {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+
+.membership-card-link{
+  text-decoration: none;
+  p{
+    color: black;
+    margin-bottom: 0px;
+  }
+}
+
+.subscribe-text{
+  font-size: 14px;
+  margin-left: 4px;
+  line-height: 15px;
+  margin-bottom: 0px;
+}
+
+.button{
+  border-radius: 10px;
+  padding: 8px 8px 8px 8px;
+}
+
+.paw-partner-recipient{
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 0.5px solid #c5c5c5;
+  padding: 10px 10px 10px 10px;
+  background-color: #e2c8ca52;
+}
+
+.random{
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  color: $yellow;
+}
+
+.paw-partner-choose{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 7px;
+  margin-bottom: 4px;
+  align-items: center;
+}

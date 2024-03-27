@@ -4,8 +4,6 @@ import flatpickr from "flatpickr"; // You need to import this to use new flatpic
 console.log("Hello, Stimulus!");
 export default class extends Controller {
   connect() {
-    console.log("Hello, Stimulus!", this.element);
-
     flatpickr(this.element, {
       enableTime: true,          // Enable time picker
       noCalendar: true,          // Disable calendar

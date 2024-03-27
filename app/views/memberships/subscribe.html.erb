@@ -1,0 +1,43 @@
+<div class="bg-white pb-5">
+  <div class="container pt-3"  data-controller="select-recipient">
+    <div class="row px-1">
+      <div class="col-sm-12 mb-4">
+        <div class="membership-card">
+          <div class="d-flex justify-content-center mt-3">
+            <%= image_tag "UPDATE PLAN.png",{ alt:"Dog and cat icon", class:"image-card"} %>
+          </div>
+          <h2 class="mt-3 text-center text-success"><strong>Update your plan:</strong></h2>
+          <div class="membership-card-header mt-3">
+            <%= cl_image_tag current_user.membership.photo.key, height: 80, width: 80%>
+            <p class="subscribe-text"> You currently have the <strong><%= current_user.membership.name %> Membership</strong> for <strong>£<%= current_user.membership.price %>/month</strong>.</p>
+          </div>
+          <br>
+          <div class="membership-card-header mb-3">
+            <%= cl_image_tag @membership.photo.key, height: 80, width: 80%>
+            <p class="subscribe-text"> You are updating to the <strong><%= @membership.name %> Membership</strong> for <strong>£<%= @membership.price %>/month</strong>.</p>
+          </div>
+          <% if @membership.name == "Paw Partner" %>
+            <div class="paw-partner-recipient mb-3">
+              <p class="subscribe-text"> By getting a <strong><%= @membership.name %> Membership</strong> you will be sponsoring a fellow pet parent 🐶♥️. </p>
+              <br>
+              <p class="subscribe-text"> <strong> Select </strong> who you want to sponsor or use our <strong> random recipient generator </strong>.</p>
+              <div class="paw-partner-choose" >
+                <%= form_with model: @user, url: memberships_path, local: true, html: { class: "form-inline", style: "font-size: 0.8rem;" } do |form| %>
+                  <%= form.collection_select :email, @collection, :email, :email, { prompt: 'Select Recipient' }, { data: { action: "change->select-recipient#select", select_recipient_target: "email"} }%>
+                <% end %>
+                <input type="hidden" id="membershipId" value="<%= @membership.id %>" data-select-recipient-target="membership">
+                <%= link_to "<i class=\"fa-solid fa-shuffle\"></i>".html_safe, memberships_path, class: 'btn btn-warning random', role: 'button', data: { action: "click->select-recipient#random" } %>
+                <br>
+              </div>
+              <div class="selected-recipient mt-4 mb-4" data-select-recipient-target="recipient">
+              </div>
+            </div>
+          <% end %>
+          <div class="d-flex justify-content-center mt-4 mb-4">
+            <%= link_to "Update Plan", memberships_path, class: 'btn btn-success button', role: 'button' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
