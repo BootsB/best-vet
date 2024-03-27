@@ -1,13 +1,13 @@
 <div class="container-fluid custom-appointments">
   <div class="row justify-content-center align-items-center h-100">
     <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">
-          <%= link_to appointments_path, class: "btn btn-primary" do %>
+      <div class="card" style="border-radius: 25px;">
+        <div class="card-header" style="background-color: transparent;">
+          <%= link_to appointments_path, class: "btn btn-primary btnbackappointment" do %>
             <i class="fas fa-arrow-left"></i>
           <% end %>
           <% if current_user.vet? %>
-            <%= link_to edit_appointment_path(@appointment), class: "btn btn-secondary", title: "Edit Appointment" do %>
+            <%= link_to edit_appointment_path(@appointment), class: "btn btn-secondary btnbackappointment", title: "Edit Appointment" do %>
               <i class="fas fa-edit"></i> Edit Consultation
             <% end %>
           <% end %>

@@ -115,7 +115,8 @@ class AppointmentsController < ApplicationController
         id: vet.id,
         email: vet.email,
         profile_picture: profile_picture ? cl_image_path(profile_picture) : nil,
-        full_name: "#{vet.user_profile.first_name} #{vet.user_profile.last_name}"
+        full_name: "#{vet.user_profile.first_name} #{vet.user_profile.last_name}",
+        vet_description: vet.user_profile.description
       }
     end
 

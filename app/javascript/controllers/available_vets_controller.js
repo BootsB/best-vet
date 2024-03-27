@@ -36,44 +36,63 @@ export default class extends Controller {
 
       vets.forEach(vet => {
         // Create card element
-      const cardDiv = document.createElement('div');
-      cardDiv.classList.add('card', 'col-sm-12');
+        const cardDiv = document.createElement('div');
+        cardDiv.classList.add('card', 'col-sm-12');
 
-      // Create card body
-      const cardBodyDiv = document.createElement('div');
-      cardBodyDiv.classList.add('card-body');
+        // Create flex container for vet image and name
+        const flexContainer = document.createElement('div');
+        flexContainer.classList.add('d-flex', 'align-items-center', 'justify-content-around');
+        flexContainer.classList.add('flex-container');
 
-      // Vet name
-      const vetName = document.createElement('h5');
-      vetName.classList.add('card-title', 'text-center');
-      vetName.textContent = `Dr. ${vet.full_name}`;
+        // Vet image
+        const vetImage = document.createElement('img');
+        vetImage.src = vet.profile_picture;
+        vetImage.alt = 'Profile Picture';
+        vetImage.classList.add('card-img-top', 'img-thumbnail', 'rounded-circle', 'col-sm-6', 'imgvetapp');
 
-      // Vet image
-      const vetImage = document.createElement('img');
-      vetImage.src = vet.profile_picture;
-      vetImage.alt = 'Profile Picture';
-      vetImage.classList.add('card-img-top', 'img-thumbnail', 'rounded-circle', 'col-sm-12', 'imgvetapp');
+        // Vet name
+        const vetName = document.createElement('h5');
+        vetName.classList.add('card-title', 'text-center');
+        vetName.textContent = `Dr. ${vet.full_name}`;
+        vetName.style.color = "#2E6E62";
 
-      // Append elements to card body
-      cardBodyDiv.appendChild(vetName);
-      cardBodyDiv.appendChild(vetImage);
+        // Append vet image and name to the flex container
+        flexContainer.appendChild(vetImage);
+        flexContainer.appendChild(vetName);
 
-      // Append card body to card
-      cardDiv.appendChild(cardBodyDiv);
+        // Append flex container to card body
+        cardDiv.appendChild(flexContainer);
 
-      // Set data attribute for identification
-      cardDiv.dataset.vet = vet.id;
-      cardDiv.setAttribute('data-action', 'click->available-vets#selectVet');
+        // Create div for vet description
+        const descriptionDiv = document.createElement('div');
+        descriptionDiv.classList.add('col-sm-12', 'mt-3');
 
-      // Append card to vet list
-      vetList.appendChild(cardDiv);
+        // Vet description
+        const vetDescription = document.createElement('p');
+        vetDescription.textContent = vet.vet_description;
+        vetDescription.classList.add('vet-description');
+
+        // Append vet description to description div
+        descriptionDiv.appendChild(vetDescription);
+
+        // Append description div to card body
+        cardDiv.appendChild(descriptionDiv);
+
+        // Set data attribute for identification
+        cardDiv.dataset.vet = vet.id;
+        cardDiv.setAttribute('data-action', 'click->available-vets#selectVet');
+
+        // Append card to vet list
+        vetList.appendChild(cardDiv);
       });
-    })
 
+
+    })
     .catch(error => {
       console.error('Error fetching available vets:', error);
     });
   }
+
 
   selectVet(event) {
     event.stopPropagation();

@@ -1,6 +1,5 @@
 require "faker"
 require "open-uri"
-require "cloudinary"
 
 Appointment.destroy_all
 PetProfile.destroy_all
@@ -10,12 +9,7 @@ UserProfile.destroy_all
 User.destroy_all
 Membership.destroy_all
 
-# Initialize Cloudinary
-Cloudinary.config do |config|
-  config.cloud_name = ENV['CLOUDINARY_CLOUD_NAME']
-  config.api_key = ENV['CLOUDINARY_API_KEY']
-  config.api_secret = ENV['CLOUDINARY_API_SECRET']
-end
+
 
 # Output the number of existing users before creating new ones
 puts "Number of existing users: #{User.count}"
@@ -286,12 +280,14 @@ puts "Number of existing user profiles: #{UserProfile.count}"
     zip_code: Faker::Address.zip_code,
     licence_number: Faker::Number.number(digits: 8) # Generate a random 8-digit license number
   )
-
-  # Assign a photo to the user profile if one exists
-  if rand(2) == 0  # 50% chance of having a photo
-    photo_url = Faker::Avatar.image(slug: user.email, size: "300x300", format: "jpg")  # Generate a random avatar URL
-    user_profile.photo.attach(io: URI.open(photo_url), filename: "profile_photo.jpg")
+  if user.vet?
+    fileuser_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1711210040/3jlk5a1ev1fycwmsfmvxfrq0jm1b.jpg"
+  else
+    fileuser_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1711552933/pre_vet-main_or0axy.jpg"
   end
+
+  fileuser = URI.open(fileuser_url)
+  user_profile.photo.attach(io: fileuser, filename: "profile_image.png", content_type: "image/png")
 
   user_profile.save!
 
@@ -310,6 +306,10 @@ puts "Number of existing user profiles: #{UserProfile.count}"
       # Add any other attributes you have for the PetProfile model
     )
     pet_profile.user = user
+    filepet_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1709135262/1gtofk0exrobkn1d0zg8x29e0axu.avif"
+    filepet = URI.open(filepet_url)
+    pet_profile.photo.attach(io: filepet, filename: "profile_image_pet.png", content_type: "image/png")
+
     pet_profile.save!
   end
 

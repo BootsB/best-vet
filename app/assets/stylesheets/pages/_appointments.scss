@@ -106,21 +106,31 @@
   object-fit: cover;
 }
 .selected {
-  border: 1px solid black; /* Add border */
-  position: relative; /* Ensure the icon is positioned relative to the vet div */
-}
+  border: 2px solid #2E6E62;
+  background-color: #fff5f0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-in-out;
 
-.selected::before {
-  content: "fa-angellist"; /* Add your icon content here */
-  font-family: 'Font Awesome'; /* Assuming you're using Font Awesome */
-  position: absolute; /* Position the icon absolutely */
-  top: -10px; /* Adjust vertical position as needed */
-  right: -10px; /* Adjust horizontal position as needed */
-  color: green; /* Choose your icon color */
-  font-size: 20px; /* Adjust the icon size */
-  background-color: white; /* Optional: Add background color behind the icon */
-  padding: 5px; /* Optional: Add padding around the icon */
-  border-radius: 50%; /* Optional: Make the icon circular */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+}
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  margin-bottom: -50px; /* ADJUST HERE AS NEEDED */
+}
+.vet-description {
+  padding: 20px;
+  margin-left: 20px;
 }
 
 
@@ -166,5 +176,13 @@
   width: 35px;
   height: 35px;
   margin: 0 auto;
-  padding: 4px;
+  padding: 2px;
+}
+.btnbackappointment {
+  border-radius: 25px;
+}
+
+// INDEX
+.petappointmentindex {
+  object-fit: cover;
 }
