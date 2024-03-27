@@ -56,4 +56,9 @@ class AppointmentPolicy < ApplicationPolicy
     user.present? && ( user == @appointment.user || user == @appointment.vet )
   end
 
+  def create_review?
+    true
+    # @record.present? && @record.user_id == @user.id
+  end
+
 end
