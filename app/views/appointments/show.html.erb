@@ -78,7 +78,7 @@
                 <p><%= @appointment.description_of_problem %></p>
               </div>
 
-              <% if @appointment.zoom_link.present? %>
+              <% if @appointment.accepted? %>
                 <%= link_to videocall_appointment_path(@appointment), class: "btn btn-success btn-blocked mt-3" do %>
                   <i class="fas fa-phone-alt"></i> Join Call
                 <% end %>

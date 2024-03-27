@@ -110,11 +110,12 @@ class AppointmentsController < ApplicationController
     date = params[:date]
     time = params[:time]
     @available_vets = Appointment.available_vets(date, time).map do |vet|
+      profile_picture = vet.user_profile.photo.key if vet.user_profile.photo
       {
         id: vet.id,
         email: vet.email,
-        profile_picture: cl_image_path(vet.user_profile.photo.key),
-        full_name: vet.user_profile.first_name + ' ' + vet.user_profile.last_name,
+        profile_picture: profile_picture ? cl_image_path(profile_picture) : nil,
+        full_name: "#{vet.user_profile.first_name} #{vet.user_profile.last_name}"
       }
     end
 
@@ -129,7 +130,11 @@ class AppointmentsController < ApplicationController
   private
 
   def set_appointment
-    @appointment = Appointment.find(params[:id])
+    if params[:id].present? && params[:id] != "null"
+      @appointment = Appointment.find(params[:id])
+    else
+      redirect_to appointments_path, alert: "Appointment not found."
+    end
   end
 
   def set_vet_users

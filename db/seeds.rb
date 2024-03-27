@@ -1,5 +1,6 @@
 require "faker"
 require "open-uri"
+require "cloudinary"
 
 Appointment.destroy_all
 PetProfile.destroy_all
@@ -14,6 +15,13 @@ Post.destroy_all
 Category.destroy_all
 UserProfile.destroy_all
 User.destroy_all
+
+# Initialize Cloudinary
+Cloudinary.config do |config|
+  config.cloud_name = ENV['CLOUDINARY_CLOUD_NAME']
+  config.api_key = ENV['CLOUDINARY_API_KEY']
+  config.api_secret = ENV['CLOUDINARY_API_SECRET']
+end
 
 # Output the number of existing users before creating new ones
 puts "Number of existing users: #{User.count}"
@@ -262,8 +270,13 @@ puts "Number of existing user profiles: #{UserProfile.count}"
     state: Faker::Address.state_abbr,
     zip_code: Faker::Address.zip_code,
     licence_number: Faker::Number.number(digits: 8) # Generate a random 8-digit license number
-    # Add any other attributes you have for the UserProfile model
   )
+
+  # Assign a photo to the user profile if one exists
+  if rand(2) == 0  # 50% chance of having a photo
+    photo_url = Faker::Avatar.image(slug: user.email, size: "300x300", format: "jpg")  # Generate a random avatar URL
+    user_profile.photo.attach(io: URI.open(photo_url), filename: "profile_photo.jpg")
+  end
 
   user_profile.save!
 
