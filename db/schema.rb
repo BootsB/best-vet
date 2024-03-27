@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_19_162232) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_25_172931) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_162232) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.string "name"
+    t.float "price"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pet_profiles", force: :cascade do |t|
@@ -116,7 +124,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_162232) do
     t.string "last_name"
     t.string "address"
     t.string "description"
-    t.integer "membership"
     t.string "location"
     t.string "city"
     t.string "phone_number"
@@ -127,6 +134,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_162232) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.string "profile_photo"
+    t.bigint "membership_id", null: false
+    t.index ["membership_id"], name: "index_user_profiles_on_membership_id"
     t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
@@ -153,5 +162,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_19_162232) do
   add_foreign_key "replies", "posts"
   add_foreign_key "replies", "users"
   add_foreign_key "reviews", "appointments"
+  add_foreign_key "user_profiles", "memberships"
   add_foreign_key "user_profiles", "users"
 end

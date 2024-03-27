@@ -7,13 +7,9 @@ Post.destroy_all
 Category.destroy_all
 UserProfile.destroy_all
 User.destroy_all
+Membership.destroy_all
 
-Appointment.destroy_all
-PetProfile.destroy_all
-Post.destroy_all
-Category.destroy_all
-UserProfile.destroy_all
-User.destroy_all
+
 
 # Output the number of existing users before creating new ones
 puts "Number of existing users: #{User.count}"
@@ -74,16 +70,6 @@ community = Category.new(
 )
 community.photo.attach(io: file7, filename: "community.png", content_type: "image/png")
 community.save!
-
-# categories = Category.create([
-#   { title: "General", description: "Explore general pet care topics including tips, advice, and best practices for keeping your furry friend happy and healthy." },
-#   { title: "Health Concerns", description: "Discover common health issues, symptoms, treatments, and preventive care for pets to ensure their well-being." },
-#   { title: "Behavior and Training", description: "Learn effective training techniques and positive reinforcement methods for managing pet behavior." },
-#   { title: "Nutrition and Diet", description: "Get insights and advice for pet nutrition and feeding guidelines for a balanced diet and optimal health." },
-#   { title: "Emergency Care", description: "Be prepared for pet emergencies with information on recognizing signs of distress and administering first aid." },
-#   { title: "Senior Pet Care", description: "Discover tips for providing the best care to senior pets and managing age-related health issues." },
-#   { title: "Community", description: "Stay connected with our pet-loving community and get involved in events promoting pet welfare." }
-# ])
 
 # Create a single user
 user = User.create!(email: "example@example.com", password: "password")
@@ -231,6 +217,37 @@ Post.create!(
 # Output the ID of the created user
 puts "Created user ID: #{user.id}"
 
+file8 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711391837/BASIC%20MEMBERSHIP.png")
+file9 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711391837/PREMIUM.png")
+file10 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711391837/PAW%20PARTNER.png")
+
+basic = Membership.new(
+  name: "Basic",
+  price: 0.00,
+  description: "The free membership grants you unrestricted access to our forum, enabling you to post inquiries and engage with fellow pet owners and veterinarians alike. Please note that video call functionality is not included with this membership tier."
+)
+basic.photo.attach(io: file8, filename: "basic.png", content_type: "image/png")
+basic.save!
+
+premium = Membership.new(
+  name: "Premium",
+  price: 7.99,
+  description: "Alongside unlimited access to our forum for discussions with pet owners and veterinarians, you'll also enjoy the added benefit of unlimited video calls with licensed professionals."
+)
+premium.photo.attach(io: file9, filename: "premium.png", content_type: "image/png")
+premium.save!
+
+paw_partner = Membership.create!(
+  name: "Paw Partner",
+  price: 13.99,
+  description: "We understand the financial challenges many pet parents face in providing veterinary care. With our Paw Partner Membership, you not only gain unlimited access to our forum and video calls with licensed veterinarians but also extend the same lifeline to another pet parent in need."
+)
+paw_partner.photo.attach(io: file10, filename:"paw-partner.png", content_type: "image/png")
+paw_partner.save!
+
+# Output Membership Types
+puts "Created 3 membership types"
+
 # Output the number of existing user profiles before creating new ones
 puts "Number of existing user profiles: #{UserProfile.count}"
 
@@ -255,15 +272,22 @@ puts "Number of existing user profiles: #{UserProfile.count}"
     last_name: Faker::Name.last_name,
     address: Faker::Address.street_address,
     description: Faker::Lorem.sentence,
-    membership: Faker::Number.between(from: 1, to: 5), # Randomly assign membership level
+    membership_id: Membership.find_by(name: "Premium").id, # Randomly assign membership level
     location: Faker::Address.city,
     city: Faker::Address.city,
     phone_number: Faker::PhoneNumber.phone_number,
     state: Faker::Address.state_abbr,
     zip_code: Faker::Address.zip_code,
     licence_number: Faker::Number.number(digits: 8) # Generate a random 8-digit license number
-    # Add any other attributes you have for the UserProfile model
   )
+  if user.vet?
+    fileuser_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1711210040/3jlk5a1ev1fycwmsfmvxfrq0jm1b.jpg"
+  else
+    fileuser_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1711552933/pre_vet-main_or0axy.jpg"
+  end
+
+  fileuser = URI.open(fileuser_url)
+  user_profile.photo.attach(io: fileuser, filename: "profile_image.png", content_type: "image/png")
 
   user_profile.save!
 
@@ -282,6 +306,10 @@ puts "Number of existing user profiles: #{UserProfile.count}"
       # Add any other attributes you have for the PetProfile model
     )
     pet_profile.user = user
+    filepet_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1709135262/1gtofk0exrobkn1d0zg8x29e0axu.avif"
+    filepet = URI.open(filepet_url)
+    pet_profile.photo.attach(io: filepet, filename: "profile_image_pet.png", content_type: "image/png")
+
     pet_profile.save!
   end
 

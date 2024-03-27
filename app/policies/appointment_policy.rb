@@ -53,7 +53,7 @@ class AppointmentPolicy < ApplicationPolicy
   end
 
   def videocall?
-    user.present? && ( user == @appointment.user || user == @appointment.vet )
+    user.present? && ( user == @appointment.user || user == @appointment.pet_profile.user )
   end
 
   def create_review?

@@ -3,4 +3,8 @@ class PagesController < ApplicationController
 
   def home
   end
+
+  def memberships
+    @memberships = Membership.all
+  end
 end
