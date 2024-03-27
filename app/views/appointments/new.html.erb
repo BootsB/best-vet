@@ -4,6 +4,12 @@
       <div class="card">
         <div class="card-body">
           <h1 class="text-center"><%= current_user.vet? ? "Arrange Your Consultation" : "Schedule Your Appointment" %></h1>
+          <% if current_user.vet? %>
+            <div class="reminder text-center">Remember to save your changes!</div>
+          <% else %>
+            <div class="instruction text-center">Please select a date and time to view available veterinarians.</div>
+          <% end %>
+          <br>
           <%= render "form" %>
         </div>
       </div>

@@ -35,31 +35,85 @@ export default class extends Controller {
       vetList.innerHTML = '';
 
       vets.forEach(vet => {
-        const vetDiv = document.createElement('div');
-        vetDiv.textContent = `HELLO ${vet.email}`;
-        // Append default profile image
-        console.log(vet.profile_picture);
-        vetDiv.innerHTML += `<img src="${vet.profile_picture.key }" alt="Profile picture" style="width: 100px; height: 100px; border-radius: 50%;">`;
-        vetDiv.dataset.vet = vet.id;
-        vetDiv.setAttribute("data-action", "click->available-vets#selectVet")
-        // Add a data attribute for identification
-        vetList.appendChild(vetDiv);
+        // Create card element
+        const cardDiv = document.createElement('div');
+        cardDiv.classList.add('card', 'col-sm-12');
+
+        // Create flex container for vet image and name
+        const flexContainer = document.createElement('div');
+        flexContainer.classList.add('d-flex', 'align-items-center', 'justify-content-around');
+        flexContainer.classList.add('flex-container');
+
+        // Vet image
+        const vetImage = document.createElement('img');
+        vetImage.src = vet.profile_picture;
+        vetImage.alt = 'Profile Picture';
+        vetImage.classList.add('card-img-top', 'img-thumbnail', 'rounded-circle', 'col-sm-6', 'imgvetapp');
+
+        // Vet name
+        const vetName = document.createElement('h5');
+        vetName.classList.add('card-title', 'text-center');
+        vetName.textContent = `Dr. ${vet.full_name}`;
+        vetName.style.color = "#2E6E62";
+
+        // Append vet image and name to the flex container
+        flexContainer.appendChild(vetImage);
+        flexContainer.appendChild(vetName);
+
+        // Append flex container to card body
+        cardDiv.appendChild(flexContainer);
+
+        // Create div for vet description
+        const descriptionDiv = document.createElement('div');
+        descriptionDiv.classList.add('col-sm-12', 'mt-3');
+
+        // Vet description
+        const vetDescription = document.createElement('p');
+        vetDescription.textContent = vet.vet_description;
+        vetDescription.classList.add('vet-description');
+
+        // Append vet description to description div
+        descriptionDiv.appendChild(vetDescription);
+
+        // Append description div to card body
+        cardDiv.appendChild(descriptionDiv);
+
+        // Set data attribute for identification
+        cardDiv.dataset.vet = vet.id;
+        cardDiv.setAttribute('data-action', 'click->available-vets#selectVet');
+
+        // Append card to vet list
+        vetList.appendChild(cardDiv);
       });
+
+
     })
     .catch(error => {
       console.error('Error fetching available vets:', error);
     });
   }
 
+
   selectVet(event) {
     event.stopPropagation();
-    console.log(event.currentTarget)
     const selectedVetIdInput = document.querySelector('#selected-vet-id');
     const vetDiv = event.target.closest('div[data-vet]');
+    const allVetDivs = this.itemsTarget.querySelectorAll('div[data-vet]');
+
     if (vetDiv) {
+      // Remove selected class from all vet divs
+      allVetDivs.forEach(div => {
+        div.classList.remove('selected');
+      });
+
+      // Add selected class to the clicked vet div
+      vetDiv.classList.add('selected');
+
+      // Set selected vet ID
       selectedVetIdInput.value = vetDiv.dataset.vet; // Use dataset to retrieve vet ID
     }
   }
+
 
   send(event) {
     event.preventDefault();

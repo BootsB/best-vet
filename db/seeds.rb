@@ -9,6 +9,8 @@ UserProfile.destroy_all
 User.destroy_all
 Membership.destroy_all
 
+
+
 # Output the number of existing users before creating new ones
 puts "Number of existing users: #{User.count}"
 
@@ -277,8 +279,15 @@ puts "Number of existing user profiles: #{UserProfile.count}"
     state: Faker::Address.state_abbr,
     zip_code: Faker::Address.zip_code,
     licence_number: Faker::Number.number(digits: 8) # Generate a random 8-digit license number
-    # Add any other attributes you have for the UserProfile model
   )
+  if user.vet?
+    fileuser_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1711210040/3jlk5a1ev1fycwmsfmvxfrq0jm1b.jpg"
+  else
+    fileuser_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1711552933/pre_vet-main_or0axy.jpg"
+  end
+
+  fileuser = URI.open(fileuser_url)
+  user_profile.photo.attach(io: fileuser, filename: "profile_image.png", content_type: "image/png")
 
   user_profile.save!
 
@@ -297,6 +306,10 @@ puts "Number of existing user profiles: #{UserProfile.count}"
       # Add any other attributes you have for the PetProfile model
     )
     pet_profile.user = user
+    filepet_url = "https://res.cloudinary.com/dg9mc7ach/image/upload/v1709135262/1gtofk0exrobkn1d0zg8x29e0axu.avif"
+    filepet = URI.open(filepet_url)
+    pet_profile.photo.attach(io: filepet, filename: "profile_image_pet.png", content_type: "image/png")
+
     pet_profile.save!
   end
 
