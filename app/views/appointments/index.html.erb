@@ -1,7 +1,7 @@
 <div class="container custom-appointments">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <div class="card" style="border-radius: 25px;">
+      <div class="card bg-white" style="border-radius: 25px;">
         <div class="card-header d-flex justify-content-between">
           <%= link_to root_path, class: "btn btn-primary btnbackappointment" do %>
             <i class="fas fa-arrow-left"></i>
@@ -16,6 +16,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
+              <br>
               <% if current_user.vet? %>
                 <% if @appointments.present? %>
                   <h1 class="text-center">Your Appointments</h1>
