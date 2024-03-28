@@ -1,0 +1,83 @@
+
+
+h1 {
+  margin-top: 35px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+.rating {
+  display: inline-block;
+
+  input {
+    display: none;
+  }
+
+  label {
+    float: right;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+    margin-bottom: 5px;
+
+    &:before {
+      content: '\2605';
+      font-size: 30px;
+    }
+  }
+
+  input:checked ~ label,
+  label:hover,
+  label:hover ~ label {
+    color: $orange;
+    transition: color 0.3s;
+  }
+}
+
+
+.actions {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  margin-top: 5px; /* Add some margin space */
+}
+
+.btn {
+  background-color: $green;
+  color: $light-gray;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
