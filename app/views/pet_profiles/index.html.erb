@@ -24,8 +24,13 @@
                   <p class="text-muted">
                     <strong>Next scheduled call:</strong>
                     <br>
-                    <%# insert booking logic below when done %>
-                    <%= ["15th", "19th", "27th", "22nd"].sample %> March 2024
+
+                    <% if pet.appointments.first %>
+                      <%= pet.appointments.first.appointment_date.strftime("%B %d") %> 
+                    <% else %>
+                     <p>No appointments</p>
+                    <% end %>
+
                   </p>
 
                 </div>
