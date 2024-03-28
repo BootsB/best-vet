@@ -4,6 +4,7 @@ class UserProfile < ApplicationRecord
   belongs_to :user
   belongs_to :membership
   has_one_attached :photo
+  has_many :orders
 
   private
 
