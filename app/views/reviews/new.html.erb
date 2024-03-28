@@ -1,0 +1,28 @@
+  <h1>Leave a Review for Dr. <%= @appointment.user.user_profile.first_name %> <%= @appointment.user.user_profile.last_name %></h1>
+
+  <div class="form-container">
+    <%= simple_form_for [@appointment, @review] do |form| %>
+      <div class="field">
+        <%= form.input :content, rows: 4 %>
+      </div>
+
+      <div class="field">
+        <%= form.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}}  %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit 'Submit Review', class: 'btn' %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @review.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+    <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
