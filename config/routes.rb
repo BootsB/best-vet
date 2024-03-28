@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   resources :posts, only: [:show, :new, :create, :destroy] do
     resources :replies, only: [:create, :destroy]
   end
+  resources :orders, only: [:show, :create] do
+    resources :payments, only: :new
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get '/dashboard', to: 'users#dashboard', as: 'dashboard'
@@ -26,4 +30,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row py-4">
+    <div class="col-md-3"><%= cl_image_tag @order.membership.photo.key, height: 100, width: 100%></div>
+    <div class="col">
+      <h1>Order #<%= @order.id %> <small><span><%= @order.state %></span></small></h1>
+      <ul class="list-unstyled">
+        <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
+        <li><strong>MEMBERSHIP</strong> <%= @order.membership.name %> [<%= @order.membership_sku %>]</li>
+        <li><strong>TOTAL</strong> <%= humanized_money_with_symbol @order.amount %></li>
+        </li>
+      </ul>
+      <p>Membership available <strong>immediately</strong></p>
+    </div>
+  </div>
+</div>
