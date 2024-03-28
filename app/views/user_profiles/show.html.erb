@@ -1,13 +1,13 @@
 <div class="bg-white pb-5">
   <div class="container pt-3 pe-3 ps-3">
     <div class="user-profile-card">
-      <% if current_user.user_profile.present? && current_user.user_profile.photo.attached? %>
-        <%= cl_image_tag @user_profile.photo.key, { alt:"Picture that describes user", class:"image-card"} %>
+      <% if @user_profile.photo.attached? %>
+        <%= cl_image_tag @user_profile.photo.key, { alt: "Picture that describes user", class: "image-card" } %>
       <% else %>
-        <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", { alt:"Picture that describes user", class:"image-card"} %>
+        <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", { alt: "Picture that describes user", class: "image-card" } %>
       <% end %>
       <div class="user-profile-card-information">
-          <h4><%= @user_profile.first_name %> <%= @user_profile.last_name %></h4>
+        <h4><%= @user_profile.first_name %> <%= @user_profile.last_name %></h4>
       </div>
       <% if current_user == @user_profile.user %>
         <div class="d-flex edit-delete">
@@ -32,35 +32,43 @@
       <p>
         <strong>Membership:</strong> <%= @user_profile.membership.name %>
       </p>
-
-      <% if current_user.vet? %>
+      <% if @user_profile.user.vet? %>
         <p>
           <strong>License Number:</strong> <%= @user_profile.licence_number %>
+        </p>
+         <p>
+          <strong>Phone Number:</strong> <%= @user_profile.phone_number %>
         </p>
         <p>
           <strong>Address:</strong> <%= @user_profile.address %>
         </p>
-
         <p>
-          <strong>Phone Number:</strong> <%= @user_profile.phone_number %>
+          <strong>City:</strong> <%= @user_profile.city %>
         </p>
-      <% end %>
-
-      <p>
-        <strong>City:</strong> <%= @user_profile.city %>
-      </p>
-      <p>
-        <strong>State:</strong> <%= @user_profile.state %>
-      </p>
-      <p>
-        <strong>Country:</strong> <%= @user_profile.location %>
-      </p>
-
-      <% if current_user.vet? %>
         <p>
           <strong>Zip Code:</strong> <%= @user_profile.zip_code %>
         </p>
+        <p>
+          <strong>State:</strong> <%= @user_profile.state %>
+        </p>
+        <p>
+          <strong>Country:</strong> <%= @user_profile.location %>
+        </p>
+
+
+       <% if @avg_rating.present? && @avg_rating > 0 %>
+          <p><strong>Average Rating:</strong> <%= @avg_rating %> <span class="orange-stars">★</span></p>
+        <% end %>
+
+        <% if @review.present? %>
+          <div class="review-container">
+            <p><strong>Content:</strong> <%= @review&.content %></p>
+            <p><strong>Rating:</strong> <%= @review&.rating %></p>
+          </div>
+        <% end %>
+
       <% end %>
 
+    </div>
   </div>
 </div>

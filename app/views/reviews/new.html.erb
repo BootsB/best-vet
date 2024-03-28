@@ -1,26 +1,13 @@
-  <h1>Leave a Review for Dr. <%= @appointment.user_profile.first_name %> <%= @appointment.user_profile.last_name %></h1>
+  <h1>Leave a Review for Dr. <%= @appointment.user.user_profile.first_name %> <%= @appointment.user.user_profile.last_name %></h1>
 
   <div class="form-container">
-    <%= form_for [@appointment, @review] do |form| %>
+    <%= simple_form_for [@appointment, @review] do |form| %>
       <div class="field">
-        <%= form.label :content %>
-        <%= form.text_area :content, rows: 4 %>
+        <%= form.input :content, rows: 4 %>
       </div>
 
       <div class="field">
-        <%= form.label :rating %><br>
-        <div class="rating">
-          <input value="5" name="rating" id="star5" type="radio">
-          <label for="star5"></label>
-          <input value="4" name="rating" id="star4" type="radio">
-          <label for="star4"></label>
-          <input value="3" name="rating" id="star3" type="radio">
-          <label for="star3"></label>
-          <input value="2" name="rating" id="star2" type="radio">
-          <label for="star2"></label>
-          <input value="1" name="rating" id="star1" type="radio">
-          <label for="star1"></label>
-        </div>
+        <%= form.input :rating, collection: (1..5).to_a, label: "Rate your experience", input_html: {data: {controller: "star-rating"}}  %>
       </div>
 
       <div class="actions">
@@ -28,3 +15,14 @@
       </div>
     <% end %>
   </div>
+
+  <% if @review.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+    <ul>
+      <% @review.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

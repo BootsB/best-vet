@@ -7,7 +7,7 @@ class ReviewPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present?
+    true
   end
 
   def new?

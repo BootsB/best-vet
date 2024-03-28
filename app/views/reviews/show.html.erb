@@ -1,7 +1,9 @@
-<h2>Reviews</h2>
-<% @reviews.each do |review| %>
-  <div>
-    <p><strong>Rating:</strong> <%= review.rating %></p>
-    <p><%= review.content %></p>
-  </div>
-<% end %>
+<h1>Review for Dr. <%= @appointment.user.user_profile.first_name %> <%= @appointment.user.user_profile.last_name %></h1>
+
+<div class="review-container">
+  <p><strong>Content:</strong> <%= @review.content %></p>
+  <p><strong>Rating:</strong> <%= @review.rating %></p>
+</div>
+
+<%= link_to 'Edit Review', edit_appointment_review_path(@appointment, @review), class: 'btn' %>
+<%= link_to 'Back', appointment_path(@appointment), class: 'btn btn-secondary' %>

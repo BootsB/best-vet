@@ -9,9 +9,11 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = @appointment.reviews.build(review_params)
+    @review = Review.new(review_params)
+    @review.appointment = @appointment
+    authorize @review
 
-    if @review.save
+    if @review.save!
       redirect_to @appointment, notice: 'Review was successfully created.'
     else
       render :new
