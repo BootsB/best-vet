@@ -84,6 +84,8 @@
                 <% end %>
               <% end %>
 
+              <%= link_to "Leave a Review" , new_appointment_review_path(@appointment), class: "btn btn-success btn-blocked mt-3" %>
+
               <% if current_user.vet? %>
                   <%= link_to "DELETE APPOINTMENT", appointment_path(@appointment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-blocked mt-3 text-white btndelete" %>
               <% end %>

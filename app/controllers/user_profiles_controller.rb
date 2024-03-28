@@ -4,6 +4,7 @@ class UserProfilesController < ApplicationController
 
   def show
     authorize @user_profile
+    @avg_rating = calculate_average_rating(@user_profile)
   end
 
   def new
@@ -36,6 +37,19 @@ class UserProfilesController < ApplicationController
   end
 
   private
+
+  def calculate_average_rating(user_profile)
+    appointments = user_profile.user.appointments.includes(:review)
+    total_rating = appointments.sum { |appointment| appointment.review&.rating.to_f }
+    total_reviews = appointments.count { |appointment| appointment.review.present? }
+
+    if total_reviews.positive?
+      total_rating / total_reviews
+    else
+      0 # or handle this case however you want
+    end
+  end
+
 
   def set_user_profile
     @user_profile = UserProfile.find(params[:id])

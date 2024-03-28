@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     get :accept, on: :member
     get :reject, on: :member
     get :videocall, on: :member
+
+    resources :reviews, only: [:show, :new, :create]
   end
 
   resources :categories, only: [:show, :index], path: 'forum'
