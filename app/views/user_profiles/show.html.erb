@@ -32,6 +32,7 @@
       <p>
         <strong>Membership:</strong> <%= @user_profile.membership.name %>
       </p>
+
       <% if @user_profile.user.vet? %>
         <p>
           <strong>License Number:</strong> <%= @user_profile.licence_number %>
@@ -54,20 +55,42 @@
         <p>
           <strong>Country:</strong> <%= @user_profile.location %>
         </p>
-
-
-       <% if @avg_rating.present? && @avg_rating > 0 %>
-          <p><strong>Average Rating:</strong> <%= @avg_rating %> <span class="orange-stars">★</span></p>
-        <% end %>
-
-        <% if @review.present? %>
-          <div class="review-container">
-            <p><strong>Content:</strong> <%= @review&.content %></p>
-            <p><strong>Rating:</strong> <%= @review&.rating %></p>
-          </div>
-        <% end %>
-
+      <% else %>
+        <p>
+          <strong>City:</strong> <%= @user_profile.city %>
+        </p>
+        <p>
+          <strong>Zip Code:</strong> <%= @user_profile.zip_code %>
+        </p>
+        <p>
+          <strong>State:</strong> <%= @user_profile.state %>
+        </p>
+        <p>
+          <strong>Country:</strong> <%= @user_profile.location %>
+        </p>
       <% end %>
+
+      <% if @avg_rating.present? && @avg_rating > 0 %>
+        <% if @avg_rating.to_i == 1 %>
+          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+        <% elsif @avg_rating.to_i == 2 %>
+          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+        <% elsif @avg_rating.to_i == 3 %>
+          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+        <% elsif @avg_rating.to_i == 4 %>
+          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i></p>
+        <% elsif @avg_rating.to_i == 5 %>
+          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></p>
+        <% end %>
+      <% end %>
+
+      <% if @review.present? %>
+        <div class="review-container">
+          <p><strong>Content:</strong> <%= @review&.content %></p>
+          <p><strong>Rating:</strong> <%= @review&.rating %></p>
+        </div>
+      <% end %>
+
 
     </div>
   </div>
