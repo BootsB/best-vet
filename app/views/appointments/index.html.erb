@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card bg-white" style="border-radius: 25px;">
-        <div class="card-header d-flex justify-content-between">
+        <div class="card-header d-flex justify-content-between" style="margin-top: -25px; background-color: transparent;">
           <%= link_to dashboard_path, class: "btn btn-primary btnbackappointment" do %>
             <i class="fas fa-arrow-left"></i>
           <% end %>
@@ -16,10 +16,9 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-              <br>
               <% if current_user.vet? %>
                 <% if @appointments.present? %>
-                  <h1 class="text-center">Your Appointments</h1>
+                  <h1 class="text-center", style="margin-top: -5px;">Your Appointments</h1>
                 <% else %>
                   <h1 class="text-center">No Appointments Today</h1>
                 <% end %>
