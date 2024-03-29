@@ -2,7 +2,7 @@
   <div class="row justify-content-center align-items-center h-100">
     <div class="col-md-8">
       <div class="card" style="border-radius: 25px;">
-        <div class="card-header" style="background-color: transparent;">
+        <div class="card-header" style="background-color: transparent; display: flex; justify-content: space-between;">
           <%= link_to appointments_path, class: "btn btn-primary btnbackappointment" do %>
             <i class="fas fa-arrow-left"></i>
           <% end %>
@@ -85,9 +85,9 @@
               <% end %>
 
               <% if current_user.vet? %>
-                  <%= link_to "DELETE APPOINTMENT", appointment_path(@appointment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-blocked mt-3 text-white btndelete" %>
+                  <%= link_to "DELETE APPOINTMENT", appointment_path(@appointment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-blocked mt-3 text-white", id: "btndelete" %>
                 <% else %>
-                  <%= link_to "Leave a Review" , new_appointment_review_path(@appointment), class: "btn btn-success btn-blocked mt-3" %>
+                  <%= link_to "Leave a Review" , new_appointment_review_path(@appointment), class: "btn btn-success mt-3", id: "btn-blocked" %>
               <% end %>
             </div> <!-- Closing col-md-12 -->
           </div> <!-- Closing row -->
