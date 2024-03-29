@@ -1,7 +1,7 @@
 class Appointment < ApplicationRecord
   belongs_to :user
   belongs_to :pet_profile
-  has_one :user_profile, through: :user
+  # has_one :user_profile, through: :user
   has_many :reviews, dependent: :destroy
 
   delegate :first_name, :last_name, :address, :description, :membership, :location, :city, :phone_number, :state, :zip_code, :licence_number, to: :user_profile, allow_nil: true
