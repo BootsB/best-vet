@@ -6,9 +6,35 @@
       <% else %>
         <%= image_tag "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", { alt: "Picture that describes user", class: "image-card" } %>
       <% end %>
+
       <div class="user-profile-card-information">
-        <h4><%= @user_profile.first_name %> <%= @user_profile.last_name %></h4>
+        <% if @user_profile.user.vet? %>
+          <h4>Dr. <%= @user_profile.first_name %> <%= @user_profile.last_name %></h4>
+        <% else %>
+          <h4><%= @user_profile.first_name %> <%= @user_profile.last_name %></h4>
+        <% end %>
+
+        <div class="rating-info">
+          <% if @avg_rating.present? && @avg_rating > 0 %>
+            <% if @avg_rating.to_i == 1 %>
+              <p> <%= @avg_rating.to_i %> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+            <% elsif @avg_rating.to_i == 2 %>
+              <p> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+            <% elsif @avg_rating.to_i == 3 %>
+              <p> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+            <% elsif @avg_rating.to_i == 4 %>
+              <p> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i></p>
+            <% elsif @avg_rating.to_i == 5 %>
+              <p> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></p>
+            <% end %>
+          <% end %>
+        </div>
       </div>
+
+      <% if @user_profile.user.vet? %>
+        <i class="fas fa-user-md text-info vet-icon"></i>
+      <% end %>
+
       <% if current_user == @user_profile.user %>
         <div class="d-flex edit-delete">
           <%= link_to(edit_user_profile_path(@user_profile)) do %>
@@ -68,20 +94,6 @@
         <p>
           <strong>Country:</strong> <%= @user_profile.location %>
         </p>
-      <% end %>
-
-      <% if @avg_rating.present? && @avg_rating > 0 %>
-        <% if @avg_rating.to_i == 1 %>
-          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
-        <% elsif @avg_rating.to_i == 2 %>
-          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
-        <% elsif @avg_rating.to_i == 3 %>
-          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
-        <% elsif @avg_rating.to_i == 4 %>
-          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i></p>
-        <% elsif @avg_rating.to_i == 5 %>
-          <p><strong>Average Rating:</strong> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></p>
-        <% end %>
       <% end %>
 
       <% if @review.present? %>
