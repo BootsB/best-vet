@@ -6,7 +6,7 @@
 
 .search-form-control .btn {
   position: absolute;
-  top: 8px;
+  top: -8px;
   bottom: 8px;
   right: 8px;
 
@@ -21,4 +21,9 @@
   border: 1px solid $green;
   outline: none !important;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+#search-button{
+  background-color: #f4f4f400;
+  color: $green;
 }

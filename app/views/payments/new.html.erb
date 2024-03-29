@@ -1,0 +1,28 @@
+<div class="bg-white pb-5">
+  <div class="container pt-3">
+    <div class="row px-1">
+      <div class="col-sm-12 mb-4">
+        <div class="membership-card">
+          <div class="d-flex justify-content-center mt-3">
+            <%= cl_image_tag @order.membership.photo.key, height: 50, width: 50, alt:"Membership icon"%>
+          </div>
+          <h2 class="mt-3 text-center text-success"><strong>Checkout Summary:</strong></h2>
+          <p class="text-center">Purchase of <strong><%= @order.membership.name %></strong> for <strong><%= humanized_money_with_symbol @order.amount %>/month</strong></p>
+          <div class="d-flex justify-content-center mt-4 mb-4">
+            <button id="pay" class="btn btn-success button">Pay</button>
+          </div>
+          <script src="https://js.stripe.com/v3/"></script>
+          <script>
+            const paymentButton = document.getElementById('pay');
+            paymentButton.addEventListener('click', () => {
+              const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+              stripe.redirectToCheckout({
+                sessionId: '<%= @order.checkout_session_id %>'
+              });
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

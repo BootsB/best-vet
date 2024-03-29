@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_25_172931) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_27_151810) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,10 +65,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_25_172931) do
 
   create_table "memberships", force: :cascade do |t|
     t.string "name"
-    t.float "price"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "sku"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "state"
+    t.string "membership_sku"
+    t.string "checkout_session_id"
+    t.bigint "user_profile_id", null: false
+    t.bigint "membership_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.index ["membership_id"], name: "index_orders_on_membership_id"
+    t.index ["user_profile_id"], name: "index_orders_on_user_profile_id"
   end
 
   create_table "pet_profiles", force: :cascade do |t|
@@ -156,6 +170,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_25_172931) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "appointments", "pet_profiles"
   add_foreign_key "appointments", "users"
+  add_foreign_key "orders", "memberships"
+  add_foreign_key "orders", "user_profiles"
   add_foreign_key "pet_profiles", "users"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"

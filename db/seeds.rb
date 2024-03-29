@@ -223,24 +223,27 @@ file10 = URI.open("https://res.cloudinary.com/dg9mc7ach/image/upload/v1711391837
 
 basic = Membership.new(
   name: "Basic",
-  price: 0.00,
-  description: "The free membership grants you unrestricted access to our forum, enabling you to post inquiries and engage with fellow pet owners and veterinarians alike. Please note that video call functionality is not included with this membership tier."
+  price_cents: 0,
+  description: "The free membership grants you unrestricted access to our forum, enabling you to post inquiries and engage with fellow pet owners and veterinarians alike. Please note that video call functionality is not included with this membership tier.",
+  sku: "basic-membership"
 )
 basic.photo.attach(io: file8, filename: "basic.png", content_type: "image/png")
 basic.save!
 
 premium = Membership.new(
   name: "Premium",
-  price: 7.99,
-  description: "Alongside unlimited access to our forum for discussions with pet owners and veterinarians, you'll also enjoy the added benefit of unlimited video calls with licensed professionals."
+  price_cents: 799,
+  description: "Alongside unlimited access to our forum for discussions with pet owners and veterinarians, you'll also enjoy the added benefit of unlimited video calls with licensed professionals.",
+  sku: "premium-membership"
 )
 premium.photo.attach(io: file9, filename: "premium.png", content_type: "image/png")
 premium.save!
 
 paw_partner = Membership.create!(
   name: "Paw Partner",
-  price: 13.99,
-  description: "We understand the financial challenges many pet parents face in providing veterinary care. With our Paw Partner Membership, you not only gain unlimited access to our forum and video calls with licensed veterinarians but also extend the same lifeline to another pet parent in need."
+  price_cents: 1399,
+  description: "We understand the financial challenges many pet parents face in providing veterinary care. With our Paw Partner Membership, you not only gain unlimited access to our forum and video calls with licensed veterinarians but also extend the same lifeline to another pet parent in need.",
+  sku: "paw-partner-membership"
 )
 paw_partner.photo.attach(io: file10, filename:"paw-partner.png", content_type: "image/png")
 paw_partner.save!

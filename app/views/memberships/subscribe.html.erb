@@ -14,7 +14,7 @@
           <br>
           <div class="membership-card-header mb-3">
             <%= cl_image_tag @membership.photo.key, height: 80, width: 80%>
-            <p class="subscribe-text"> You are updating to the <strong><%= @membership.name %> Membership</strong> for <strong>£<%= @membership.price %>/month</strong>.</p>
+            <p class="subscribe-text"> You are updating to the <strong><%= @membership.name %> Membership</strong> for <strong>£<%= @membership.price%>/month</strong>.</p>
           </div>
           <% if @membership.name == "Paw Partner" %>
             <div class="paw-partner-recipient mb-3">
@@ -34,7 +34,10 @@
             </div>
           <% end %>
           <div class="d-flex justify-content-center mt-4 mb-4">
-            <%= link_to "Update Plan", memberships_path, class: 'btn btn-success button', role: 'button' %>
+            <%= form_with url: orders_path do %>
+              <%= hidden_field_tag 'membership_id', @membership.id %>
+              <%= submit_tag 'Update', class: 'btn btn-success button' %>
+            <% end %>
           </div>
         </div>
       </div>
