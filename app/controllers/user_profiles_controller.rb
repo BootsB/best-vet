@@ -40,8 +40,8 @@ class UserProfilesController < ApplicationController
 
   def calculate_average_rating(user_profile)
     appointments = user_profile.user.appointments.includes(:review)
-    total_rating = appointments.sum { |appointment| appointment.review&.rating.to_f }
-    total_reviews = appointments.count { |appointment| appointment.review.present? }
+    total_rating = appointments.sum { |appointment| appointment.reviews&.rating.to_f }
+    total_reviews = appointments.count { |appointment| appointment.reviews.present? }
 
     if total_reviews.positive?
       total_rating / total_reviews
