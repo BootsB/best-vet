@@ -12,6 +12,7 @@ class MembershipsController < ApplicationController
         first_name: user.user_profile.first_name,
         last_name: user.user_profile.last_name,
         city: user.user_profile.city,
+        country: user.user_profile.location,
         pets: user.pet_profiles
       }
     end

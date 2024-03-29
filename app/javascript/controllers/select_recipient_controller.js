@@ -13,7 +13,7 @@ export default class extends Controller {
     this.recipientTarget.innerHTML =
       `<p class="subscribe-text"><strong> You will be sponsoring: </strong></p>
       <p class="subscribe-text"><i class="fa-solid fa-address-card"></i>: ${user.first_name} ${user.last_name}  </p>
-      <p class="subscribe-text"><i class="fa-solid fa-earth-americas"></i>: ${user.city} </p>
+      <p class="subscribe-text"><i class="fa-solid fa-earth-americas"></i>: ${user.city} - ${user.country} </p>
       <p class="subscribe-text"><i class="fa-solid fa-paw"></i>: ${petInformationString} </p>`;
   }
 
