@@ -2,7 +2,7 @@
   <div class="row justify-content-center align-items-center h-100">
     <div class="col-md-8">
       <div class="card" style="border-radius: 25px;">
-        <div class="card-header" style="background-color: transparent;">
+        <div class="card-header" style="background-color: transparent; display: flex; justify-content: space-between;">
           <%= link_to appointments_path, class: "btn btn-primary btnbackappointment" do %>
             <i class="fas fa-arrow-left"></i>
           <% end %>
@@ -46,7 +46,9 @@
               <% full_name = full_name(@appointment) %>
               <% if current_user.vet? && (@appointment.pending? || @appointment.accepted?) %>
                 <div class="owner-details box-shadow">
-                  <p><%= cl_image_tag @appointment.pet_profile.user.user_profile.photo.key, class: "avatar-img rounded-circle border", alt: "Owner's photo", width: 80, height: 75, crop: :thumb, gravity: :face %></p>
+                    <%= link_to user_profile_path(@appointment.pet_profile.user.user_profile), class: "avatar-link" do %>
+                      <%= cl_image_tag @appointment.pet_profile.user.user_profile.photo.key, class: "avatar-img rounded-circle border", alt: "Owner's photo", width: 80, height: 75, crop: :thumb, gravity: :face %>
+                    <% end %>
                   <div class="owner-about">
                     <p><%= @appointment.pet_profile.user.full_name %> pet owner of <span style="color: #2E6E62; font-weight: bold;"><%= @appointment.pet_profile.name %></span></p>
                   </div>
@@ -54,7 +56,9 @@
               <% else %>
               <div class="vet-details box-shadow">
                 <!-- Display vet's profile picture -->
-                <%= cl_image_tag @appointment.user_profile.photo.key, class: "avatar-img rounded-circle border", alt: "Vet's photo", width: 80, height: 75, crop: :thumb, gravity: :face %>
+                <%= link_to user_profile_path(@appointment.user_profile), class: "avatar-link" do %>
+                  <%= cl_image_tag @appointment.user_profile.photo.key, class: "avatar-img rounded-circle border", alt: "Vet's photo", width: 80, height: 75, crop: :thumb, gravity: :face %>
+                <% end %>
                 <div class="vet-about">
                 <!-- Display vet's name -->
                 <p><span style="color: #2E6E62; font-weight: bold;">Dr. <%= full_name %></span></p>
@@ -85,9 +89,9 @@
               <% end %>
 
               <% if current_user.vet? %>
-                  <%= link_to "DELETE APPOINTMENT", appointment_path(@appointment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-blocked mt-3 text-white btndelete" %>
+                  <%= link_to "Delete Appointment", appointment_path(@appointment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-blocked mt-3 text-white", id: "btndelete" %>
                 <% else %>
-                  <%= link_to "Leave a Review" , new_appointment_review_path(@appointment), class: "btn btn-success btn-blocked mt-3" %>
+                  <%= link_to "Leave a Review" , new_appointment_review_path(@appointment), class: "btn btn-success mt-3 btn-blocked", id: "btn-blocked", style:"background-color: #C36E5F;"%>
               <% end %>
             </div> <!-- Closing col-md-12 -->
           </div> <!-- Closing row -->
