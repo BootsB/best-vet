@@ -56,12 +56,6 @@
       <p>
         <strong>Description:</strong> <%= @user_profile.description %>
       </p>
-      <p>
-        <strong>Membership:</strong>
-        <%=link_to memberships_path, class:"membership-path" do %>
-          <%= cl_image_tag @user_profile.membership.photo.key, height: 25, width: 25%> <%= @user_profile.membership.name %>
-        <% end %>
-      </p>
 
       <% if @user_profile.user.vet? %>
         <p>
@@ -98,6 +92,12 @@
         </p>
         <p>
           <strong>Country:</strong> <%= @user_profile.location %>
+        </p>
+        <p>
+        <strong>Membership:</strong>
+        <%=link_to memberships_path, class:"membership-path" do %>
+          <%= cl_image_tag @user_profile.membership.photo.key, height: 25, width: 25%> <%= @user_profile.membership.name %>
+        <% end %>
         </p>
       <% end %>
 

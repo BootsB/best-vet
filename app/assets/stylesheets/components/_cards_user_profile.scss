@@ -44,8 +44,10 @@
     object-fit: cover;
   }
   .user-profile-card-information {
+    justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
+    margin-left: 30px;
     p {
       margin: auto;
       font-size: 14px;
