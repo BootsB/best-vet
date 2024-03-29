@@ -26,7 +26,7 @@
                   <%= form.collection_select :email, @collection, :email, :email, { prompt: 'Select Recipient' }, { data: { action: "change->select-recipient#select", select_recipient_target: "email"} }%>
                 <% end %>
                 <input type="hidden" id="membershipId" value="<%= @membership.id %>" data-select-recipient-target="membership">
-                <%= link_to "<i class=\"fa-solid fa-shuffle\"></i>".html_safe, memberships_path, class: 'btn btn-warning random', role: 'button', data: { action: "click->select-recipient#random" } %>
+                <%= link_to "<i class=\"fa-solid fa-shuffle\"></i>".html_safe, memberships_path, class: 'btn btn-warning random', id: 'random-btn', role: 'button', data: { action: "click->select-recipient#random" } %>
                 <br>
               </div>
               <div class="selected-recipient mt-4 mb-4" data-select-recipient-target="recipient">

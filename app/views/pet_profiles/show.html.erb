@@ -58,10 +58,20 @@
       <% end %></p>
     </div>
     <div class="filtered-information-card d-none" data-pet-information-filter-target="information" data-pet-information-filter-info-value="appointments">
-      <p>No scheduled appointments</p>
+      <p>
+        <strong>Next scheduled call:</strong>
+        <br>
+        <% if @pet.appointments.first %>
+          <%= @pet.appointments.first.appointment_date.strftime("%B %d") %>
+        <% else %>
+          <p>No appointments</p>
+        <% end %>
+      </p>
     </div>
     <div class="filtered-information-card d-none" data-pet-information-filter-target="information" data-pet-information-filter-info-value="records">
-      <p>No records yet</p>
+      <p><strong>Last Appointment:</strong> 30th March 2024</p>
+      <p><strong>Comments:</strong> She is very active and healthy, but has a tendency for naughty eating when she goes to the Market.</p>
+      <p><strong>Conditions:</strong> None</p>
     </div>
   </div>
 </div>
