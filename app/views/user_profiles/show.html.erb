@@ -16,16 +16,17 @@
 
         <div class="rating-info">
           <% if @avg_rating.present? && @avg_rating > 0 %>
-            <% if @avg_rating.to_i == 1 %>
-              <p> <%= @avg_rating.to_i %> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
-            <% elsif @avg_rating.to_i == 2 %>
-              <p> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
-            <% elsif @avg_rating.to_i == 3 %>
-              <p> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
-            <% elsif @avg_rating.to_i == 4 %>
-              <p> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i></p>
-            <% elsif @avg_rating.to_i == 5 %>
-              <p> <%= @avg_rating %> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></p>
+            <% avg_rating_integer = @avg_rating.round %>
+            <% if avg_rating_integer == 1 %>
+              <p> <%= avg_rating_integer %>.0 <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+            <% elsif avg_rating_integer == 2 %>
+              <p> <%= avg_rating_integer %>.0 <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+            <% elsif avg_rating_integer == 3 %>
+              <p> <%= avg_rating_integer %>.0 <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i></p>
+            <% elsif avg_rating_integer == 4 %>
+              <p> <%= avg_rating_integer %>.0 <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i></p>
+            <% elsif avg_rating_integer == 5 %>
+              <p> <%= avg_rating_integer %>.0 <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i></p>
             <% end %>
           <% end %>
         </div>
