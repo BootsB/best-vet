@@ -90,7 +90,7 @@
 
               <% if current_user.vet? %>
                   <%= link_to "Delete Appointment", appointment_path(@appointment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-blocked mt-3 text-white", id: "btndelete" %>
-                <% else %>
+              <% elsif @appointment.appointment_date < Date.today || (@appointment.appointment_date == Date.today && @appointment.appointment_time < Time.now) %>
                   <%= link_to "Leave a Review" , new_appointment_review_path(@appointment), class: "btn btn-success mt-3 btn-blocked", id: "btn-blocked", style:"background-color: #C36E5F;"%>
               <% end %>
             </div> <!-- Closing col-md-12 -->
