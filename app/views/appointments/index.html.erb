@@ -55,7 +55,7 @@
                         when :declined
                           "fa-solid fa-times-circle text-danger" # Red
                         when :confirmed
-                          "fa-solid fa-check-double" # Confirmed icon
+                          "fa-solid fa-check-double text-success" # Confirmed icon
                         else
                           "fa-solid fa-question-circle" # Default if status is not recognized
                       end %>
@@ -64,10 +64,10 @@
 
                     <% if current_user.vet? && appointment.pending? %>
                       <div class="card-footer d-flex justify-content-center">
-                        <%= link_to accept_appointment_path(appointment), method: :get, class: "btn btn-success font-weight-bold", title: "Accept" do %>
+                        <%= link_to accept_appointment_path(appointment), method: :get, class: "btn btn-success font-weight-bold btnbackappointment", title: "Accept" do %>
                           <i class="fas fa-check"></i> Accept
                         <% end %>
-                        <%= link_to reject_appointment_path(appointment), method: :get, class: "btn btn-danger text-white font-weight-bold", title: "Decline" do %>
+                        <%= link_to reject_appointment_path(appointment), method: :get, class: "btn btn-danger text-white font-weight-bold btnbackappointment", title: "Decline" do %>
                           <i class="fas fa-times"></i> Decline
                         <% end %>
                       </div>

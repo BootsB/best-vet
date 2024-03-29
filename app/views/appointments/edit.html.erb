@@ -13,20 +13,26 @@
     </div>
   </div>
 
-  <div class="form-group editform">
+  <div class="form-group editform" style="display: none;>
     <div class="col-sm-12">
       <%= f.input :description_of_problem, class: "form-control", placeholder: "Tell us about your problem...." %>
     </div>
   </div>
 
+  <div class="form-group editform">
+    <div class="col-sm-12">
+      <%= f.input :status, class: "form-control", placeholder: "After the call please confirmed the Consulation" %>
+    </div>
+  </div>
+
     <% if current_user.vet? %>
       <div class="form-group">
-        <div class="col-md-9">
-          <%= f.input :zoom_link, as: :string, input_html: { class: "form-control" }, label: "Zoom Link", placeholder: "Type your Zoom link here...."%>
+        <div class="col-md-9" style="display: none;">
+          <%= f.input :zoom_link, as: :string, input_html: { class: "form-control" }, label: "Zoom Link-->DON'T MODIFY THIS LINK", placeholder: "Type your Zoom link here...."%>
         </div>
       </div>
     <% end %>
 
-    <%= f.button :submit, "Save Changes", class: "btn btn-primary" %>
+    <%= f.button :submit, "Save Changes", class: "btn btn-primary btnbackappointment" %>
   <% end %>
 </div>
