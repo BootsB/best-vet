@@ -56,8 +56,8 @@
               <% else %>
               <div class="vet-details box-shadow">
                 <!-- Display vet's profile picture -->
-                <%= link_to user_profile_path(@appointment.user.user_profile), class: "avatar-link" do %>
-                  <%= cl_image_tag @appointment.user.user_profile.photo.key, class: "avatar-img rounded-circle border", alt: "Vet's photo", width: 80, height: 75, crop: :thumb, gravity: :face %>
+                <%= link_to user_profile_path(@appointment.user_profile), class: "avatar-link" do %>
+                  <%= cl_image_tag @appointment.user_profile.photo.key, class: "avatar-img rounded-circle border", alt: "Vet's photo", width: 80, height: 75, crop: :thumb, gravity: :face %>
                 <% end %>
                 <div class="vet-about">
                 <!-- Display vet's name -->
