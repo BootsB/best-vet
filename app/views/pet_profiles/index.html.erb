@@ -26,9 +26,9 @@
                     <br>
 
                     <% if pet.appointments.first %>
-                      <%= pet.appointments.first.appointment_date.strftime("%B %d") %> 
+                      <%= pet.appointments.first.appointment_date.strftime("%B %d") %>
                     <% else %>
-                     <p>No appointments</p>
+                      <p>No appointments</p>
                     <% end %>
 
                   </p>
